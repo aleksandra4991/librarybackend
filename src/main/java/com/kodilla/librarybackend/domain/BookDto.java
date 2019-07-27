@@ -14,6 +14,15 @@ public class BookDto {
     public BookDto() {
     }
 
+    public BookDto(Long bookId, String title, String author, Long year, boolean rented, String groupId) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.rented = rented;
+        this.groupId = groupId;
+    }
+
     public BookDto(String title, String author, Long year, boolean rented, String groupId) {
         this.title = title;
         this.author = author;
