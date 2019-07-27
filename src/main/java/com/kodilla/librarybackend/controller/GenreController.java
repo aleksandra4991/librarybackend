@@ -2,10 +2,7 @@ package com.kodilla.librarybackend.controller;
 
 import com.kodilla.librarybackend.domain.GenreDto;
 import com.kodilla.librarybackend.exceptions.GenreNotFoundException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -26,17 +23,17 @@ public class GenreController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getSpecifiedGenre")
-    public GenreDto getSpecifiedGenre(@RequestParam Long id) throws GenreNotFoundException {
+    public GenreDto getSpecifiedGenre(@RequestParam Long genreId) throws GenreNotFoundException {
         return thriller;
     }
 
     @RequestMapping(method = RequestMethod.PUT, name = "updateSpecifiedGenre")
-    public GenreDto updateSepcifiedGenre(@RequestParam Long id){
+    public GenreDto updateSepcifiedGenre(@RequestParam Long genreId){
         return new GenreDto(1L,"romance");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createNewGenre", consumes = APPLICATION_JSON_VALUE)
-    public void createNewGenre(GenreDto genreDto){
+    public void createNewGenre(@RequestBody GenreDto genreDto){
 
     }
 

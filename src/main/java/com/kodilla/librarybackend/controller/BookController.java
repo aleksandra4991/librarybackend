@@ -39,22 +39,22 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getBook")
-    public BookDto getBook(@RequestParam Long id) throws BookNotFoundException {
+    public BookDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
         return new BookDto("Tytuł","Autor", (long) 2000,false,"2L");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createBook", consumes = APPLICATION_JSON_VALUE)
-    public void createBook(BookDto bookDto){
+    public void createBook(@RequestBody BookDto bookDto){
 
     }
 
-    @RequestMapping(method = RequestMethod.PUT,value = "updateProduct",consumes = APPLICATION_JSON_VALUE)
-    public BookDto updateProduct(@RequestParam Long id){
+    @RequestMapping(method = RequestMethod.PUT,value = "updateBook",consumes = APPLICATION_JSON_VALUE)
+    public BookDto updateBook(@RequestParam Long BookId){
         return new BookDto("Tytuł","Autor", (long) 2000,true,"2L");
     }
 
     @RequestMapping(method = RequestMethod.DELETE,value = "deleteBook")
-    public void deleteBook(@RequestParam Long id) throws BookNotFoundException {
+    public void deleteBook(@RequestParam Long bookId) throws BookNotFoundException {
     }
 
 

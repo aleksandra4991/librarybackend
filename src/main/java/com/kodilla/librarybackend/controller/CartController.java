@@ -2,6 +2,7 @@ package com.kodilla.librarybackend.controller;
 
 import com.kodilla.librarybackend.domain.CartBookAdderDto;
 import com.kodilla.librarybackend.domain.CartBookRemoverDto;
+import com.kodilla.librarybackend.domain.CartDto;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -11,7 +12,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CartController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart")
-    public void createEmptyCart(){
+    public void createEmptyCart(@RequestBody CartDto cartDto){
 
     }
 

@@ -22,6 +22,13 @@ public class BookDto {
         this.groupId = groupId;
     }
 
+    public BookDto(String title, String author, Long year, String groupId) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.groupId = groupId;
+    }
+
     public Long getId() {
         return id;
     }
@@ -40,6 +47,10 @@ public class BookDto {
 
     public boolean isRented() {
         return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 
     public String getGroupId() {

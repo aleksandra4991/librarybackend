@@ -20,7 +20,7 @@ public class ReservationController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createReservation",consumes = APPLICATION_JSON_VALUE)
-    public void createReservation(ReservationDto reservationDto){
+    public void createReservation(@RequestBody ReservationDto reservationDto){
 
     }
 
