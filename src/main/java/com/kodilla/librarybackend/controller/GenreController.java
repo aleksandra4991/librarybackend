@@ -29,7 +29,7 @@ public class GenreController {
 
     @RequestMapping(method = RequestMethod.PUT, name = "updateSpecifiedGenre")
     public GenreDto updateSepcifiedGenre(@RequestParam Long genreId){
-        return new GenreDto(1L,"romance");
+        return new GenreDto(1L,"romanceXXX");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createNewGenre", consumes = APPLICATION_JSON_VALUE)
