@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ReaderDto {
 
-    private Long id;
+    private Long readerId;
     private String readerName;
     private String phoneNumber;
     private String emailAdress;
@@ -22,8 +22,8 @@ public class ReaderDto {
     public ReaderDto() {
     }
 
-    public ReaderDto(Long id, String readerName, String phoneNumber, String emailAdress, String status) {
-        this.id = id;
+    public ReaderDto(Long readerId, String readerName, String phoneNumber, String emailAdress, String status) {
+        this.readerId = readerId;
         this.readerName = readerName;
         this.phoneNumber = phoneNumber;
         this.emailAdress = emailAdress;
@@ -35,8 +35,8 @@ public class ReaderDto {
         this.status = "UNBLOCKED";
     }
 
-    public ReaderDto(Long id, String readerName) {
-        this.id = id;
+    public ReaderDto(Long readerId, String readerName) {
+        this.readerId = readerId;
         this.readerName = readerName;
     }
 
@@ -44,8 +44,8 @@ public class ReaderDto {
         this.status = "BLOCKED";
     }
 
-    public Long getId() {
-        return id;
+    public Long getReaderId() {
+        return readerId;
     }
 
     public String getReaderName() {

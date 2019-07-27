@@ -2,19 +2,19 @@ package com.kodilla.librarybackend.domain;
 
 public class CartBookAdderDto {
 
-    private Long id;
+    private Long cartId;
     private Long BookId;
 
     public CartBookAdderDto() {
     }
 
-    public CartBookAdderDto(Long id, Long bookId) {
-        this.id = id;
+    public CartBookAdderDto(Long cartId, Long bookId) {
+        this.cartId = cartId;
         BookId = bookId;
     }
 
-    public Long getId() {
-        return id;
+    public Long getCartId() {
+        return cartId;
     }
 
     public Long getBookId() {
