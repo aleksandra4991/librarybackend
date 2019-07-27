@@ -16,31 +16,31 @@ public class BookController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllBooks")
     public List<BookDto> getAllBooks(){
-        return new ArrayList<>(Arrays.asList(new BookDto("Rok 1984","George Orwell",(long)1949,true,"1L"),
-                new BookDto("Tytuł","Autor", (long) 2000,false,"2L")));
+        return new ArrayList<>(Arrays.asList(new BookDto(1L,"Rok 1984","George Orwell",(long)1949,true,"1L"),
+                new BookDto(2L,"Tytuł","Autor", (long) 2000,false,"2L")));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getAvaiableToRentBooks")
     public List<BookDto> getAvaiableToRentBooks(@RequestParam boolean rented){
-        return new ArrayList<>(Arrays.asList(new BookDto("Rok 1984","George Orwell",(long)1949,false,"1L"),
-                new BookDto("Tytuł","Autor", (long) 2000,false,"2L")));
+        return new ArrayList<>(Arrays.asList(new BookDto(1L,"Rok 1984","George Orwell",(long)1949,false,"1L"),
+                new BookDto(2L,"Tytuł","Autor", (long) 2000,false,"2L")));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getAlreadyRentedBooks")
     public List<BookDto> getAlreadyRentedBooks(@RequestParam boolean rented){
-        return new ArrayList<>(Arrays.asList(new BookDto("Rok 1984","George Orwell",(long)1949,true,"1L"),
-                new BookDto("Tytuł","Autor", (long) 2000,true,"2L")));
+        return new ArrayList<>(Arrays.asList(new BookDto(1L,"Rok 1984","George Orwell",(long)1949,true,"1L"),
+                new BookDto(2L,"Tytuł","Autor", (long) 2000,true,"2L")));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getBooksOfDefiniedAuthor")
     public List<BookDto> getBooksOfDefiniedAuthor (@RequestParam String author){
-        return new ArrayList<>(Arrays.asList(new BookDto("Rok 1984","George Orwell",(long)1949,true,"1L"),
-                new BookDto("Tytuł","George Orwell", (long) (long)1952,true,"2L")));
+        return new ArrayList<>(Arrays.asList(new BookDto(1L,"Rok 1984","George Orwell",(long)1949,true,"1L"),
+                new BookDto(2L,"Tytuł","George Orwell", (long) (long)1952,true,"2L")));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getBook")
     public BookDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
-        return new BookDto("Tytuł","Autor", (long) 2000,false,"2L");
+        return new BookDto(2L,"Tytuł","Autor", (long) 2000,false,"2L");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createBook", consumes = APPLICATION_JSON_VALUE)
@@ -49,8 +49,8 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.PUT,value = "updateBook",consumes = APPLICATION_JSON_VALUE)
-    public BookDto updateBook(@RequestParam Long BookId){
-        return new BookDto("Tytuł","Autor", (long) 2000,true,"2L");
+    public BookDto updateBook(@RequestParam Long bookId){
+        return new BookDto(2L,"Tytuł","Autor", (long) 2000,true,"2L");
     }
 
     @RequestMapping(method = RequestMethod.DELETE,value = "deleteBook")
