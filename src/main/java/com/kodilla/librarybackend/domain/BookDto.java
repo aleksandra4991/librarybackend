@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class BookDto {
 
-    private Long id;
+    private Long bookId;
     private String title;
     private String author;
     private Long year;
@@ -29,8 +29,8 @@ public class BookDto {
         this.groupId = groupId;
     }
 
-    public Long getId() {
-        return id;
+    public Long getBookId() {
+        return bookId;
     }
 
     public String getTitle() {
@@ -67,7 +67,7 @@ public class BookDto {
         if (o == null || getClass() != o.getClass()) return false;
         BookDto bookDto = (BookDto) o;
         return isRented() == bookDto.isRented() &&
-                getId().equals(bookDto.getId()) &&
+                getBookId().equals(bookDto.getBookId()) &&
                 getTitle().equals(bookDto.getTitle()) &&
                 getAuthor().equals(bookDto.getAuthor()) &&
                 getYear().equals(bookDto.getYear()) &&
@@ -76,7 +76,7 @@ public class BookDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getAuthor(), getYear(), isRented(), getGroupId());
+        return Objects.hash(getBookId(), getTitle(), getAuthor(), getYear(), isRented(), getGroupId());
     }
 
     @Override

@@ -1,11 +1,8 @@
 package com.kodilla.librarybackend.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GenreDto {
 
-    private Long id;
+    private Long genreId;
     private String name;
 
     public GenreDto() {
@@ -15,13 +12,13 @@ public class GenreDto {
         this.name = name;
     }
 
-    public GenreDto(Long id, String name) {
-        this.id = id;
+    public GenreDto(Long genreId, String name) {
+        this.genreId = genreId;
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    public Long getGenreId() {
+        return genreId;
     }
 
     public String getName() {
