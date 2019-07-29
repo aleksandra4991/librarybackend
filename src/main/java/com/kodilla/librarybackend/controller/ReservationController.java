@@ -1,5 +1,6 @@
 package com.kodilla.librarybackend.controller;
 
+import com.kodilla.librarybackend.domain.ReservationCreationDto;
 import com.kodilla.librarybackend.domain.ReservationDto;
 import com.kodilla.librarybackend.exceptions.ReservationNotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ReservationController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createReservation",consumes = APPLICATION_JSON_VALUE)
-    public void createReservation(@RequestBody ReservationDto reservationDto){
+    public void createReservation(@RequestBody ReservationCreationDto reservationCreationDto){
 
     }
 

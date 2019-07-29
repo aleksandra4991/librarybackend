@@ -3,14 +3,14 @@ package com.kodilla.librarybackend.domain;
 public class CartBookRemoverDto {
 
     private Long cartId;
-    private Long BookId;
+    private Long bookId;
 
     public CartBookRemoverDto() {
     }
 
     public CartBookRemoverDto(Long cartId, Long bookId) {
         this.cartId = cartId;
-        BookId = bookId;
+        this.bookId = bookId;
     }
 
     public Long getCartId() {
@@ -18,6 +18,6 @@ public class CartBookRemoverDto {
     }
 
     public Long getBookId() {
-        return BookId;
+        return bookId;
     }
 }

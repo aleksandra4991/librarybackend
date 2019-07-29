@@ -1,23 +1,26 @@
 package com.kodilla.librarybackend.domain;
 
+import java.util.List;
+
 public class CartBookAdderDto {
 
     private Long cartId;
-    private Long BookId;
+
+    private List<BookDto> bookDtoList;
 
     public CartBookAdderDto() {
     }
 
-    public CartBookAdderDto(Long cartId, Long bookId) {
+    public CartBookAdderDto(Long cartId, List<BookDto> bookDtoList) {
         this.cartId = cartId;
-        BookId = bookId;
+        this.bookDtoList = bookDtoList;
     }
 
     public Long getCartId() {
         return cartId;
     }
 
-    public Long getBookId() {
-        return BookId;
+    public List<BookDto> getBookDtoList() {
+        return bookDtoList;
     }
 }
