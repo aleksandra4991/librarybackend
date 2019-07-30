@@ -17,9 +17,9 @@ public class Book {
     private String signature;
     private boolean rented;
 
-    //@ManyToOne(cascade = CascadeType.PERSIST)
-    //@JoinColumn(name = "CART_ID")
-    //private Cart cart;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "CART_ID")
+    private Cart cart;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "GENRE_ID")
@@ -61,9 +61,9 @@ public class Book {
         return rented;
     }
 
-    /*public Cart getCart() {
+    public Cart getCart() {
         return cart;
-    }*/
+    }
 
     public Genre getGenre() {
         return genre;
@@ -73,7 +73,7 @@ public class Book {
         this.rented = rented;
     }
 
-    /*public void setCart(Cart cart) {
+    public void setCart(Cart cart) {
         this.cart = cart;
-    }*/
+    }
 }

@@ -19,18 +19,18 @@ public class Reservation {
     @JoinColumn(name = "CART_ID")
     private Cart cart;
 
-    //@ManyToOne(cascade = CascadeType.PERSIST)
-    //@JoinColumn(name = "READER_ID")
-    //private Reader reader;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "READER_ID")
+    private Reader reader;
 
     private LocalDate reservationDateCreation;
 
     public Reservation() {
     }
 
-    public Reservation(Cart cart/*Reader reader*/) {
+    public Reservation(Cart cart,Reader reader) {
         this.cart = cart;
-       // this.reader = reader;
+        this.reader = reader;
     }
 
     public Long getId() {
@@ -45,9 +45,9 @@ public class Reservation {
         this.active = active;
     }
 
-    /*public Reader getReader() {
+    public Reader getReader() {
         return reader;
-    }*/
+    }
 
     public Cart getCart() {
         return cart;

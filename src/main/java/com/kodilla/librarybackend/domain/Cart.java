@@ -15,13 +15,12 @@ public class Cart {
     @Column(name="CART_ID", unique = true)
     private Long id;
 
-    /*@OneToOne(cascade = CascadeType.ALL,
+    @OneToOne(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             targetEntity = Reservation.class,
             mappedBy = "cart")
     @JoinColumn(name = "ORDER_ID")
     private Reservation reservation;
-*/
 
     @OneToMany(targetEntity = Book.class, mappedBy = "cart",
             cascade = CascadeType.ALL,fetch=FetchType.LAZY)
@@ -39,13 +38,13 @@ public class Cart {
         return id;
     }
 
-    /*public Reservation getReservation() {
+    public Reservation getReservation() {
         return reservation;
-    }*/
+    }
 
-    /*public void setReservation(Reservation reservation) {
+    public void setReservation(Reservation reservation) {
         this.reservation = reservation;
-    }*/
+    }
 
     public List<Book> getBooks() {
         return books;
