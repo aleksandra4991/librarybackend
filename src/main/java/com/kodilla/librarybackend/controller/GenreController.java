@@ -27,7 +27,7 @@ public class GenreController {
         return thriller;
     }
 
-    @RequestMapping(method = RequestMethod.PUT, name = "updateSpecifiedGenre")
+    @RequestMapping(method = RequestMethod.PUT, value = "updateSpecifiedGenre")
     public GenreDto updateSpecifiedGenre(@RequestParam Long genreId){
         return new GenreDto(1L,"romanceXXX");
     }

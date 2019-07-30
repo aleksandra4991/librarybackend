@@ -18,19 +18,19 @@ public class CartController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST, name = "addBookWithSpecifiedIdToSpecifiedCart",consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "addBookWithSpecifiedIdToSpecifiedCart",consumes = APPLICATION_JSON_VALUE)
     public CartDto addBookWithSpecifiedIdToSpecifiedCart (@RequestParam CartBookAdderDto cartBookAdderDto) {
         return new CartDto(1L, new ArrayList<>(Arrays.asList(new BookDto(1L, "Rok 1984", "George Orwell", (long) 1949, false, "1L"),
                 new BookDto(2L, "Tytuł", "Autor", (long) 2000, false, "2L"))));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, name = "removeBookWithSpecifiedIdToSpecifiedCart", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.DELETE, value = "removeBookWithSpecifiedIdToSpecifiedCart", consumes = APPLICATION_JSON_VALUE)
     public void removeBookWithSpecifiedIdToSpecifiedCart (@RequestParam CartBookRemoverDto cartBookRemoverDto){
         CartDto cartDto = new CartDto();
         cartDto.getBookDtoList().remove(new BookDto());
     }
 
-    @RequestMapping(method = RequestMethod.PUT , name = "createReservationByCartId", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.PUT , value = "createReservationByCartId", consumes = APPLICATION_JSON_VALUE)
     public ReservationCreationDto createReservationByCartId(@RequestParam Long cartId){
         return new ReservationCreationDto(1L,1l);
     }
