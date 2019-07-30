@@ -21,20 +21,20 @@ public class Book {
     //@JoinColumn(name = "CART_ID")
     //private Cart cart;
 
-    //@ManyToOne(cascade = CascadeType.PERSIST)
-    //@JoinColumn(name = "GENRE_ID")
-    //private Genre genre;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "GENRE_ID")
+    private Genre genre;
 
 
     public Book() {
     }
 
-    public Book(String title, String author, Long year, String signature/* Genre genre*/) {
+    public Book(String title, String author, Long year, String signature, Genre genre) {
         this.title = title;
         this.author = author;
         this.year = year;
         this.signature = signature;
-        //this.genre = genre;
+        this.genre = genre;
     }
 
     public Long getId() {
@@ -65,9 +65,9 @@ public class Book {
         return cart;
     }*/
 
-    /*public Genre getGenre() {
+    public Genre getGenre() {
         return genre;
-    }*/
+    }
 
     public void setRented(boolean rented) {
         this.rented = rented;
