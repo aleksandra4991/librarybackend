@@ -25,6 +25,43 @@ public class Book {
     @JoinColumn(name = "GENRE_ID")
     private Genre genre;
 
+    public static class BookBuilder{
+
+        private String title;
+        private String author;
+        private Long year;
+        private String signature;
+        private Genre genre;
+
+        public BookBuilder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public BookBuilder author(String author) {
+            this.author = author;
+            return this;
+        }
+
+        public BookBuilder year(Long year) {
+            this.year = year;
+            return this;
+        }
+
+        public BookBuilder signature (String signature) {
+            this.signature = signature;
+            return this;
+        }
+
+        public BookBuilder genre(Genre genre) {
+            this.genre = genre;
+            return this;
+        }
+
+        public Book build(){
+            return new Book (title,author,year,signature,genre);
+        }
+    }
 
     public Book() {
     }
