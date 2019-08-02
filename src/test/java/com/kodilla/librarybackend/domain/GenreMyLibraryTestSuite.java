@@ -58,10 +58,33 @@ public class GenreMyLibraryTestSuite {
         //Given
         Genre genre1 = new Genre(GENRE_NAME_ROMANCE);
         genreRepository.save(genre1);
+        Long genreId = genre1.getId();
+        Genre specifiedGenreToUpdate = genreRepository.getOne(genreId);
 
         //When
+        specifiedGenreToUpdate.setName("Comedy");
+        genreRepository.save(specifiedGenreToUpdate);
+        specifiedGenreToUpdate = genreRepository.getOne(genreId);
+        String updatedNameOfSpecifiedGenre = specifiedGenreToUpdate.getName();
+
+        //Then
+        Assert.assertNotEquals("Romance",updatedNameOfSpecifiedGenre);
+
+    }
+
+    @Test
+    public void testCreateNewGenre(){
+
+        //Given
+        Genre genre1 = new Genre(GENRE_NAME_ROMANCE);
+
+        //When
+        genreRepository.save(genre1);
         Long genreId = genre1.getId();
-        Genre specifiedGenre = genreRepository.getOne(genreId);
+        Genre newGenre = genreRepository.getOne(genreId);
+
+        //Then
+        Assert.assertNotEquals(null,newGenre);
 
     }
 }
