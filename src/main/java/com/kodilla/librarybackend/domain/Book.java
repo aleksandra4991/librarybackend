@@ -74,6 +74,16 @@ public class Book {
         this.genre = genre;
     }
 
+
+    public Book(String title, String author, Long year, String signature, boolean rented, Genre genre) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.signature = signature;
+        this.rented = rented;
+        this.genre = genre;
+    }
+
     public Long getId() {
         return id;
     }
