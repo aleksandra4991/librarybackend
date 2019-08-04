@@ -36,10 +36,12 @@ public class BookMyLibraryTestSuite {
         //Then
         Assert.assertEquals(booksCounterBeforeSave + 3, booksCounterAfterSave);
 
+        //CleanUp
+        bookRepository.deleteAll();
     }
 
     @Test
-    public void testGetAvaiableToRentBooks (){
+    public void getAvaiableToRentBooks (){
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
@@ -63,6 +65,8 @@ public class BookMyLibraryTestSuite {
         Assert.assertEquals("Autor2",authorOfBook2);
         Assert.assertNotEquals("B19876",signatureOfBook3);
 
+        //CleanUp
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -89,6 +93,8 @@ public class BookMyLibraryTestSuite {
         Assert.assertTrue(book11IsRented==book21IsRented);
         Assert.assertTrue(genreOfbook1.equals(genreOfbook3));
 
+        //CleanUp
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -113,6 +119,8 @@ public class BookMyLibraryTestSuite {
         Assert.assertNotEquals(2,numberOfBooksOfSpecifiedAuthor);
         Assert.assertTrue(authorOfFirstBook.equals(authorOfSecondBook));
 
+        //CleanUp
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -130,6 +138,8 @@ public class BookMyLibraryTestSuite {
         //Then
         Assert.assertNotNull(yearOfFirstBook);
 
+        //CleanUp
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -147,6 +157,8 @@ public class BookMyLibraryTestSuite {
         //Then
         Assert.assertNotNull(newBook);
 
+        //CleanUp
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -167,6 +179,9 @@ public class BookMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(false,updatedIsRentedForSpecifiedBook);
+
+        //CleanUp
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -189,6 +204,9 @@ public class BookMyLibraryTestSuite {
 
         //Then
         Assert.assertNotEquals(bookCounterBeforeDeletion,bookCounterAfterDeletion);
+
+        //CleanUp
+        bookRepository.deleteAll();
     }
 
 }
