@@ -19,7 +19,7 @@ public class Reservation {
     @JoinColumn(name = "CART_ID")
     private Cart cart;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "READER_ID")
     private Reader reader;
 

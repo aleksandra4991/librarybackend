@@ -5,16 +5,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
+@DataJpaTest
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class ReaderMyLibraryTestSuite {
 
     @Autowired
@@ -34,8 +32,6 @@ public class ReaderMyLibraryTestSuite {
         //Then
         Assert.assertNotNull(newReader);
 
-        //CleanUp
-        readerRepository.deleteAll();
     }
 
     @Test
@@ -56,8 +52,6 @@ public class ReaderMyLibraryTestSuite {
         //Then
         Assert.assertEquals(false,updatedIsBlockedForSpecifiedReader);
 
-        //CleanUp
-        readerRepository.deleteAll();
     }
 
     @Test
@@ -84,8 +78,6 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertNotEquals("509345876",updatedPhoneNumberForSpecifiedReader);
         Assert.assertEquals("aleksandraRadzikowska@onet.pl",updatedEmailAdressForSpecifiedReader);
 
-        //CleanUp
-        readerRepository.deleteAll();
     }
 
     @Test
@@ -114,8 +106,6 @@ public class ReaderMyLibraryTestSuite {
         //Then
         Assert.assertEquals(1,numberOfReservationsOfSpecifiedReader);
 
-        //CleanUp
-        readerRepository.deleteAll();
     }
 
     @Test
@@ -140,7 +130,5 @@ public class ReaderMyLibraryTestSuite {
         //Then
         Assert.assertEquals(2,numberOfRentedBooksBySpecifiedReader);
 
-        //CleanUp
-        readerRepository.deleteAll();
     }
 }
