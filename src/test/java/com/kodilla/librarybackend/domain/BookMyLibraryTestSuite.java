@@ -74,7 +74,7 @@ public class BookMyLibraryTestSuite {
         String signatureOfBook3 = thirdBook.getSignature();
 
         //Then
-        //Assert.assertEquals(3,numberOfAvaiableBooks);
+        Assert.assertEquals(3,numberOfAvaiableBooks);
         Assert.assertEquals("Tytuł1",titleOfBook1);
         Assert.assertEquals("Autor2",authorOfBook2);
         Assert.assertNotEquals("B19876",signatureOfBook3);
