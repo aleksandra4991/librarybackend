@@ -24,8 +24,8 @@ public class CartController {
                 new BookDto(2L, "Tytuł", "Autor", (long) 2000, false, "2L"))));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "removeBookWithSpecifiedIdToSpecifiedCart", consumes = APPLICATION_JSON_VALUE)
-    public void removeBookWithSpecifiedIdToSpecifiedCart (@RequestParam CartBookRemoverDto cartBookRemoverDto){
+    @RequestMapping(method = RequestMethod.DELETE, value = "removeBookWithSpecifiedIdFromSpecifiedCart", consumes = APPLICATION_JSON_VALUE)
+    public void removeBookWithSpecifiedIdFromSpecifiedCart (@RequestParam CartBookRemoverDto cartBookRemoverDto){
         CartDto cartDto = new CartDto();
         cartDto.getBookDtoList().remove(new BookDto());
     }
