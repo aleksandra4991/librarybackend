@@ -5,13 +5,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
+@DataJpaTest
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
 public class GenreMyLibraryTestSuite {
 
     private static final String GENRE_NAME_THRILLER = "Thriller";
@@ -39,9 +37,6 @@ public class GenreMyLibraryTestSuite {
         //Then
         Assert.assertEquals(2,genreCounter);
 
-        //CleanUp
-        genreRepository.deleteById(firstGenreId);
-        genreRepository.deleteById(secondGenreId);
     }
 
     @Test
@@ -59,8 +54,6 @@ public class GenreMyLibraryTestSuite {
         //Then
         Assert.assertEquals("Romance",genreName);
 
-        //CleanUp
-        genreRepository.deleteAll();
     }
 
     @Test
@@ -99,7 +92,5 @@ public class GenreMyLibraryTestSuite {
         //Then
         Assert.assertNotEquals(null,newGenre);
 
-        //CleanUp
-        genreRepository.deleteAll();
     }
 }
