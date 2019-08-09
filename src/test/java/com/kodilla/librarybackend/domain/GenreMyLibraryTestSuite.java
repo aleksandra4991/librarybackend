@@ -30,13 +30,18 @@ public class GenreMyLibraryTestSuite {
         genreRepository.save(genre2);
 
         //When
+        Long firstGenreId = genre1.getId();
+        Genre firstGenre = genreRepository.getOne(firstGenreId);
+        Long secondGenreId = genre2.getId();
+        Genre secondGenre = genreRepository.getOne(secondGenreId);
         int genreCounter = genreRepository.findAll().size();
 
         //Then
         Assert.assertEquals(2,genreCounter);
 
         //CleanUp
-        genreRepository.deleteAll();
+        genreRepository.deleteById(firstGenreId);
+        genreRepository.deleteById(secondGenreId);
     }
 
     @Test

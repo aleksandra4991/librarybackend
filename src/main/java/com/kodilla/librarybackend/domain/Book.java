@@ -25,13 +25,16 @@ public class Book {
     @JoinColumn(name = "GENRE_ID")
     private Genre genre;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "READER_ID")
+    private Reader reader;
+
     public static class BookBuilder{
 
         private String title;
         private String author;
         private Long year;
         private String signature;
-        private Genre genre;
 
         public BookBuilder title(String title) {
             this.title = title;
@@ -53,17 +56,12 @@ public class Book {
             return this;
         }
 
-        public BookBuilder genre(Genre genre) {
-            this.genre = genre;
-            return this;
-        }
-
         public Book build(){
-            return new Book (title,author,year,signature,genre);
+            return new Book (title,author,year,signature);
         }
     }
 
-    public Book() {
+    public Book(String title, String author, Long year, String signature) {
     }
 
     public Book(String title, String author, Long year, String signature, Genre genre) {
@@ -122,5 +120,13 @@ public class Book {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public Reader getReader() {
+        return reader;
+    }
+
+    public void setReader(Reader reader) {
+        this.reader = reader;
     }
 }
