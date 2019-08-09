@@ -186,6 +186,7 @@ public class BookMyLibraryTestSuite {
     public void testDeleteBook(){
 
         //Given
+        Genre testGenre = new Genre("Gatunek Testowy");
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
         Book book3 = new Book("Tytuł3", "Autor3", (long) 1960, "B19878", testGenre);
