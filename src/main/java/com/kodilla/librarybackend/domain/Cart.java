@@ -50,6 +50,10 @@ public class Cart {
         return books;
     }
 
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     public LocalDate getCartUpdate() {
         return cartUpdate;
     }
