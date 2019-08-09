@@ -24,6 +24,12 @@ public class Reader {
             fetch = FetchType.LAZY)
     private List<Reservation> reservations = new ArrayList<>();
 
+    @OneToMany(targetEntity = Book.class,
+            mappedBy = "reader",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Book> bookList = new ArrayList<>();
+
     public Reader() {
     }
 
@@ -31,6 +37,13 @@ public class Reader {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
+    }
+
+    public Reader(String name, String phoneNumber, String emailAddress, boolean status) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.status = status;
     }
 
     public Long getId() {
@@ -41,12 +54,24 @@ public class Reader {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getEmailAddress() {
         return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public boolean isStatus() {
@@ -63,5 +88,13 @@ public class Reader {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 }
