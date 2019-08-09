@@ -17,15 +17,15 @@ public class Book {
     private String signature;
     private boolean rented;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CART_ID")
     private Cart cart;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GENRE_ID")
     private Genre genre;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "READER_ID")
     private Reader reader;
 
@@ -35,6 +35,7 @@ public class Book {
         private String author;
         private Long year;
         private String signature;
+        private Genre genre;
 
         public BookBuilder title(String title) {
             this.title = title;
@@ -56,12 +57,24 @@ public class Book {
             return this;
         }
 
+        public BookBuilder title(Genre genre) {
+            this.genre = genre;
+            return this;
+        }
+
         public Book build(){
-            return new Book (title,author,year,signature);
+            return new Book (title,author,year,signature,genre);
         }
     }
 
+    public Book() {
+    }
+
     public Book(String title, String author, Long year, String signature) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.signature = signature;
     }
 
     public Book(String title, String author, Long year, String signature, Genre genre) {
