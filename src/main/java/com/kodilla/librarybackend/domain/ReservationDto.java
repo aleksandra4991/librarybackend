@@ -1,11 +1,13 @@
 package com.kodilla.librarybackend.domain;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class ReservationDto {
 
     private Long reservationId;
     private String reader;
     private String reservedBooks;
-    private boolean active;
+    private AtomicBoolean active;
 
     public ReservationDto() {
     }
@@ -16,7 +18,7 @@ public class ReservationDto {
         this.reservedBooks = reservedBooks;
     }
 
-    public ReservationDto(Long reservationId, String reader, String reservedBooks, boolean active) {
+    public ReservationDto(Long reservationId, String reader, String reservedBooks, AtomicBoolean active) {
         this.reservationId = reservationId;
         this.reader = reader;
         this.reservedBooks = reservedBooks;
@@ -33,7 +35,7 @@ public class ReservationDto {
         return reservedBooks;
     }
 
-    public boolean isActive() {
+    public AtomicBoolean getActive() {
         return active;
     }
 }

@@ -4,6 +4,7 @@ package com.kodilla.librarybackend.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Entity
 public class Reservation {
@@ -13,7 +14,7 @@ public class Reservation {
     @GeneratedValue
     @Column(name="RESERVATION_ID", unique = true)
     private Long id;
-    private boolean active;
+    private AtomicBoolean active;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CART_ID")
@@ -37,11 +38,11 @@ public class Reservation {
         return id;
     }
 
-    public boolean isActive() {
+    public AtomicBoolean getActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(AtomicBoolean active) {
         this.active = active;
     }
 
