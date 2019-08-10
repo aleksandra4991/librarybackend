@@ -1,7 +1,11 @@
 package com.kodilla.librarybackend.controller;
 
+import com.kodilla.librarybackend.domain.Book;
 import com.kodilla.librarybackend.domain.BookDto;
 import com.kodilla.librarybackend.exceptions.BookNotFoundException;
+import com.kodilla.librarybackend.mapper.BookMapper;
+import com.kodilla.librarybackend.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,48 +18,50 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/myLibrary")
 public class BookController {
 
+    @Autowired
+    private BookService bookService;
+
+    @Autowired
+    private BookMapper bookMapper;
+
     @RequestMapping(method = RequestMethod.GET, value = "getAllBooks")
     public List<BookDto> getAllBooks(){
-        return new ArrayList<>(Arrays.asList(new BookDto(1L,"Rok 1984","George Orwell",(long)1949,true,"1L"),
-                new BookDto(2L,"Tytuł","Autor", (long) 2000,false,"2L")));
+        return bookMapper.mapToBookDtoList(bookService.getAllBooks());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getAvaiableToRentBooks")
     public List<BookDto> getAvaiableToRentBooks(@RequestParam boolean rented){
-        return new ArrayList<>(Arrays.asList(new BookDto(1L,"Rok 1984","George Orwell",(long)1949,false,"1L"),
-                new BookDto(2L,"Tytuł","Autor", (long) 2000,false,"2L")));
+        return bookMapper.mapToBookDtoList(bookService.getAvaiableToRentBooks(rented));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getAlreadyRentedBooks")
     public List<BookDto> getAlreadyRentedBooks(@RequestParam boolean rented){
-        return new ArrayList<>(Arrays.asList(new BookDto(1L,"Rok 1984","George Orwell",(long)1949,true,"1L"),
-                new BookDto(2L,"Tytuł","Autor", (long) 2000,true,"2L")));
+        return bookMapper.mapToBookDtoList(bookService.getAlreadyRentedBooks(rented));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getBooksOfDefiniedAuthor")
     public List<BookDto> getBooksOfDefiniedAuthor (@RequestParam String author){
-        return new ArrayList<>(Arrays.asList(new BookDto(1L,"Rok 1984","George Orwell",(long)1949,true,"1L"),
-                new BookDto(2L,"Tytuł","George Orwell", (long) (long)1952,true,"2L")));
+        return bookMapper.mapToBookDtoList(bookService.getBooksOfDefiniedAuthor(author));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getBook")
     public BookDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
-        return new BookDto(2L,"Tytuł","Autor", (long) 2000,false,"2L");
+        return bookMapper.mapToBookDto((Book) bookService.getBook(bookId));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createBook", consumes = APPLICATION_JSON_VALUE)
-    public void createBook(@RequestBody BookDto bookDto){
-
+    public BookDto createBook(@RequestBody BookDto bookDto){
+        return bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto)));
     }
 
     @RequestMapping(method = RequestMethod.PUT,value = "updateBook",consumes = APPLICATION_JSON_VALUE)
-    public BookDto updateBook(@RequestParam Long bookId){
-        return new BookDto(2L,"Tytuł","Autor", (long) 2000,true,"2L");
+    public BookDto updateBook(@RequestBody BookDto bookDto) {
+        return bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto)));
     }
 
     @RequestMapping(method = RequestMethod.DELETE,value = "deleteBook")
     public void deleteBook(@RequestParam Long bookId) throws BookNotFoundException {
+        bookService.deleteBook(bookId);
     }
-
 
 }

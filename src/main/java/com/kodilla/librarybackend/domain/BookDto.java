@@ -8,38 +8,28 @@ public class BookDto {
     private String title;
     private String author;
     private Long year;
+    private String signature;
     private boolean rented;
-    private String groupId;
+    private String genreId;
 
     public BookDto() {
     }
 
-    public BookDto(Long bookId, String title, String author, Long year, boolean rented, String groupId) {
-        this.bookId = bookId;
+    public BookDto(String title, String author, Long year, String signature, boolean rented, String genreId) {
         this.title = title;
         this.author = author;
         this.year = year;
+        this.signature = signature;
         this.rented = rented;
-        this.groupId = groupId;
-    }
-
-    public BookDto(String title, String author, Long year, boolean rented, String groupId) {
-        this.title = title;
-        this.author = author;
-        this.year = year;
-        this.rented = rented;
-        this.groupId = groupId;
-    }
-
-    public BookDto(String title, String author, Long year, String groupId) {
-        this.title = title;
-        this.author = author;
-        this.year = year;
-        this.groupId = groupId;
+        this.genreId = genreId;
     }
 
     public Long getBookId() {
         return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
     public String getTitle() {
@@ -54,6 +44,10 @@ public class BookDto {
         return year;
     }
 
+    public String getSignature() {
+        return signature;
+    }
+
     public boolean isRented() {
         return rented;
     }
@@ -62,12 +56,12 @@ public class BookDto {
         this.rented = rented;
     }
 
-    public String getGroupId() {
-        return groupId;
+    public String getGenreId() {
+        return genreId;
     }
 
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setGenreId(String genreId) {
+        this.genreId = genreId;
     }
 
     @Override
@@ -80,12 +74,12 @@ public class BookDto {
                 getTitle().equals(bookDto.getTitle()) &&
                 getAuthor().equals(bookDto.getAuthor()) &&
                 getYear().equals(bookDto.getYear()) &&
-                getGroupId().equals(bookDto.getGroupId());
+                getGenreId().equals(bookDto.getGenreId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getBookId(), getTitle(), getAuthor(), getYear(), isRented(), getGroupId());
+        return Objects.hash(getBookId(), getTitle(), getAuthor(), getYear(), isRented(), getGenreId());
     }
 
     @Override
