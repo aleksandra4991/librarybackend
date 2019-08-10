@@ -226,12 +226,6 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertTrue(statusBeforeExpiration.get()==true);
         Assert.assertFalse(statusAfterExpiration.get()==true);
 
-
-
-
-
-
-
     }
 
 
