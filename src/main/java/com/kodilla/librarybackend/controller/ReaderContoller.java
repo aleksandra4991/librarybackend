@@ -23,10 +23,10 @@ public class ReaderContoller {
         return new ReaderDto(1L,"Aleksandra Radzikowska","509345876","aradzikowska999@gmail.com","BLOCKED");
     }
 
-    @RequestMapping(method = RequestMethod.PUT , value = "updateReaderData")
-    public ReaderDto updateReaderData (@RequestParam Long readerId){
-        return new ReaderDto(1L,"Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com","UNBLOCKED");
-    }
+    //@RequestMapping(method = RequestMethod.PUT , value = "updateReaderPhoneNumber")
+    //public ReaderDto updateReaderData (@RequestParam Long readerId){
+      //  return new ReaderDto(1L,"Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com","UNBLOCKED");
+    //}
 
     @RequestMapping(method = RequestMethod.GET , value = "getReservationsOfSpecifiedReader")
     public List<ReservationDto> getReservationsOfSpecifiedReader (@RequestParam Long readerId){
