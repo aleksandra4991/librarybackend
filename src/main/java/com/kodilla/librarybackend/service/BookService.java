@@ -54,7 +54,7 @@ public class BookService {
     }
 
     public void updateBook(final Long id){
-        bookRepository.updateUserSetRentedForId(true,id);
+        bookRepository.updateBookSetRentedForId(true,id);
         Book book = getBook(id);
         entityManager.refresh(book);
     }
