@@ -1,40 +1,45 @@
 package com.kodilla.librarybackend.controller;
 
+import com.kodilla.librarybackend.domain.Genre;
 import com.kodilla.librarybackend.domain.GenreDto;
 import com.kodilla.librarybackend.exceptions.GenreNotFoundException;
+import com.kodilla.librarybackend.mapper.GenreMapper;
+import com.kodilla.librarybackend.service.GenreService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping("/myLibrary")
 public class GenreController {
 
-    GenreDto romance = new GenreDto(1L,"romance");
-    GenreDto thriller = new GenreDto(2L,"thiller");
+    @Autowired
+    private GenreService genreService;
+
+    @Autowired
+    private GenreMapper genreMapper;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllGenres" )
     public List <GenreDto> getAllGenres (){
-        return new ArrayList<>(Arrays.asList(romance,thriller));
+        return genreMapper.mapToGenreDtoList(genreService.getAllGenres());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getSpecifiedGenre")
     public GenreDto getSpecifiedGenre(@RequestParam Long genreId) throws GenreNotFoundException {
-        return thriller;
+        return genreMapper.mapToGenreDto((Genre)genreService.getSpecifiedGenre(genreId));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateSpecifiedGenre")
-    public GenreDto updateSpecifiedGenre(@RequestParam Long genreId){
-        return new GenreDto(1L,"romanceXXX");
+    public GenreDto updateSpecifiedGenre(@RequestBody GenreDto genreDto){
+        return genreMapper.mapToGenreDto(genreService.createNewGenre(genreMapper.mapToGenre(genreDto)));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createNewGenre", consumes = APPLICATION_JSON_VALUE)
-    public void createNewGenre(@RequestBody GenreDto genreDto){
-
+    public GenreDto createNewGenre(@RequestBody GenreDto genreDto){
+        return genreMapper.mapToGenreDto(genreService.createNewGenre(genreMapper.mapToGenre(genreDto)));
     }
 
 }
