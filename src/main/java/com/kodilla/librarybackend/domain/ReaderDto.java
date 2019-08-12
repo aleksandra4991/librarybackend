@@ -11,7 +11,7 @@ public class ReaderDto {
     private String readerName;
     private String phoneNumber;
     private String emailAdress;
-    private String status;
+    private boolean status;
 
     @JsonIgnore
     private List<ReservationDto> reservationDtoList = new ArrayList<>();
@@ -22,26 +22,19 @@ public class ReaderDto {
     public ReaderDto() {
     }
 
-    public ReaderDto(Long readerId, String readerName, String phoneNumber, String emailAdress, String status) {
-        this.readerId = readerId;
+    public ReaderDto(String readerName, boolean status) {
         this.readerName = readerName;
-        this.phoneNumber = phoneNumber;
-        this.emailAdress = emailAdress;
         this.status = status;
     }
 
-    public ReaderDto(String readerName) {
+    public ReaderDto(String readerName, String phoneNumber, String emailAdress) {
         this.readerName = readerName;
-        this.status = "UNBLOCKED";
-    }
-
-    public ReaderDto(Long readerId, String readerName) {
-        this.readerId = readerId;
-        this.readerName = readerName;
+        this.phoneNumber = phoneNumber;
+        this.emailAdress = emailAdress;
     }
 
     public void blockUser(){
-        this.status = "BLOCKED";
+        this.status = false;
     }
 
     public Long getReaderId() {
@@ -60,7 +53,7 @@ public class ReaderDto {
         return emailAdress;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 

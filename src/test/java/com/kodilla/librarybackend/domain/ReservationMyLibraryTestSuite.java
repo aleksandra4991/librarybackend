@@ -44,7 +44,7 @@ public class ReservationMyLibraryTestSuite {
         List<Book> bookList = new ArrayList<>();
         bookList.add(specifiedBook1);
         bookList.add(specifiedBook);
-        Reader specifiedReader = new Reader("Aleksandra Radzikowska","566890787","aleksandraaaa@gmail.com");
+        Reader specifiedReader = new Reader("Aleksandra Radzikowska",true);
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
@@ -56,7 +56,7 @@ public class ReservationMyLibraryTestSuite {
         List<Book> secondBookList = new ArrayList<>();
         secondBookList.add(thirdSpecifiedBook);
 
-        Reader secondSpecifiedReader = new Reader("Julia Wrzosek","522890787","juleczkaa@gmail.com");
+        Reader secondSpecifiedReader = new Reader("Julia Wrzosek",true);
         readerRepository.save(secondSpecifiedReader);
 
         Cart secondSspecifiedCart = new Cart();
@@ -90,7 +90,7 @@ public class ReservationMyLibraryTestSuite {
         List<Book> secondBookList = new ArrayList<>();
         secondBookList.add(thirdSpecifiedBook);
 
-        Reader secondSpecifiedReader = new Reader("Julia Wrzosek","522890787","juleczkaa@gmail.com");
+        Reader secondSpecifiedReader = new Reader("Julia Wrzosek",true);
         readerRepository.save(secondSpecifiedReader);
 
         Cart secondSspecifiedCart = new Cart();
@@ -106,8 +106,6 @@ public class ReservationMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(1,numberOfReservations);
-        Assert.assertEquals("522890787",secondFoundReservation.getReader().getPhoneNumber());
-        Assert.assertNotEquals("xxx@gmail.com",secondFoundReservation.getReader().getEmailAddress());
 
     }
 
@@ -120,7 +118,7 @@ public class ReservationMyLibraryTestSuite {
         List<Book> secondBookList = new ArrayList<>();
         secondBookList.add(thirdSpecifiedBook);
 
-        Reader secondSpecifiedReader = new Reader("Julia Wrzosek","522890787","juleczkaa@gmail.com");
+        Reader secondSpecifiedReader = new Reader("Julia Wrzosek",true);
         secondSpecifiedReader.setBookList(secondBookList);
         readerRepository.save(secondSpecifiedReader);
 
@@ -138,8 +136,6 @@ public class ReservationMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(1,numberOfReservations);
-        Assert.assertNotEquals("522800787",secondFoundReservation.getReader().getPhoneNumber());
-        Assert.assertEquals("juleczkaa@gmail.com",secondFoundReservation.getReader().getEmailAddress());
         Assert.assertEquals("B09876",signatureOfReservedBook);
 
     }
@@ -155,7 +151,7 @@ public class ReservationMyLibraryTestSuite {
         List<Book> bookList = new ArrayList<>();
         bookList.add(specifiedBook1);
         bookList.add(specifiedBook);
-        Reader specifiedReader = new Reader("Aleksandra Radzikowska","566890787","aleksandraaaa@gmail.com");
+        Reader specifiedReader = new Reader("Aleksandra Radzikowska",true);
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
@@ -167,7 +163,7 @@ public class ReservationMyLibraryTestSuite {
         List<Book> secondBookList = new ArrayList<>();
         secondBookList.add(thirdSpecifiedBook);
 
-        Reader secondSpecifiedReader = new Reader("Julia Wrzosek","522890787","juleczkaa@gmail.com");
+        Reader secondSpecifiedReader = new Reader("Julia Wrzosek",true);
         readerRepository.save(secondSpecifiedReader);
 
         Cart secondSspecifiedCart = new Cart();
@@ -202,7 +198,7 @@ public class ReservationMyLibraryTestSuite {
         List<Book> secondBookList = new ArrayList<>();
         secondBookList.add(thirdSpecifiedBook);
 
-        Reader secondSpecifiedReader = new Reader("Julia Wrzosek","522890787","juleczkaa@gmail.com",true);
+        Reader secondSpecifiedReader = new Reader("Julia Wrzosek",true);
         secondSpecifiedReader.setBookList(secondBookList);
         readerRepository.save(secondSpecifiedReader);
 

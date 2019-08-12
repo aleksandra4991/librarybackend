@@ -33,10 +33,9 @@ public class Reader {
     public Reader() {
     }
 
-    public Reader(String name, String phoneNumber, String emailAddress) {
+    public Reader(String name, boolean status) {
         this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.emailAddress = emailAddress;
+        this.status = status;
     }
 
     public Reader(String name, String phoneNumber, String emailAddress, boolean status) {
