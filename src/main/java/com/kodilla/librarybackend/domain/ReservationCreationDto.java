@@ -6,7 +6,6 @@ public class ReservationCreationDto {
     private Long cartId;
 
     public ReservationCreationDto(){
-
     }
 
     public ReservationCreationDto(Long readerId, Long cartId) {
