@@ -22,7 +22,7 @@ public class ReaderMyLibraryTestSuite {
     public void testCreateReader(){
 
         //Given
-        Reader reader1 = new Reader("Aleksandra Radzikowska","509345876","aradzikowska999@gmail.com");
+        Reader reader1 = new Reader("Aleksandra Radzikowska",true);
 
         //When
         readerRepository.save(reader1);

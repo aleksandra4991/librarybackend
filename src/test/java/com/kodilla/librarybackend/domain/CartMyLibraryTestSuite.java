@@ -105,7 +105,7 @@ public class CartMyLibraryTestSuite {
         List<Book> bookList = new ArrayList<>();
         bookList.add(specifiedBook);
 
-        Reader specifiedReader = new Reader("Aleksandra Radzikowska","566890787","aleksandraaaa@gmail.com");
+        Reader specifiedReader = new Reader("Aleksandra Radzikowska",true);
         readerRepository.save(specifiedReader);
 
         Cart specifiedCart = new Cart();
