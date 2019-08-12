@@ -92,7 +92,7 @@ public class ReaderMyLibraryTestSuite {
         reservedBooks.add(book1);
         reservedBooks.add(book2);
         Cart cartX = new Cart(reservedBooks);
-        Reservation reservationOfSpecifiedReader = new Reservation(cartX,testReader);
+        Reservation reservationOfSpecifiedReader = new Reservation(testReader,cartX);
         List<Reservation> reservations = new ArrayList<>();
         reservations.add(reservationOfSpecifiedReader);
         testReader.setReservations(reservations);

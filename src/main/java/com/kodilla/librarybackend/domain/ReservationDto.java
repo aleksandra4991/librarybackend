@@ -12,12 +12,6 @@ public class ReservationDto {
     public ReservationDto() {
     }
 
-    public ReservationDto(Long reservationId, String reader, String reservedBooks) {
-        this.reservationId = reservationId;
-        this.reader = reader;
-        this.reservedBooks = reservedBooks;
-    }
-
     public ReservationDto(Long reservationId, String reader, String reservedBooks, AtomicBoolean active) {
         this.reservationId = reservationId;
         this.reader = reader;
@@ -37,5 +31,9 @@ public class ReservationDto {
 
     public AtomicBoolean getActive() {
         return active;
+    }
+
+    public void setActive(AtomicBoolean active) {
+        this.active = active;
     }
 }

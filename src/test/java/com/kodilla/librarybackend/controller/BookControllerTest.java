@@ -26,11 +26,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@WebMvcTest(BookController.class)
 /*public class BookControllerTest {
 
-    private static final Genre genre = new Genre ("Gatunek Testowy");
-    private static final Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", genre);
-    private static final BookDto bookDto1 = new BookDto("Tytuł1", "Autor1", (long) 1958, "B19876", genre.getId().toString());
+    private final static Genre genre = new Genre ("Gatunek Testowy");
+    private final static Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", genre);
+    private final static BookDto bookDto1 = new BookDto("Tytuł1", "Autor1", (long) 1958, "B19876", genre.getId().toString());
     private static Gson gson = new Gson();
-    private static final String jsonContent = gson.toJson(bookDto1);
+    private final static String jsonContent = gson.toJson(bookDto1);
 
     @Autowired
     private MockMvc mockMvc;

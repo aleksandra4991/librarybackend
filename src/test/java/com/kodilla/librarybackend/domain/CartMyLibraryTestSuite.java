@@ -28,8 +28,6 @@ public class CartMyLibraryTestSuite {
     @Autowired
     private ReservationRepository reservationRepository;
 
-
-
     @Test
     public void testCreateEmptyCart(){
 
@@ -111,7 +109,7 @@ public class CartMyLibraryTestSuite {
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
 
-        Reservation specifiedReservation = new Reservation(specifiedCart,specifiedReader);
+        Reservation specifiedReservation = new Reservation(specifiedReader,specifiedCart);
 
         //When
         reservationRepository.save(specifiedReservation);

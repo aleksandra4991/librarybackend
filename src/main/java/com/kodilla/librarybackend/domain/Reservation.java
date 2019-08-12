@@ -16,22 +16,22 @@ public class Reservation {
     private Long id;
     private AtomicBoolean active;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CART_ID")
-    private Cart cart;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "READER_ID")
     private Reader reader;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CART_ID")
+    private Cart cart;
 
     private LocalDate reservationDateCreation;
 
     public Reservation() {
     }
 
-    public Reservation(Cart cart,Reader reader) {
-        this.cart = cart;
+    public Reservation(Reader reader, Cart cart) {
         this.reader = reader;
+        this.cart = cart;
     }
 
     public Long getId() {
@@ -48,6 +48,10 @@ public class Reservation {
 
     public Reader getReader() {
         return reader;
+    }
+
+    public void setReader(Reader reader) {
+        this.reader = reader;
     }
 
     public Cart getCart() {
