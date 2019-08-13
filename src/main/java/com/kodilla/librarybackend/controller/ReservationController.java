@@ -3,6 +3,9 @@ package com.kodilla.librarybackend.controller;
 import com.kodilla.librarybackend.domain.ReservationCreationDto;
 import com.kodilla.librarybackend.domain.ReservationDto;
 import com.kodilla.librarybackend.exceptions.ReservationNotFoundException;
+import com.kodilla.librarybackend.mapper.ReservationMapper;
+import com.kodilla.librarybackend.service.ReservationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,31 +19,35 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/myLibrary")
 public class ReservationController {
 
+    @Autowired
+    private ReservationService reservationService;
+
+    @Autowired
+    private ReservationMapper reservationMapper;
+
     @RequestMapping(method = RequestMethod.GET, value ="getReservations")
     public List <ReservationDto> getReservations(){
-        return new ArrayList<>(Arrays.asList(new ReservationDto(1L,"reader1","reservedBooks1",new AtomicBoolean(true)),new ReservationDto(2L,"reader2","reservedBooks2",new AtomicBoolean(true))));
+        return reservationMapper.mapToReservationDtoList(reservationService.getReservations());
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createReservation",consumes = APPLICATION_JSON_VALUE)
     public void createReservation(@RequestBody ReservationCreationDto reservationCreationDto){
-
+        reservationService.createReservation(reservationCreationDto);
     }
 
     @RequestMapping(method = RequestMethod.GET , value = "getSpecifiedReservation")
     public ReservationDto getSpecifiedReservation(@RequestParam Long reservationId)throws ReservationNotFoundException {
-        return new ReservationDto(1L,"reader1","reservedBooks1",new AtomicBoolean(true));
+        return reservationMapper.mapToReservationDto(reservationService.getSpecifiedReservation(reservationId));
     }
 
     @RequestMapping(method = RequestMethod.DELETE , value = "deleteSpecifiedReservation")
     public void deleteSpecifiedReservation(@RequestParam Long reservationId) throws ReservationNotFoundException{
-
+        reservationService.deleteSpecifiedReservation(reservationId);
     }
 
     @RequestMapping(method = RequestMethod.PUT , value = "updateWithExpirationOfReservation")
-    public ReservationDto updateWithExpirationOfReservation (@RequestBody ReservationDto reservationDto) throws ReservationNotFoundException{
-        return new ReservationDto(1L,"reader1","reservedBooks1",new AtomicBoolean(false));
+    public ReservationDto updateWithExpirationOfReservation (@RequestBody ReservationCreationDto reservationCreationDto) throws ReservationNotFoundException{
+        return reservationMapper.mapToReservationDto(reservationService.createReservation(reservationCreationDto));
     }
-
-
 
 }

@@ -48,7 +48,7 @@ public class ReservationMyLibraryTestSuite {
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
-        Reservation specifiedReservation = new Reservation(specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(new AtomicBoolean(true),specifiedReader,specifiedCart);
 
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
         Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
@@ -62,7 +62,7 @@ public class ReservationMyLibraryTestSuite {
         Cart secondSspecifiedCart = new Cart();
         cartRepository.save(secondSspecifiedCart);
 
-        Reservation secondSpecifiedReservation = new Reservation(secondSpecifiedReader,secondSspecifiedCart);
+        Reservation secondSpecifiedReservation = new Reservation(new AtomicBoolean(true),secondSpecifiedReader,secondSspecifiedCart);
 
         //When
         reservationRepository.save(specifiedReservation);
@@ -96,7 +96,7 @@ public class ReservationMyLibraryTestSuite {
         Cart secondSspecifiedCart = new Cart();
         cartRepository.save(secondSspecifiedCart);
 
-        Reservation secondSpecifiedReservation = new Reservation(secondSpecifiedReader,secondSspecifiedCart);
+        Reservation secondSpecifiedReservation = new Reservation(new AtomicBoolean(true),secondSpecifiedReader,secondSspecifiedCart);
 
         //When
         reservationRepository.save(secondSpecifiedReservation);
@@ -125,7 +125,7 @@ public class ReservationMyLibraryTestSuite {
         Cart secondSspecifiedCart = new Cart();
         cartRepository.save(secondSspecifiedCart);
 
-        Reservation secondSpecifiedReservation = new Reservation(secondSpecifiedReader,secondSspecifiedCart);
+        Reservation secondSpecifiedReservation = new Reservation(new AtomicBoolean(true),secondSpecifiedReader,secondSspecifiedCart);
 
         //When
         reservationRepository.save(secondSpecifiedReservation);
@@ -155,7 +155,7 @@ public class ReservationMyLibraryTestSuite {
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
-        Reservation specifiedReservation = new Reservation(specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(new AtomicBoolean(true),specifiedReader,specifiedCart);
 
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
         Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
@@ -169,7 +169,7 @@ public class ReservationMyLibraryTestSuite {
         Cart secondSspecifiedCart = new Cart();
         cartRepository.save(secondSspecifiedCart);
 
-        Reservation secondSpecifiedReservation = new Reservation(secondSpecifiedReader,secondSspecifiedCart);
+        Reservation secondSpecifiedReservation = new Reservation(new AtomicBoolean(true),secondSpecifiedReader,secondSspecifiedCart);
 
         //When
         reservationRepository.save(specifiedReservation);
@@ -205,7 +205,7 @@ public class ReservationMyLibraryTestSuite {
         Cart secondSspecifiedCart = new Cart();
         cartRepository.save(secondSspecifiedCart);
 
-        Reservation secondSpecifiedReservation = new Reservation(secondSpecifiedReader,secondSspecifiedCart);
+        Reservation secondSpecifiedReservation = new Reservation(new AtomicBoolean(true),secondSpecifiedReader,secondSspecifiedCart);
         reservationRepository.save(secondSpecifiedReservation);
         Long secondReservationId = secondSpecifiedReservation.getId();
         Reservation secondFoundReservation = reservationRepository.getOne(secondReservationId);

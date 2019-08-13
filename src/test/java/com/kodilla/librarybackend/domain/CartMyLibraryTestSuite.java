@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 @DataJpaTest
@@ -109,7 +110,7 @@ public class CartMyLibraryTestSuite {
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
 
-        Reservation specifiedReservation = new Reservation(specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(new AtomicBoolean(true),specifiedReader,specifiedCart);
 
         //When
         reservationRepository.save(specifiedReservation);

@@ -4,22 +4,26 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ReservationDto {
 
+    private AtomicBoolean active;
     private Long reservationId;
     private String reader;
     private String reservedBooks;
-    private AtomicBoolean active;
+
 
     public ReservationDto() {
     }
 
-    public ReservationDto(Long reservationId, String reader, String reservedBooks, AtomicBoolean active) {
-        this.reservationId = reservationId;
+    public ReservationDto(AtomicBoolean active, String reader, String reservedBooks) {
+        this.active = active;
         this.reader = reader;
         this.reservedBooks = reservedBooks;
-        this.active = active;
     }
 
     public Long geReservationId() { return reservationId; }
+
+    public void setReservationId(Long reservationId) {
+        this.reservationId = reservationId;
+    }
 
     public String getReader() {
         return reader;

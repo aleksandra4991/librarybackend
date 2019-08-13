@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)
@@ -92,7 +93,7 @@ public class ReaderMyLibraryTestSuite {
         reservedBooks.add(book1);
         reservedBooks.add(book2);
         Cart cartX = new Cart(reservedBooks);
-        Reservation reservationOfSpecifiedReader = new Reservation(testReader,cartX);
+        Reservation reservationOfSpecifiedReader = new Reservation(new AtomicBoolean(true),testReader,cartX);
         List<Reservation> reservations = new ArrayList<>();
         reservations.add(reservationOfSpecifiedReader);
         testReader.setReservations(reservations);

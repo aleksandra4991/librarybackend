@@ -39,7 +39,7 @@ public class ReservationService {
     public Reservation createReservation(ReservationCreationDto reservationCreationDto) {
         Reader specifiedReader = readerRepository.getOne(reservationCreationDto.getReaderId());
         Cart specifiedCart = cartRepository.getOne(reservationCreationDto.getCartId());
-        return reservationRepository.save(new Reservation(specifiedReader,specifiedCart));
+        return reservationRepository.save(new Reservation(new AtomicBoolean(true),specifiedReader,specifiedCart));
     }
 
     public void updateWithExpirationOfReservation(ReservationDto reservationDto){
