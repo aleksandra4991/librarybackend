@@ -18,11 +18,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
-public class ReservationMapperTest {
-
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+//@Transactional
+//public class ReservationMapperTest {
+/*
     @Autowired
     private ReservationMapper reservationMapper;
 
@@ -168,6 +168,6 @@ public class ReservationMapperTest {
 
         assertThat(reservations, sameBeanAs(reservationMapper.mapToReservationList(reservationDtos)));
     }
-
-}
+*/
+//}
 
