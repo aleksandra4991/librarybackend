@@ -1,10 +1,14 @@
 package com.kodilla.librarybackend.controller;
 
 import com.kodilla.librarybackend.domain.*;
+import com.kodilla.librarybackend.mapper.BookMapper;
+import com.kodilla.librarybackend.mapper.CartMapper;
+import com.kodilla.librarybackend.repository.CartRepository;
+import com.kodilla.librarybackend.repository.ReservationRepository;
+import com.kodilla.librarybackend.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -13,28 +17,36 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/myLibrary")
 public class CartController {
 
-    @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart")
-    public void createEmptyCart(@RequestBody CartDto cartDto){
+    @Autowired
+    private CartMapper cartMapper;
 
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private BookMapper bookMapper;
+
+    @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart")
+    public void createEmptyCart(){
+        cartService.createEmptyCart(new Cart());
     }
 
-    /*@RequestMapping(method = RequestMethod.POST, value = "addBookWithSpecifiedIdToSpecifiedCart",consumes = APPLICATION_JSON_VALUE)
-    public CartDto addBookWithSpecifiedIdToSpecifiedCart (@RequestParam CartBookAdderDto cartBookAdderDto) {
-        return new CartDto(1L, new ArrayList<>(Arrays.asList(new BookDto(1L, "Rok 1984", "George Orwell", (long) 1949, false, "1L"),
-                new BookDto(2L, "Tytuł", "Autor", (long) 2000, false, "2L"))));
+    @RequestMapping(method = RequestMethod.POST, value = "addBookWithSpecifiedIdToSpecifiedCart",consumes = APPLICATION_JSON_VALUE)
+    public List<BookDto> addBookWithSpecifiedIdToSpecifiedCart (@RequestParam CartBookAdderDto cartBookAdderDto) {
+        return bookMapper.mapToBookDtoList(cartService.addBookWithSpecifiedIdToSpecifiedCart((cartMapper.mapToIdFromCartAdderDto(cartBookAdderDto))
+                , cartMapper.mapToBooksListFromCartAdderDto(cartBookAdderDto)));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "removeBookWithSpecifiedIdFromSpecifiedCart", consumes = APPLICATION_JSON_VALUE)
-    public void removeBookWithSpecifiedIdFromSpecifiedCart (@RequestParam CartBookRemoverDto cartBookRemoverDto){
-        CartDto cartDto = new CartDto();
-        cartDto.getBookDtoList().remove(new BookDto());
+    public void removeBookWithSpecifiedIdFromSpecifiedCart (@RequestBody CartBookRemoverDto cartBookRemoverDto){
+        cartService.removeBookWithSpecifiedIdFromSpecifiedCart(cartBookRemoverDto.getCartId(), cartBookRemoverDto.getBookId());
     }
 
-    @RequestMapping(method = RequestMethod.PUT , value = "createReservationByCartId", consumes = APPLICATION_JSON_VALUE)
-    public ReservationCreationDto createReservationByCartId(@RequestParam Long cartId){
-        return new ReservationCreationDto(1L,1l);
+    @RequestMapping(method = RequestMethod.PUT , value = "placeReservationByCartId", consumes = APPLICATION_JSON_VALUE)
+    public void createReservationByCartId(@RequestBody ReservationCreationDto reservationCreationDto){
+        cartService.createReservationByCartId(reservationCreationDto.getReaderId(),reservationCreationDto.getCartId());
     }
 
 
-*/
+
 }

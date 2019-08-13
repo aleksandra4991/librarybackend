@@ -1,7 +1,8 @@
 package com.kodilla.librarybackend.mapper;
 
+import com.kodilla.librarybackend.domain.Book;
 import com.kodilla.librarybackend.domain.Cart;
-import com.kodilla.librarybackend.domain.CartDto;
+import com.kodilla.librarybackend.domain.CartBookAdderDto;
 import com.kodilla.librarybackend.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,25 +14,16 @@ import java.util.stream.Collectors;
 public class CartMapper {
 
     @Autowired
-    CartRepository cartRepository;
+    private BookMapper bookMapper;
 
-    public List<CartDto> mapToCartDtoList(final List<Cart> carts) {
-        return carts.stream()
-                .map(c->new CartDto(c.getBooks().toString()))
-                .collect(Collectors.toList());
+    public Long mapToIdFromCartAdderDto(CartBookAdderDto cartBookAdderDto){
+        return cartBookAdderDto.getCartId();
     }
 
-    public CartDto mapToCarteDto(Cart cart) {
-        CartDto cartDto = new CartDto(cart.getBooks().toString());
-        return cartDto;
+    public List<Book> mapToBooksListFromCartAdderDto(CartBookAdderDto cartBookAdderDto){
+        return bookMapper.mapToBookList(cartBookAdderDto.getBookDtoList());
     }
 
-
-    public List<Cart> mapToCartList(final List<CartDto> cartDtos) {
-        return cartDtos.stream()
-                .map(c -> cartRepository.findById(c.getCartId()).get())
-                .collect(Collectors.toList());
-    }
 
 
 }
