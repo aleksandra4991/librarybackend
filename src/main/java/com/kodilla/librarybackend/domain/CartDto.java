@@ -5,12 +5,12 @@ import java.util.List;
 public class CartDto {
 
     private Long cartId;
-    private List<BookDto> bookDtoList;
+    private String bookDtoList;
 
     public CartDto() {
     }
 
-    public CartDto(List<BookDto> bookDtoList) {
+    public CartDto(String bookDtoList) {
         this.bookDtoList = bookDtoList;
     }
 
@@ -18,7 +18,7 @@ public class CartDto {
         return cartId;
     }
 
-    public List<BookDto> getBookDtoList() {
+    public String getBookDtoList() {
         return bookDtoList;
     }
 }
