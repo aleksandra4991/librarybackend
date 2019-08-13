@@ -10,8 +10,7 @@ public class CartDto {
     public CartDto() {
     }
 
-    public CartDto(Long cartId, List<BookDto> bookDtoList) {
-        this.cartId = cartId;
+    public CartDto(List<BookDto> bookDtoList) {
         this.bookDtoList = bookDtoList;
     }
 

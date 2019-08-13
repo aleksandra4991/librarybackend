@@ -29,7 +29,8 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Reader reader, Cart cart) {
+    public Reservation(AtomicBoolean active, Reader reader, Cart cart) {
+        this.active = active;
         this.reader = reader;
         this.cart = cart;
     }
