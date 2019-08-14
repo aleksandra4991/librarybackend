@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ReaderService {
@@ -20,6 +22,24 @@ public class ReaderService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    private Set<Reader> readers;
+    private static ReaderService readerService;
+
+    public static ReaderService getInstance() {
+        if (readerService == null) {
+            readerService = new ReaderService();
+        }
+        return readerService;
+    }
+
+    public Set<Reader> getReaders() {
+        return new HashSet<>(readers);
+    }
+
+    public void addReader(Reader reader) {
+        this.readers.add(reader);
+    }
 
     public List<Reader> getAllReaders() {
         return readerRepository.findAll();

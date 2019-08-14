@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +21,24 @@ public class BookService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    private Set<Book> books;
+    private static BookService bookService;
+
+    public static BookService getInstance() {
+        if (bookService == null) {
+            bookService = new BookService();
+        }
+        return bookService;
+    }
+
+    public Set<Book> getBooks() {
+        return new HashSet<>(books);
+    }
+
+    public void addBook(Book book) {
+        this.books.add(book);
+    }
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
@@ -45,6 +65,10 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
+    public Set<Book> findByTitle(String title) {
+        return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toSet());
+    }
+
     public Book getBook(final Long id){
         return bookRepository.getOne(id);
     }
@@ -63,6 +87,7 @@ public class BookService {
     public void deleteBook(final Long id){
         bookRepository.deleteById(id);
     }
+
 
 }
 

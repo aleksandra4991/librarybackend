@@ -11,7 +11,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
 
-@Route
+@Route(value = "true")
 public class CreateNewAccount extends VerticalLayout {
 
     TextField name = new TextField("Name");
@@ -23,7 +23,7 @@ public class CreateNewAccount extends VerticalLayout {
 
     private Binder<Reader> binder = new Binder<>(Reader.class);
 
-    private ReaderService readerService = new ReaderService();
+    private ReaderService readerService = ReaderService.getInstance();
 
     private void save() {
         Reader reader = binder.getBean();
