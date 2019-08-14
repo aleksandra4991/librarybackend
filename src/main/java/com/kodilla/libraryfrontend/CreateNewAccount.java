@@ -17,7 +17,9 @@ public class CreateNewAccount extends VerticalLayout {
     TextField name = new TextField("Name");
     TextField phoneNumber = new TextField("Phone Number");
     TextField emailAddress = new TextField("Email Address");
+    TextField password = new TextField("Password");
     Button createNewAccount = new Button("Create an Account");
+    Button goBackToLogIn = new Button("Log In");
 
     private Binder<Reader> binder = new Binder<>(Reader.class);
 
@@ -30,11 +32,11 @@ public class CreateNewAccount extends VerticalLayout {
 
     public CreateNewAccount(){
         HorizontalLayout buttons = new HorizontalLayout(createNewAccount);
-        add(name,phoneNumber,emailAddress,createNewAccount);
+        add(name,phoneNumber,emailAddress,password,createNewAccount);
         binder.bindInstanceFields(this);
 
         createNewAccount.addClickListener(event -> save());
-
+        goBackToLogIn.addClickListener(event -> getUI().get().navigate(String.valueOf(LogIn.class)));
     }
 
 }

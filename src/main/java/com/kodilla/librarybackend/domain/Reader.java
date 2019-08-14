@@ -17,6 +17,7 @@ public class Reader {
     private String phoneNumber;
     private String emailAddress;
     private boolean status;
+    private String password;
 
     @OneToMany(targetEntity = Reservation.class,
             mappedBy = "reader",
@@ -79,6 +80,14 @@ public class Reader {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Reservation> getReservations() {
