@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
@@ -29,6 +31,24 @@ public class CartService {
 
     @Autowired
     private ReservationRepository reservationRepository;
+
+    private Set<Cart> carts;
+    private static CartService cartService;
+
+    public static CartService getInstance() {
+        if (cartService == null) {
+            cartService = new CartService();
+        }
+        return cartService;
+    }
+
+    public Set<Cart> getCarts() {
+        return new HashSet<>(carts);
+    }
+
+    public void addCart(Cart cart) {
+        this.carts.add(cart);
+    }
 
     public Cart createEmptyCart(final Cart cart){
         return cartRepository.save(cart);
