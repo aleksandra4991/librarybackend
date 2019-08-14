@@ -1,9 +1,11 @@
 package com.kodilla.libraryfrontend;
 
 import com.kodilla.librarybackend.domain.Book;
+import com.kodilla.librarybackend.domain.Cart;
 import com.kodilla.librarybackend.domain.Reader;
 import com.kodilla.librarybackend.domain.Reservation;
 import com.kodilla.librarybackend.service.BookService;
+import com.kodilla.librarybackend.service.CartService;
 import com.kodilla.librarybackend.service.ReaderService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -28,12 +30,19 @@ public class ReaderAccount extends VerticalLayout {
 
     private Binder<Reader> binderOfReader = new Binder<>(Reader.class);
     //private Binder<Reservation> binderOfReservation = new Binder<>(Reservation.class);
-
     private ReaderService readerService = ReaderService.getInstance();
 
     private void getReaderReservation() {
         Reader reader = binderOfReader.getBean();
         readerService.getReservationsOfSpecifiedReader(reader.getId());
+    }
+
+    private Binder<Cart> binderOfCart= new Binder<>(Cart.class);
+    private CartService cartService = CartService.getInstance();
+
+    private void AddBookToCart() {
+        Cart cart = binderOfCart.getBean();
+        //cartService.addBookWithSpecifiedIdToSpecifiedCart(cart.getId(),);
     }
 
     public ReaderAccount(){
