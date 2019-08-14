@@ -12,6 +12,7 @@ public class ReaderDto {
     private String phoneNumber;
     private String emailAdress;
     private boolean status;
+    private String password;
 
     @JsonIgnore
     private List<ReservationDto> reservationDtoList = new ArrayList<>();
@@ -55,6 +56,22 @@ public class ReaderDto {
 
     public boolean getStatus() {
         return status;
+    }
+
+    public void setReaderId(Long readerId) {
+        this.readerId = readerId;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<ReservationDto> getReservationDtoList() {
