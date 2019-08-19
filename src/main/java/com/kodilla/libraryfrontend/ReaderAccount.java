@@ -17,6 +17,7 @@ import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
 
 @Route(value = "true")
 public class ReaderAccount extends VerticalLayout {
+    /*
 
     Button logOut = new Button("Log out");
     Button editingData = new Button("Edit your profile");
@@ -61,4 +62,6 @@ public class ReaderAccount extends VerticalLayout {
     public void refresh() {
         grid.setItems(bookService.getAllBooks());
     }
+*/
 }
+
