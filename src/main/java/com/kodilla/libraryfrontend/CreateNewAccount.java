@@ -13,7 +13,7 @@ import com.vaadin.flow.router.Route;
 
 @Route(value = "true")
 public class CreateNewAccount extends VerticalLayout {
-
+/*
     TextField name = new TextField("Name");
     TextField phoneNumber = new TextField("Phone Number");
     TextField emailAddress = new TextField("Email Address");
@@ -38,5 +38,5 @@ public class CreateNewAccount extends VerticalLayout {
         createNewAccount.addClickListener(event -> save());
         goBackToLogIn.addClickListener(event -> getUI().get().navigate(String.valueOf(LogIn.class)));
     }
-
+*/
 }

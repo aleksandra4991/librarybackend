@@ -84,8 +84,4 @@ public class CartService {
         return reservation;
     }
 
-    @Transactional
-    public void deleteReservation(final Long id){
-        reservationRepository.deleteById(id);
-    }
 }

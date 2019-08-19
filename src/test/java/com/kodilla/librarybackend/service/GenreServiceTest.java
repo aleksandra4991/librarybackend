@@ -48,7 +48,7 @@ public class GenreServiceTest {
     }*/
 
     @Test
-    public void testGetBook(){
+    public void testGetGenre(){
 
         //Given
         Genre genre1 = new Genre("sci-fi");
@@ -66,7 +66,7 @@ public class GenreServiceTest {
     }
 
     @Test
-    public void testDeleteBook(){
+    public void testDeleteGenre(){
         //Given
         Genre genre1 = new Genre("sci-fi");
         genreRepository.save(genre1);
