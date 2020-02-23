@@ -30,9 +30,9 @@ ext {
 
 dependencies {
 
-    implementation ('org.springframework.boot:spring-boot-starter-jdbc')
+    //implementation ('org.springframework.boot:spring-boot-starter-jdbc')
     implementation('org.springframework.boot:spring-boot-starter-web')
-    //testRuntime('com.h2database:h2')
+    testRuntimeOnly('com.h2database:h2')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     compile ('mysql:mysql-connector-java')
     //compile('org.postgresql:postgresql')

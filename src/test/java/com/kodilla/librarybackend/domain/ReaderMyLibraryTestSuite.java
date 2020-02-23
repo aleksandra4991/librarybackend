@@ -1,11 +1,10 @@
 package com.kodilla.librarybackend.domain;
 
-import com.kodilla.librarybackend.repository.ReaderRepository;
+import com.kodilla.librarybackend.repository.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,6 +20,18 @@ public class ReaderMyLibraryTestSuite {
     @Autowired
     private ReaderRepository readerRepository;
 
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private GenreRepository genreRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
+
     @Test
     public void testCreateReader(){
 
@@ -34,7 +45,9 @@ public class ReaderMyLibraryTestSuite {
 
         //Then
         Assert.assertNotNull(newReader);
-        readerRepository.deleteAll();
+
+        //CleanUp
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -54,7 +67,9 @@ public class ReaderMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(false,updatedIsBlockedForSpecifiedReader);
-        readerRepository.deleteAll();
+
+        //CleanUp
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -80,7 +95,9 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(false,updatedStatusForSpecifiedReader);
         Assert.assertNotEquals("509345876",updatedPhoneNumberForSpecifiedReader);
         Assert.assertEquals("aleksandraRadzikowska@onet.pl",updatedEmailAdressForSpecifiedReader);
-        readerRepository.deleteAll();
+
+        //CleanUp
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -88,14 +105,20 @@ public class ReaderMyLibraryTestSuite {
 
         //Given
         Reader testReader = new Reader("Aleksandra Radzikowska","509345876","aradzikowska999@gmail.com",true);
+        readerRepository.save(testReader);
         List<Book> reservedBooks = new ArrayList<>();
         Genre genre = new Genre("testGenre");
+        genreRepository.save(genre);
         Book book1 = new Book("Rok 1984","George Orwell",(long)1949,"B098734",genre);
         Book book2 = new Book("Tytuł","George Orwell", (long) (long)1952,"C234908",genre);
+        bookRepository.save(book1);
+        bookRepository.save(book2);
         reservedBooks.add(book1);
         reservedBooks.add(book2);
         Cart cartX = new Cart(reservedBooks);
+        cartRepository.save(cartX);
         Reservation reservationOfSpecifiedReader = new Reservation(true,testReader,cartX);
+        reservationRepository.save(reservationOfSpecifiedReader);
         List<Reservation> reservations = new ArrayList<>();
         reservations.add(reservationOfSpecifiedReader);
         testReader.setReservations(reservations);
@@ -108,7 +131,13 @@ public class ReaderMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(1,numberOfReservationsOfSpecifiedReader);
-        readerRepository.deleteAll();
+
+        //CleanUp
+        genreRepository.deleteAllInBatch();
+        bookRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -116,10 +145,14 @@ public class ReaderMyLibraryTestSuite {
 
         //Given
         Reader testReader = new Reader("Aleksandra Radzikowska","509345876","aradzikowska999@gmail.com",true);
+        readerRepository.save(testReader);
         List<Book> rentedBooks = new ArrayList<>();
         Genre genre = new Genre("testGenre");
+        genreRepository.save(genre);
         Book book1 = new Book("Rok 1984","George Orwell",(long)1949,"B098734",genre);
         Book book2 = new Book("Tytuł","George Orwell", (long) (long)1952,"C234908",genre);
+        bookRepository.save(book1);
+        bookRepository.save(book2);
         rentedBooks.add(book1);
         rentedBooks.add(book2);
         testReader.setBookList(rentedBooks);
@@ -132,7 +165,11 @@ public class ReaderMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(2,numberOfRentedBooksBySpecifiedReader);
-        readerRepository.deleteAll();
+
+        //CleanUP
+        genreRepository.deleteAllInBatch();
+        bookRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
     }
 
 

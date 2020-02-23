@@ -47,7 +47,9 @@ public class CartMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(1,numberOfCarts);
-        cartRepository.deleteAll();
+
+        //CleanUp
+        cartRepository.deleteAllInBatch();
     }
 
     @Test
@@ -55,8 +57,10 @@ public class CartMyLibraryTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
+        genreRepository.save(testGenre);
         Book specifiedBook = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         List<Book> bookList = new ArrayList<>();
+        bookRepository.save(specifiedBook);
         bookList.add(specifiedBook);
         Cart specifiedCart = new Cart();
         specifiedCart.setBooks(bookList);
@@ -71,7 +75,11 @@ public class CartMyLibraryTestSuite {
         //Then
         Assert.assertEquals("Tytuł1",specifiedBookName);
         Assert.assertTrue(specifiedCart.getBooks().size()==1);
-        cartRepository.deleteAll();
+
+        //CleanUp
+        genreRepository.deleteAllInBatch();
+        bookRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
     }
 
     @Test
@@ -79,8 +87,10 @@ public class CartMyLibraryTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
+        genreRepository.save(testGenre);
         Book specifiedBook = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         List<Book> bookList = new ArrayList<>();
+        bookRepository.save(specifiedBook);
         bookList.add(specifiedBook);
         Cart specifiedCart = new Cart();
         specifiedCart.setBooks(bookList);
@@ -95,7 +105,11 @@ public class CartMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(0,quantityOfBooksinCartAfterRemovingBook);
-        cartRepository.deleteAll();
+
+        //CleanUp
+        genreRepository.deleteAllInBatch();
+        bookRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
     }
 
     @Test
@@ -124,11 +138,13 @@ public class CartMyLibraryTestSuite {
 
         //Then
         Assert.assertNotEquals(null, foundReservation);
-        bookRepository.deleteAll();
-        readerRepository.deleteAll();
-        cartRepository.deleteAll();
-        readerRepository.deleteAll();
-        genreRepository.deleteAll();
+
+        //CleanUp
+        bookRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
     }
 
 
