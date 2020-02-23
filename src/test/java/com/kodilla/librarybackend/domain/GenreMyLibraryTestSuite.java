@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -40,7 +39,9 @@ public class GenreMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(2,genreCounter);
-        genreRepository.deleteAll();
+
+        //CleanUp
+        genreRepository.deleteAllInBatch();
     }
 
     @Test
@@ -57,7 +58,9 @@ public class GenreMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals("Romance",genreName);
-        genreRepository.deleteAll();
+
+        //CleanUp
+        genreRepository.deleteAllInBatch();
     }
 
     @Test
@@ -79,7 +82,7 @@ public class GenreMyLibraryTestSuite {
         Assert.assertNotEquals("Romance",updatedNameOfSpecifiedGenre);
 
         //CleanUp
-        genreRepository.deleteAll();
+        genreRepository.deleteAllInBatch();
     }
 
     @Test
@@ -95,7 +98,9 @@ public class GenreMyLibraryTestSuite {
 
         //Then
         Assert.assertNotEquals(null,newGenre);
-        genreRepository.deleteAll();
+
+        //CleanUp
+        genreRepository.deleteAllInBatch();
     }
 
 
