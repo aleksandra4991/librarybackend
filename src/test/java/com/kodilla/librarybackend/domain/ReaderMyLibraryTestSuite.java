@@ -6,13 +6,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-@DataJpaTest
+@Transactional
+@SpringBootTest
 @RunWith(SpringRunner.class)
 public class ReaderMyLibraryTestSuite {
 
@@ -32,7 +34,7 @@ public class ReaderMyLibraryTestSuite {
 
         //Then
         Assert.assertNotNull(newReader);
-
+        readerRepository.deleteAll();
     }
 
     @Test
@@ -52,7 +54,7 @@ public class ReaderMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(false,updatedIsBlockedForSpecifiedReader);
-
+        readerRepository.deleteAll();
     }
 
     @Test
@@ -78,7 +80,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(false,updatedStatusForSpecifiedReader);
         Assert.assertNotEquals("509345876",updatedPhoneNumberForSpecifiedReader);
         Assert.assertEquals("aleksandraRadzikowska@onet.pl",updatedEmailAdressForSpecifiedReader);
-
+        readerRepository.deleteAll();
     }
 
     @Test
@@ -93,7 +95,7 @@ public class ReaderMyLibraryTestSuite {
         reservedBooks.add(book1);
         reservedBooks.add(book2);
         Cart cartX = new Cart(reservedBooks);
-        Reservation reservationOfSpecifiedReader = new Reservation(new AtomicBoolean(true),testReader,cartX);
+        Reservation reservationOfSpecifiedReader = new Reservation(true,testReader,cartX);
         List<Reservation> reservations = new ArrayList<>();
         reservations.add(reservationOfSpecifiedReader);
         testReader.setReservations(reservations);
@@ -106,7 +108,7 @@ public class ReaderMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(1,numberOfReservationsOfSpecifiedReader);
-
+        readerRepository.deleteAll();
     }
 
     @Test
@@ -130,6 +132,8 @@ public class ReaderMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(2,numberOfRentedBooksBySpecifiedReader);
-
+        readerRepository.deleteAll();
     }
+
+
 }

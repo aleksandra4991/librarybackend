@@ -16,7 +16,7 @@ import javax.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+
 
 import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -56,7 +56,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
-        Reservation specifiedReservation = new Reservation(new AtomicBoolean(true),specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(new boolean(true),specifiedReader,specifiedCart);
 
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
         Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
@@ -70,7 +70,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
         Cart secondSspecifiedCart = new Cart();
         cartRepository.save(secondSspecifiedCart);
 
-        Reservation secondSpecifiedReservation = new Reservation(new AtomicBoolean(true),secondSpecifiedReader,secondSspecifiedCart);
+        Reservation secondSpecifiedReservation = new Reservation(new boolean(true),secondSpecifiedReader,secondSspecifiedCart);
 
         //When
         reservationRepository.save(specifiedReservation);
@@ -102,7 +102,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
-        Reservation specifiedReservation = new Reservation(new AtomicBoolean(true),specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(new boolean(true),specifiedReader,specifiedCart);
 
         //When
         reservationRepository.save(specifiedReservation);
@@ -130,7 +130,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
-        Reservation specifiedReservation = new Reservation(new AtomicBoolean(true),specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(new boolean(true),specifiedReader,specifiedCart);
         reservationRepository.save(specifiedReservation);
 
         long reservationCounterBeforeDeletion = reservationRepository.count();

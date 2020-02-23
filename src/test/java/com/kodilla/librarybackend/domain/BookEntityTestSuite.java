@@ -5,15 +5,18 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@DataJpaTest
+@Transactional
+@SpringBootTest
 @RunWith(SpringRunner.class)
-public class BookMyLibraryTestSuite {
+public class BookEntityTestSuite {
 
     @Autowired
     private BookRepository bookRepository;
@@ -36,6 +39,7 @@ public class BookMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(booksCounterBeforeSave + 3, booksCounterAfterSave);
+        bookRepository.deleteAll();
 
     }
 
@@ -74,7 +78,7 @@ public class BookMyLibraryTestSuite {
         Assert.assertEquals("Tytuł1",titleOfBook1);
         Assert.assertEquals("Autor2",authorOfBook2);
         Assert.assertNotEquals("B19876",signatureOfBook3);
-
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -100,7 +104,7 @@ public class BookMyLibraryTestSuite {
         Assert.assertNotNull(numberOfRRentedBooks);
         Assert.assertTrue(book11IsRented==book21IsRented);
         Assert.assertTrue(genreOfbook1.equals(genreOfbook3));
-
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -124,6 +128,7 @@ public class BookMyLibraryTestSuite {
         //Then
         Assert.assertNotEquals(2,numberOfBooksOfSpecifiedAuthor);
         Assert.assertTrue(authorOfFirstBook.equals(authorOfSecondBook));
+        bookRepository.deleteAll();
 
     }
 
@@ -141,7 +146,7 @@ public class BookMyLibraryTestSuite {
 
         //Then
         Assert.assertNotNull(yearOfFirstBook);
-
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -158,7 +163,7 @@ public class BookMyLibraryTestSuite {
 
         //Then
         Assert.assertNotNull(newBook);
-
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -179,7 +184,7 @@ public class BookMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(false,updatedIsRentedForSpecifiedBook);
-
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -202,7 +207,7 @@ public class BookMyLibraryTestSuite {
 
         //Then
         Assert.assertNotEquals(bookCounterBeforeDeletion,bookCounterAfterDeletion);
-
+        bookRepository.deleteAll();
     }
 
 }

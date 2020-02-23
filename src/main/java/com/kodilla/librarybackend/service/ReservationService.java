@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class ReservationService {
@@ -39,11 +38,11 @@ public class ReservationService {
     public Reservation createReservation(ReservationCreationDto reservationCreationDto) {
         Reader specifiedReader = readerRepository.getOne(reservationCreationDto.getReaderId());
         Cart specifiedCart = cartRepository.getOne(reservationCreationDto.getCartId());
-        return reservationRepository.save(new Reservation(new AtomicBoolean(true),specifiedReader,specifiedCart));
+        return reservationRepository.save(new Reservation(true,specifiedReader,specifiedCart));
     }
 
     public void updateWithExpirationOfReservation(ReservationDto reservationDto){
-        reservationRepository.updateReservationSetRentedForId(new AtomicBoolean(false),reservationDto.geReservationId());
+        reservationRepository.updateReservationSetRentedForId(false,reservationDto.geReservationId());
         Reservation reservation = getSpecifiedReservation(reservationDto.geReservationId());
         entityManager.refresh(reservation);
     }

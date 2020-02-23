@@ -6,14 +6,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-
-@DataJpaTest
+@Transactional
+@SpringBootTest
 @RunWith(SpringRunner.class)
 public class CartMyLibraryTestSuite {
 
@@ -29,6 +30,9 @@ public class CartMyLibraryTestSuite {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private GenreRepository genreRepository;
+
     @Test
     public void testCreateEmptyCart(){
 
@@ -43,7 +47,7 @@ public class CartMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(1,numberOfCarts);
-
+        cartRepository.deleteAll();
     }
 
     @Test
@@ -67,7 +71,7 @@ public class CartMyLibraryTestSuite {
         //Then
         Assert.assertEquals("Tytuł1",specifiedBookName);
         Assert.assertTrue(specifiedCart.getBooks().size()==1);
-
+        cartRepository.deleteAll();
     }
 
     @Test
@@ -91,7 +95,7 @@ public class CartMyLibraryTestSuite {
 
         //Then
         Assert.assertEquals(0,quantityOfBooksinCartAfterRemovingBook);
-
+        cartRepository.deleteAll();
     }
 
     @Test
@@ -99,6 +103,7 @@ public class CartMyLibraryTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
+        genreRepository.save(testGenre);
         Book specifiedBook = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         bookRepository.save(specifiedBook);
         List<Book> bookList = new ArrayList<>();
@@ -110,7 +115,7 @@ public class CartMyLibraryTestSuite {
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
 
-        Reservation specifiedReservation = new Reservation(new AtomicBoolean(true),specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(true,specifiedReader,specifiedCart);
 
         //When
         reservationRepository.save(specifiedReservation);
@@ -119,7 +124,12 @@ public class CartMyLibraryTestSuite {
 
         //Then
         Assert.assertNotEquals(null, foundReservation);
-
-
+        bookRepository.deleteAll();
+        readerRepository.deleteAll();
+        cartRepository.deleteAll();
+        readerRepository.deleteAll();
+        genreRepository.deleteAll();
     }
+
+
 }

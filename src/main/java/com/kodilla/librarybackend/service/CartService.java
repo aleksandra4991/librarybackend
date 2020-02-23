@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class CartService {
@@ -77,7 +76,7 @@ public class CartService {
 
         Reader reader = readerRepository.getOne(readerId);
         Cart cart = cartRepository.getOne(cartId);
-        Reservation reservation = new Reservation(new AtomicBoolean(true),reader, cart);
+        Reservation reservation = new Reservation(true,reader, cart);
         reservationRepository.save(reservation);
         cartRepository.save(cart);
 

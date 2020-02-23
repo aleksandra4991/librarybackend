@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+
 
 import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -72,11 +72,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
         CartDto cartDto1 = new CartDto(bookDtos1);
         CartDto cartDto2 = new CartDto(bookDtos2);
 
-        Reservation reservation1 = new Reservation(new AtomicBoolean(true),reader1,cart1);
-        Reservation reservation2 = new Reservation(new AtomicBoolean(true),reader2,cart2);
+        Reservation reservation1 = new Reservation(true,reader1,cart1);
+        Reservation reservation2 = new Reservation(new boolean(true),reader2,cart2);
 
-        ReservationDto reservationDto1 = new ReservationDto(new AtomicBoolean(true),readerDto1.toString(),cartDto1.getBookDtoList().toString());
-        ReservationDto reservationDto2 = new ReservationDto(new AtomicBoolean(true),readerDto2.toString(),cartDto2.getBookDtoList().toString());
+        ReservationDto reservationDto1 = new ReservationDto(new boolean(true),readerDto1.toString(),cartDto1.getBookDtoList().toString());
+        ReservationDto reservationDto2 = new ReservationDto(new boolean(true),readerDto2.toString(),cartDto2.getBookDtoList().toString());
 
         List<Reservation> reservations = new ArrayList<>(Arrays.asList(reservation1,reservation2));
         List<ReservationDto> reservationDtos = new ArrayList<>(Arrays.asList(reservationDto1,reservationDto2));
@@ -107,8 +107,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
         Cart cart1 = new Cart(books1);
         CartDto cartDto1 = new CartDto(bookDtos1);
 
-        Reservation reservation1 = new Reservation(new AtomicBoolean(true),reader1,cart1);
-        ReservationDto reservationDto1 = new ReservationDto(new AtomicBoolean(true),readerDto1.toString(),cartDto1.getBookDtoList().toString());
+        Reservation reservation1 = new Reservation(new boolean(true),reader1,cart1);
+        ReservationDto reservationDto1 = new ReservationDto(new boolean(true),readerDto1.toString(),cartDto1.getBookDtoList().toString());
 
         assertThat(reservationDto1 ,sameBeanAs(reservationMapper.mapToReservationDto(reservation1)));
     }
@@ -156,11 +156,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
         CartDto cartDto1 = new CartDto(bookDtos1);
         CartDto cartDto2 = new CartDto(bookDtos2);
 
-        Reservation reservation1 = new Reservation(new AtomicBoolean(true),reader1,cart1);
-        Reservation reservation2 = new Reservation(new AtomicBoolean(true),reader2,cart2);
+        Reservation reservation1 = new Reservation(new boolean(true),reader1,cart1);
+        Reservation reservation2 = new Reservation(new boolean(true),reader2,cart2);
 
-        ReservationDto reservationDto1 = new ReservationDto(new AtomicBoolean(true),readerDto1.toString(),cartDto1.getBookDtoList().toString());
-        ReservationDto reservationDto2 = new ReservationDto(new AtomicBoolean(true),readerDto2.toString(),cartDto2.getBookDtoList().toString());
+        ReservationDto reservationDto1 = new ReservationDto(new boolean(true),readerDto1.toString(),cartDto1.getBookDtoList().toString());
+        ReservationDto reservationDto2 = new ReservationDto(new boolean(true),readerDto2.toString(),cartDto2.getBookDtoList().toString());
 
         List<Reservation> reservations = new ArrayList<>(Arrays.asList(reservation1,reservation2));
         List<ReservationDto> reservationDtos = new ArrayList<>(Arrays.asList(reservationDto1,reservationDto2));

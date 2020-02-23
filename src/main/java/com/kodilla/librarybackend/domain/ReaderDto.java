@@ -34,6 +34,7 @@ public class ReaderDto {
         this.emailAdress = emailAdress;
     }
 
+
     public void blockUser(){
         this.status = false;
     }
