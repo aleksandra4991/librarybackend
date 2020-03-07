@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/myLibrary")
 public class CartController {
@@ -31,18 +32,18 @@ public class CartController {
         cartService.createEmptyCart(new Cart());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addBookWithSpecifiedIdToSpecifiedCart",consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "/books/placed",consumes = APPLICATION_JSON_VALUE)
     public List<BookDto> addBookWithSpecifiedIdToSpecifiedCart (@RequestParam CartBookAdderDto cartBookAdderDto) {
         return bookMapper.mapToBookDtoList(cartService.addBookWithSpecifiedIdToSpecifiedCart((cartMapper.mapToIdFromCartAdderDto(cartBookAdderDto))
                 , cartMapper.mapToBooksListFromCartAdderDto(cartBookAdderDto)));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "removeBookWithSpecifiedIdFromSpecifiedCart", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.DELETE, value = "books/deleted", consumes = APPLICATION_JSON_VALUE)
     public void removeBookWithSpecifiedIdFromSpecifiedCart (@RequestBody CartBookRemoverDto cartBookRemoverDto){
         cartService.removeBookWithSpecifiedIdFromSpecifiedCart(cartBookRemoverDto.getCartId(), cartBookRemoverDto.getBookId());
     }
 
-    @RequestMapping(method = RequestMethod.PUT , value = "placeReservationByCartId", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.PUT , value = "reservation/create/cart", consumes = APPLICATION_JSON_VALUE)
     public void createReservationByCartId(@RequestBody ReservationCreationDto reservationCreationDto){
         cartService.createReservationByCartId(reservationCreationDto.getReaderId(),reservationCreationDto.getCartId());
     }
