@@ -12,6 +12,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/myLibrary")
 public class GenreController {
@@ -22,22 +23,22 @@ public class GenreController {
     @Autowired
     private GenreMapper genreMapper;
 
-    @RequestMapping(method = RequestMethod.GET, value = "getAllGenres" )
+    @RequestMapping(method = RequestMethod.GET, value = "/genres" )
     public List <GenreDto> getAllGenres (){
         return genreMapper.mapToGenreDtoList(genreService.getAllGenres());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getSpecifiedGenre")
+    @RequestMapping(method = RequestMethod.GET, value = "/genre")
     public GenreDto getSpecifiedGenre(@RequestParam Long genreId) throws GenreNotFoundException {
         return genreMapper.mapToGenreDto((Genre)genreService.getSpecifiedGenre(genreId));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateSpecifiedGenre")
+    /*@RequestMapping(method = RequestMethod.PUT, value = "updateSpecifiedGenre")
     public GenreDto updateSpecifiedGenre(@RequestBody GenreDto genreDto){
         return genreMapper.mapToGenreDto(genreService.createNewGenre(genreMapper.mapToGenre(genreDto)));
-    }
+    }*/
 
-    @RequestMapping(method = RequestMethod.POST, value = "createNewGenre", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "/genre", consumes = APPLICATION_JSON_VALUE)
     public GenreDto createNewGenre(@RequestBody GenreDto genreDto){
         return genreMapper.mapToGenreDto(genreService.createNewGenre(genreMapper.mapToGenre(genreDto)));
     }

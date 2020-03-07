@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/myLibrary")
 public class BookController {
@@ -24,12 +25,12 @@ public class BookController {
     @Autowired
     private BookMapper bookMapper;
 
-    @RequestMapping(method = RequestMethod.GET, value = "getAllBooks")
+    @RequestMapping(method = RequestMethod.GET, value = "/books")
     public List<BookDto> getAllBooks(){
         return bookMapper.mapToBookDtoList(bookService.getAllBooks());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getAvaiableToRentBooks")
+    /*@RequestMapping(method = RequestMethod.GET, value = "getAvaiableToRentBooks")
     public List<BookDto> getAvaiableToRentBooks(@RequestParam boolean rented){
         return bookMapper.mapToBookDtoList(bookService.getAvaiableToRentBooks(rented));
     }
@@ -37,29 +38,29 @@ public class BookController {
     @RequestMapping(method = RequestMethod.GET, value = "getAlreadyRentedBooks")
     public List<BookDto> getAlreadyRentedBooks(@RequestParam boolean rented){
         return bookMapper.mapToBookDtoList(bookService.getAlreadyRentedBooks(rented));
-    }
+    }*/
 
-    @RequestMapping(method = RequestMethod.GET, value = "getBooksOfDefiniedAuthor")
+    @RequestMapping(method = RequestMethod.GET, value = "/books/author")
     public List<BookDto> getBooksOfDefiniedAuthor (@RequestParam String author){
         return bookMapper.mapToBookDtoList(bookService.getBooksOfDefiniedAuthor(author));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getBook")
+    @RequestMapping(method = RequestMethod.GET, value = "/book")
     public BookDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
         return bookMapper.mapToBookDto((Book) bookService.getBook(bookId));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createBook", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "/book", consumes = APPLICATION_JSON_VALUE)
     public BookDto createBook(@RequestBody BookDto bookDto){
         return bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto)));
     }
 
-    @RequestMapping(method = RequestMethod.PUT,value = "updateBook",consumes = APPLICATION_JSON_VALUE)
+    /*@RequestMapping(method = RequestMethod.PUT,value = "updateBook",consumes = APPLICATION_JSON_VALUE)
     public BookDto updateBook(@RequestBody BookDto bookDto) {
         return bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto)));
-    }
+    }*/
 
-    @RequestMapping(method = RequestMethod.DELETE,value = "deleteBook")
+    @RequestMapping(method = RequestMethod.DELETE,value = "/book")
     public void deleteBook(@RequestParam Long bookId) throws BookNotFoundException {
         bookService.deleteBook(bookId);
     }
