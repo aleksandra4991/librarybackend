@@ -2,6 +2,8 @@ package com.kodilla.librarybackend.service;
 
 import com.kodilla.librarybackend.domain.Book;
 import com.kodilla.librarybackend.repository.BookRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class BookService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
+
     private Set<Book> books;
     private static BookService bookService;
 
@@ -41,10 +45,12 @@ public class BookService {
     }
 
     public List<Book> getAllBooks() {
+        LOGGER.info("Getting all books");
         return bookRepository.findAll();
     }
 
     public List<Book> getAvaiableToRentBooks(boolean rented) {
+        LOGGER.info("Getting books avaiable to rent");
         List<Book> bookList = bookRepository.findAll();
         return bookList.stream()
                 .filter(book -> book.isRented() == false)
@@ -52,6 +58,7 @@ public class BookService {
     }
 
     public List<Book> getAlreadyRentedBooks(boolean rented) {
+        LOGGER.info("Getting books already rented");
         List<Book> bookList = bookRepository.findAll();
         return bookList.stream()
                 .filter(book -> book.isRented() == true)
@@ -59,6 +66,7 @@ public class BookService {
     }
 
     public List<Book> getBooksOfDefiniedAuthor(String author) {
+        LOGGER.info("Getting books of:"+author);
         List<Book> bookList = bookRepository.findAll();
         return bookList.stream()
                 .filter(book -> book.getAuthor() == author)
@@ -66,25 +74,31 @@ public class BookService {
     }
 
     public Set<Book> findByTitle(String title) {
+        LOGGER.info("Getting books by title,here:"+title);
         return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toSet());
     }
 
     public Book getBook(final Long id){
+        LOGGER.info("Getting book with id:"+id.toString());
         return bookRepository.getOne(id);
     }
 
     public Book createBook(final Book book){
+        LOGGER.info("Creating new book");
         return bookRepository.save(book);
     }
 
     public void updateBook(final Long id){
+        LOGGER.info("Start of updating book with id:"+id.toString());
         bookRepository.updateBookSetRentedForId(true,id);
         Book book = getBook(id);
         entityManager.refresh(book);
+        LOGGER.info("Updating book with id:"+id.toString()+" finished");
     }
 
     @Transactional
     public void deleteBook(final Long id){
+        LOGGER.info("Deleting book with id:"+id.toString());
         bookRepository.deleteById(id);
     }
 

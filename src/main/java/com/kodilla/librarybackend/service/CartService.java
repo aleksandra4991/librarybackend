@@ -8,6 +8,8 @@ import com.kodilla.librarybackend.repository.BookRepository;
 import com.kodilla.librarybackend.repository.CartRepository;
 import com.kodilla.librarybackend.repository.ReaderRepository;
 import com.kodilla.librarybackend.repository.ReservationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,8 @@ public class CartService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CartService.class);
+
     private Set<Cart> carts;
     private static CartService cartService;
 
@@ -50,10 +54,12 @@ public class CartService {
     }
 
     public Cart createEmptyCart(final Cart cart){
+        LOGGER.info("Creation of empty cart");
         return cartRepository.save(cart);
     }
 
-    public List<Book> addBookWithSpecifiedIdToSpecifiedCart(Long id, List<Book> books){
+    public List<Book> addListOfBooksToSpecifiedCart(Long id, List<Book> books){
+        LOGGER.info("Starting adding list of books to cart");
         Cart cart = cartRepository.getOne(id);
         List<Book> cartBooks = cart.getBooks();
         books.stream()
@@ -61,25 +67,26 @@ public class CartService {
                 .forEach(b -> cartBooks.add(b));
 
         cartRepository.save(cart);
-
+        LOGGER.info("Books added to cart");
         return cart.getBooks();
     }
 
     public void removeBookWithSpecifiedIdFromSpecifiedCart(Long cartId,Long bookId){
-
+        LOGGER.info("Removing book with id:"+bookId.toString()+" from cart:"+cartId.toString());
         Cart cart = cartRepository.getOne(cartId);
         cart.getBooks().remove(bookRepository.getOne(bookId));
         cartRepository.save(cart);
+        LOGGER.info("finished: removing book with id:"+bookId.toString()+" from cart:"+cartId.toString());
     }
 
     public Reservation createReservationByCartId(Long readerId,Long cartId){
-
+        LOGGER.info("Reservation creation started,readerId:"+readerId.toString()+" ,cartId:"+cartId.toString());
         Reader reader = readerRepository.getOne(readerId);
         Cart cart = cartRepository.getOne(cartId);
         Reservation reservation = new Reservation(true,reader, cart);
         reservationRepository.save(reservation);
         cartRepository.save(cart);
-
+        LOGGER.info("finished :reservation creation started,readerId:"+readerId.toString()+" ,cartId:"+cartId.toString());
         return reservation;
     }
 
