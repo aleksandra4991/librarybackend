@@ -73,9 +73,9 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public Set<Book> findByTitle(String title) {
+    public List<Book> findByTitle(String title) {
         LOGGER.info("Getting books by title,here:"+title);
-        return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toSet());
+        return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toList());
     }
 
     public Book getBook(final Long id){
@@ -101,7 +101,6 @@ public class BookService {
         LOGGER.info("Deleting book with id:"+id.toString());
         bookRepository.deleteById(id);
     }
-
 
 }
 
