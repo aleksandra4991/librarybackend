@@ -6,6 +6,7 @@ import com.kodilla.librarybackend.domain.ReservationDto;
 import com.kodilla.librarybackend.mapper.ReaderMapper;
 import com.kodilla.librarybackend.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,15 @@ public class ReaderContoller {
         return readerMapper.mapToReaderDto(readerService.createReader(readerMapper.mapToReader(readerDto)));
 
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/reader/login")
+    public Boolean login(@RequestHeader HttpHeaders headers) {
+        return (readerService.loginReader(headers.get("emailAddress").get(0), headers.get("password").get(0)));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/reader")
+    public ReaderDto getReaderByEmailAddressAndPassword(@RequestHeader HttpHeaders headers) {
+        return readerMapper.mapToReaderDto(readerService.findReaderByLoginData(headers.get("emailAddress").get(0), headers.get("password").get(0))); }
 
     /*@RequestMapping(method = RequestMethod.PUT , value = "blockReader")
     public ReaderDto blockReader (@RequestParam Long readerId){
