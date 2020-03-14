@@ -45,6 +45,11 @@ public class BookController {
         return bookMapper.mapToBookDtoList(bookService.getBooksOfDefiniedAuthor(author));
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/books/title")
+    public List<BookDto> getBooksOfSpecifiedTitle (@RequestParam String title){
+        return bookMapper.mapToBookDtoList(bookService.findByTitle(title));
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/book")
     public BookDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
         return bookMapper.mapToBookDto((Book) bookService.getBook(bookId));

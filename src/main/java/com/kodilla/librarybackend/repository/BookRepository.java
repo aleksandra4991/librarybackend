@@ -16,4 +16,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Modifying
     @Query("update Book b set b.rented = :rented where b.id=:id")
     int updateBookSetRentedForId(@Param("rented") boolean rented, @Param("id") Long id);
+
+    Book findFirstByTitle(String title);
+    Book findFirstByAuthor(String author);
+    Book findFirstByTitleAndAuthor(String title,String author);
 }
