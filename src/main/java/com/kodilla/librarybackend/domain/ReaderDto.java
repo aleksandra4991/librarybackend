@@ -10,7 +10,7 @@ public class ReaderDto {
     private Long readerId;
     private String readerName;
     private String phoneNumber;
-    private String emailAdress;
+    private String emailAddress;
     private boolean status;
     private String password;
 
@@ -28,10 +28,15 @@ public class ReaderDto {
         this.status = status;
     }
 
-    public ReaderDto(String readerName, String phoneNumber, String emailAdress) {
+    public ReaderDto(String emailAddress, String password) {
+        this.emailAddress = emailAddress;
+        this.password = password;
+    }
+
+    public ReaderDto(String readerName, String phoneNumber, String emailAddress) {
         this.readerName = readerName;
         this.phoneNumber = phoneNumber;
-        this.emailAdress = emailAdress;
+        this.emailAddress = emailAddress;
     }
 
 
@@ -51,8 +56,8 @@ public class ReaderDto {
         return phoneNumber;
     }
 
-    public String getEmailAdress() {
-        return emailAdress;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     public boolean getStatus() {

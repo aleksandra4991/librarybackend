@@ -38,13 +38,14 @@ public class GenreService {
         return genreRepository.save(genre);
     }
 
-    public void updateGenre(final Long id){
+    /*public void updateGenre(final Long id){
         LOGGER.info("Starting updating genre with id:"+id.toString());
         genreRepository.updateGenreNameForId(new String(),id);
         Genre genre = getSpecifiedGenre(id);
         entityManager.refresh(genre);
         LOGGER.info("Finished: updating genre with id:"+id.toString());
-    }
+    }*/
+
     @Transactional
     public void deleteGenre(final Long id){
         LOGGER.info("Deleting genre with id:"+id.toString());

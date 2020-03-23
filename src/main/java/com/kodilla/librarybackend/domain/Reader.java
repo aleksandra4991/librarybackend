@@ -46,6 +46,14 @@ public class Reader {
         this.status = status;
     }
 
+    public Reader(String name, String phoneNumber, String emailAddress, boolean status, String password) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.status = status;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

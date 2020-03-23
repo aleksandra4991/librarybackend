@@ -46,8 +46,7 @@ public class BookEntityTestSuite {
         Assert.assertEquals(booksCounterBeforeSave + 3, booksCounterAfterSave);
 
         //Clean Up
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
 
     }
 
@@ -89,8 +88,7 @@ public class BookEntityTestSuite {
         Assert.assertNotEquals("B19876",signatureOfBook3);
 
         //Clean Up
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -119,8 +117,7 @@ public class BookEntityTestSuite {
         Assert.assertTrue(genreOfbook1.equals(genreOfbook3));
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -147,8 +144,7 @@ public class BookEntityTestSuite {
         Assert.assertTrue(authorOfFirstBook.equals(authorOfSecondBook));
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
 
     }
 
@@ -169,8 +165,7 @@ public class BookEntityTestSuite {
         Assert.assertNotNull(yearOfFirstBook);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -190,8 +185,7 @@ public class BookEntityTestSuite {
         Assert.assertNotNull(newBook);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -215,8 +209,7 @@ public class BookEntityTestSuite {
         Assert.assertEquals(false,updatedIsRentedForSpecifiedBook);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
     }
 
     @Test
@@ -242,8 +235,7 @@ public class BookEntityTestSuite {
         Assert.assertNotEquals(bookCounterBeforeDeletion,bookCounterAfterDeletion);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
 
     }
 

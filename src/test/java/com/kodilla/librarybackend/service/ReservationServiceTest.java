@@ -21,11 +21,11 @@ import java.util.List;
 import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-//@Transactional
-//public class ReservationServiceTest {
-/*
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
+public class ReservationServiceTest {
+
     @Autowired
     private ReservationRepository reservationRepository;
 
@@ -48,6 +48,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
         Genre testGenre = new Genre("Gatunek Testowy");
         Book specifiedBook1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
+        bookRepository.save(specifiedBook1);
         bookRepository.save(specifiedBook);
         List<Book> bookList = new ArrayList<>();
         bookList.add(specifiedBook1);
@@ -56,21 +57,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
-        Reservation specifiedReservation = new Reservation(new boolean(true),specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(true,specifiedReader,specifiedCart);
 
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
         Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
         bookRepository.save(thirdSpecifiedBook);
         List<Book> secondBookList = new ArrayList<>();
         secondBookList.add(thirdSpecifiedBook);
-
         Reader secondSpecifiedReader = new Reader("Julia Wrzosek",true);
         readerRepository.save(secondSpecifiedReader);
-
         Cart secondSspecifiedCart = new Cart();
         cartRepository.save(secondSspecifiedCart);
-
-        Reservation secondSpecifiedReservation = new Reservation(new boolean(true),secondSpecifiedReader,secondSspecifiedCart);
+        Reservation secondSpecifiedReservation = new Reservation(true,secondSpecifiedReader,secondSspecifiedCart);
 
         //When
         reservationRepository.save(specifiedReservation);
@@ -83,8 +81,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
         //Clean Up
-        reservationService.deleteSpecifiedReservation(specifiedReservation.getId());
-        reservationService.deleteSpecifiedReservation(secondSpecifiedReservation.getId());
+        reservationRepository.deleteAll();
     }
 
     @Test
@@ -102,7 +99,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
-        Reservation specifiedReservation = new Reservation(new boolean(true),specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(true,specifiedReader,specifiedCart);
 
         //When
         reservationRepository.save(specifiedReservation);
@@ -112,8 +109,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
         assertThat(specifiedReservation, sameBeanAs(requestedReservation));
 
         //Clean Up
-        reservationService.deleteSpecifiedReservation(specifiedReservation.getId());
-
+        reservationRepository.deleteAll();
     }
 
     @Test
@@ -130,7 +126,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
-        Reservation specifiedReservation = new Reservation(new boolean(true),specifiedReader,specifiedCart);
+        Reservation specifiedReservation = new Reservation(true,specifiedReader,specifiedCart);
         reservationRepository.save(specifiedReservation);
 
         long reservationCounterBeforeDeletion = reservationRepository.count();
@@ -142,5 +138,5 @@ import static org.hamcrest.MatcherAssert.assertThat;
         //Then
         Assert.assertEquals(reservationCounterBeforeDeletion - 1,reservationCounterAfterDeletion );
     }
-*/
-//}
+
+}

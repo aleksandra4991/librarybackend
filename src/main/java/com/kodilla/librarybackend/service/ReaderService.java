@@ -109,7 +109,7 @@ public class ReaderService {
         return ifLoginSuccessful;
     }
 
-    public Reader changeData(Reader reader) {
+    /*public Reader changeData(Reader reader) {
         LOGGER.info("Starting: changing reader data to " + reader.toString());
         Reader readerToUpdate = findReaderByLoginData(reader.getEmailAddress(),reader.getPassword());
         LOGGER.info("Found user: " + readerToUpdate.toString());
@@ -124,7 +124,7 @@ public class ReaderService {
             LOGGER.error("Reader not found. Data change impossible");
         }
         return readerRepository.save(readerToUpdate);
-    }
+    }*/
 
     public Reader findReaderByLoginData(String emailAddress, String password) {
         return Optional.ofNullable(readerRepository.findFirstByEmailAddressAndPassword(emailAddress, password)).orElse(new Reader());
@@ -145,13 +145,13 @@ public class ReaderService {
         return readerRepository.save(reader);
     }
 
-    public void blockReader(final Long id) {
+   /* public void blockReader(final Long id) {
         LOGGER.info("Blocking reader started,readerId:"+id.toString());
         readerRepository.updateReaderSetStatusForId(false, id);
         Reader reader = getReader(id);
         entityManager.refresh(reader);
         LOGGER.info("Finished: locking reader,readerId:"+id.toString());
-    }
+    }*/
 
     public List<Reservation> getReservationsOfSpecifiedReader(final Long id){
         LOGGER.info("Getting reservation of reader,readerId:"+ id.toString());

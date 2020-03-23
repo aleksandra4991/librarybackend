@@ -47,7 +47,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertNotNull(newReader);
 
         //CleanUp
-        readerRepository.deleteAllInBatch();
+        readerRepository.deleteAll();
     }
 
     @Test
@@ -69,7 +69,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(false,updatedIsBlockedForSpecifiedReader);
 
         //CleanUp
-        readerRepository.deleteAllInBatch();
+        readerRepository.deleteAll();
     }
 
     @Test
@@ -97,7 +97,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals("aleksandraRadzikowska@onet.pl",updatedEmailAdressForSpecifiedReader);
 
         //CleanUp
-        readerRepository.deleteAllInBatch();
+        readerRepository.deleteAll();
     }
 
     @Test
@@ -133,11 +133,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(1,numberOfReservationsOfSpecifiedReader);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
-        cartRepository.deleteAllInBatch();
-        reservationRepository.deleteAllInBatch();
-        readerRepository.deleteAllInBatch();
+        readerRepository.deleteAll();
     }
 
     @Test
@@ -167,9 +163,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(2,numberOfRentedBooksBySpecifiedReader);
 
         //CleanUP
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
-        readerRepository.deleteAllInBatch();
+        readerRepository.deleteAll();
     }
 
 

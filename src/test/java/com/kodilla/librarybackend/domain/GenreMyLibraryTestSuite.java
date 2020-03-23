@@ -41,7 +41,7 @@ public class GenreMyLibraryTestSuite {
         Assert.assertEquals(2,genreCounter);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
+        genreRepository.deleteAll();
     }
 
     @Test
@@ -60,7 +60,7 @@ public class GenreMyLibraryTestSuite {
         Assert.assertEquals("Romance",genreName);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
+        genreRepository.deleteAll();
     }
 
     @Test
@@ -82,7 +82,7 @@ public class GenreMyLibraryTestSuite {
         Assert.assertNotEquals("Romance",updatedNameOfSpecifiedGenre);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
+        genreRepository.deleteAll();
     }
 
     @Test
@@ -100,7 +100,7 @@ public class GenreMyLibraryTestSuite {
         Assert.assertNotEquals(null,newGenre);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
+        genreRepository.deleteAll();
     }
 
 
