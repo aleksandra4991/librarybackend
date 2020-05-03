@@ -75,6 +75,7 @@ public class BookService {
 
     public List<Book> findByTitle(String title) {
         LOGGER.info("Getting books by title,here:"+title);
+        List<Book> books = bookRepository.findAll();
         return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toList());
     }
 
@@ -83,20 +84,21 @@ public class BookService {
         return bookRepository.getOne(id);
     }
 
+    @Transactional
     public Book createBook(final Book book){
         LOGGER.info("Creating new book");
         return bookRepository.save(book);
     }
 
-    public void updateBook(final Long id){
+   /*public void updateBook(final Long id){
         LOGGER.info("Start of updating book with id:"+id.toString());
         bookRepository.updateBookSetRentedForId(true,id);
         Book book = getBook(id);
         entityManager.refresh(book);
         LOGGER.info("Updating book with id:"+id.toString()+" finished");
-    }
+    }*/
 
-    @Transactional
+   @Transactional
     public void deleteBook(final Long id){
         LOGGER.info("Deleting book with id:"+id.toString());
         bookRepository.deleteById(id);

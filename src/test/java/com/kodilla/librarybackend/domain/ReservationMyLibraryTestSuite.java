@@ -12,9 +12,9 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
-@SpringBootTest
 @RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
 public class ReservationMyLibraryTestSuite {
 
     @Autowired
@@ -77,11 +77,10 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals(2,numberOfReservations);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
-        readerRepository.deleteAllInBatch();
-        cartRepository.deleteAllInBatch();
-        reservationRepository.deleteAllInBatch();
+        bookRepository.deleteById(specifiedBook1.getId());
+        bookRepository.deleteById(specifiedBook.getId());
+        reservationRepository.deleteById(specifiedReservation.getId());
+        reservationRepository.deleteById(secondSpecifiedReservation.getId());
     }
 
 
@@ -111,11 +110,8 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals(1,numberOfReservations);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
-        cartRepository.deleteAllInBatch();
-        readerRepository.deleteAllInBatch();
-        reservationRepository.deleteAllInBatch();
+        bookRepository.deleteById(thirdSpecifiedBook.getId());
+        reservationRepository.deleteById(secondSpecifiedReservation.getId());
     }
 
     @Test
@@ -147,11 +143,8 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals("B09876",signatureOfReservedBook);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
-        cartRepository.deleteAllInBatch();
-        readerRepository.deleteAllInBatch();
-        reservationRepository.deleteAllInBatch();
+        bookRepository.deleteById(thirdSpecifiedBook.getId());
+        reservationRepository.deleteById(secondSpecifiedReservation.getId());
     }
 
     @Test
@@ -201,11 +194,10 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals(1,numberOfReservationsAfterDeletion);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
-        cartRepository.deleteAllInBatch();
-        readerRepository.deleteAllInBatch();
-        reservationRepository.deleteAllInBatch();
+        bookRepository.deleteById(specifiedBook.getId());
+        bookRepository.deleteById(specifiedBook1.getId());
+        bookRepository.deleteById(thirdSpecifiedBook.getId());
+        reservationRepository.deleteById(secondSpecifiedReservation.getId());
     }
 
     @Test
@@ -241,11 +233,9 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertFalse(statusAfterExpiration == true);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
-        cartRepository.deleteAllInBatch();
-        readerRepository.deleteAllInBatch();
-        reservationRepository.deleteAllInBatch();
+       bookRepository.deleteById(thirdSpecifiedBook.getId());
+       reservationRepository.deleteById(secondSpecifiedReservation.getId());
+
     }
 
 

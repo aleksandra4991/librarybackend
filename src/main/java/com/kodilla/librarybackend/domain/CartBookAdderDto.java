@@ -23,4 +23,8 @@ public class CartBookAdderDto {
     public List<BookDto> getBookDtoList() {
         return bookDtoList;
     }
+
+    public void setBookDtoList(List<BookDto> bookDtoList) {
+        this.bookDtoList = bookDtoList;
+    }
 }

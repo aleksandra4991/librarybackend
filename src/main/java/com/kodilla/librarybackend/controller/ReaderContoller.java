@@ -35,7 +35,7 @@ public class ReaderContoller {
         return (readerService.loginReader(headers.get("emailAddress").get(0), headers.get("password").get(0)));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/reader")
+    @RequestMapping(method = RequestMethod.GET, value = "/reader/emailAddress/password")
     public ReaderDto getReaderByEmailAddressAndPassword(@RequestHeader HttpHeaders headers) {
         return readerMapper.mapToReaderDto(readerService.findReaderByLoginData(headers.get("emailAddress").get(0), headers.get("password").get(0))); }
 

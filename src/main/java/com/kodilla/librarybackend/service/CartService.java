@@ -90,4 +90,10 @@ public class CartService {
         return reservation;
     }
 
+    @Transactional
+    public void deleteCart(final Long id){
+        LOGGER.info("Deleting cart with id:"+id.toString());
+        cartRepository.deleteById(id);
+    }
+
 }

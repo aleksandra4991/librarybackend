@@ -3,6 +3,7 @@ package com.kodilla.librarybackend.service;
 import com.kodilla.librarybackend.domain.Book;
 import com.kodilla.librarybackend.domain.Genre;
 import com.kodilla.librarybackend.repository.BookRepository;
+import com.kodilla.librarybackend.repository.GenreRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,10 @@ public class BookServiceTest {
     @Autowired
     private BookRepository bookRepository;
 
-    @Autowired(required = true)
+    @Autowired
+    private GenreRepository genreRepository;
+
+    @Autowired
     private BookService bookService;
 
     @Test
@@ -32,28 +36,88 @@ public class BookServiceTest {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
+        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
         Book book3 = new Book("Tytuł3", "Autor3", (long) 1960, "B19878", testGenre);
 
         //When
-        bookRepository.save(book1);
-        bookRepository.save(book2);
-        bookRepository.save(book3);
-        List<Book> requestedBooks = bookService.getAllBooks();
+        bookService.createBook(book1);
+        bookService.createBook(book2);
+        bookService.createBook(book3);
+        List<Book> requestedBooks = bookRepository.findAll();
 
         //Then
         assertThat(book1, sameBeanAs(requestedBooks.get(requestedBooks.size()-3)));
         assertThat(book2, sameBeanAs(requestedBooks.get(requestedBooks.size()-2)));
         assertThat(book3,sameBeanAs(requestedBooks.get(requestedBooks.size()-1)));
 
-        //Clean Up
-        bookService.deleteBook(book1.getId());
-        bookService.deleteBook(book2.getId());
-        bookService.deleteBook(book3.getId());
+        //CleanUp
+        genreRepository.deleteAll();
+        bookRepository.deleteAll();
     }
 
-    @Test
+
+    public void testGetBooksOfDefiniedAuthor(){
+
+        //Given
+        Genre testGenre = new Genre("Gatunek Testowy");
+        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
+        Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
+
+        //When
+        bookRepository.save(book1);
+        bookRepository.save(book2);
+        List<Book> requestedBooks = bookService.getBooksOfDefiniedAuthor("Autor1");
+
+        //Then
+        Assert.assertEquals(requestedBooks.size(),1);
+
+        //Clean Up
+        bookRepository.deleteAll();
+
+    }
+
+
+    public void testFindByTitle(){
+
+        //Given
+        Genre testGenre = new Genre("Gatunek Testowy");
+        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
+        Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
+
+        //When
+        bookRepository.save(book1);
+        bookRepository.save(book2);
+        List<Book> requestedBooks = bookService.findByTitle("Tytuł1");
+
+        //Then
+        Assert.assertEquals(requestedBooks.size(),1);
+
+        //Clean Up
+        bookRepository.deleteAll();
+
+    }
+
+
+    public void testCreateBook(){
+
+        //Given
+        Genre testGenre = new Genre("Gatunek Testowy");
+        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
+        bookRepository.save(book1);
+
+        //When
+        Book requestedBook = bookService.createBook(book1);
+
+        //Then
+        Assert.assertNotEquals(null,requestedBook);
+
+        //CleanUp
+        bookRepository.deleteAll();
+    }
+
+
     public void testGetBook(){
 
         //Given
@@ -68,11 +132,11 @@ public class BookServiceTest {
         assertThat(book1, sameBeanAs(specifiedBook));
 
         //Clean Up
-        bookService.deleteBook(specifiedBook.getId());
+        bookRepository.deleteAll();
 
     }
 
-    @Test
+
     public void testDeleteBook(){
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");

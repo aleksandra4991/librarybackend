@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -13,9 +12,9 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
-@SpringBootTest
 @RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
 public class CartMyLibraryTestSuite {
 
     @Autowired
@@ -49,7 +48,7 @@ public class CartMyLibraryTestSuite {
         Assert.assertEquals(1,numberOfCarts);
 
         //CleanUp
-        cartRepository.deleteAllInBatch();
+        cartRepository.deleteAll();
     }
 
     @Test
@@ -77,9 +76,8 @@ public class CartMyLibraryTestSuite {
         Assert.assertTrue(specifiedCart.getBooks().size()==1);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
-        cartRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
+        cartRepository.deleteAll();
     }
 
     @Test
@@ -107,9 +105,8 @@ public class CartMyLibraryTestSuite {
         Assert.assertEquals(0,quantityOfBooksinCartAfterRemovingBook);
 
         //CleanUp
-        genreRepository.deleteAllInBatch();
-        bookRepository.deleteAllInBatch();
-        cartRepository.deleteAllInBatch();
+        bookRepository.deleteAll();
+        cartRepository.deleteAll();
     }
 
     @Test
@@ -140,11 +137,7 @@ public class CartMyLibraryTestSuite {
         Assert.assertNotEquals(null, foundReservation);
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
-        readerRepository.deleteAllInBatch();
-        cartRepository.deleteAllInBatch();
-        readerRepository.deleteAllInBatch();
-        genreRepository.deleteAllInBatch();
+        reservationRepository.deleteAll();
     }
 
 

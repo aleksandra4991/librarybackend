@@ -10,15 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
-@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class GenreServiceTest {
 
     @Autowired(required = true)
@@ -61,7 +59,25 @@ public class GenreServiceTest {
         assertThat(genre1, sameBeanAs(specifiedGenre));
 
         //Clean Up
-        genreService.deleteGenre(specifiedGenre.getId());
+        genreRepository.deleteAll();
+
+    }
+
+    @Test
+    public void testCreateNewGenre(){
+
+        //Given
+        Genre testGenre = new Genre();
+        genreRepository.save(testGenre);
+
+        //When
+        Genre createdGenre = genreService.createNewGenre(testGenre);
+
+        //Then
+        Assert.assertNotEquals(null,createdGenre);
+
+        //CleanUp
+        genreRepository.deleteAll();
 
     }
 

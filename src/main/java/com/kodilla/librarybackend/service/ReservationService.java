@@ -49,13 +49,13 @@ public class ReservationService {
         return reservationRepository.save(new Reservation(true,specifiedReader,specifiedCart));
     }
 
-    public void updateWithExpirationOfReservation(ReservationDto reservationDto){
+    /*public void updateWithExpirationOfReservation(ReservationDto reservationDto){
         LOGGER.info("Starting updating of expiration the reservation");
         reservationRepository.updateReservationSetRentedForId(false,reservationDto.geReservationId());
         Reservation reservation = getSpecifiedReservation(reservationDto.geReservationId());
         entityManager.refresh(reservation);
         LOGGER.info("Finished: updating of expiration the reservation");
-    }
+    }*/
 
     @Transactional
     public void deleteSpecifiedReservation(final Long id){
