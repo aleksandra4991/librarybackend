@@ -28,7 +28,7 @@ public class BookServiceTest {
     @Autowired
     private GenreRepository genreRepository;
 
-    @Autowired(required = true)
+    @Autowired
     private BookService bookService;
 
     @Test
@@ -36,26 +36,28 @@ public class BookServiceTest {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
+        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
         Book book3 = new Book("Tytuł3", "Autor3", (long) 1960, "B19878", testGenre);
 
         //When
-        bookRepository.save(book1);
-        bookRepository.save(book2);
-        bookRepository.save(book3);
-        List<Book> requestedBooks = bookService.getAllBooks();
+        bookService.createBook(book1);
+        bookService.createBook(book2);
+        bookService.createBook(book3);
+        List<Book> requestedBooks = bookRepository.findAll();
 
         //Then
         assertThat(book1, sameBeanAs(requestedBooks.get(requestedBooks.size()-3)));
         assertThat(book2, sameBeanAs(requestedBooks.get(requestedBooks.size()-2)));
         assertThat(book3,sameBeanAs(requestedBooks.get(requestedBooks.size()-1)));
 
-        //Clean Up
+        //CleanUp
+        genreRepository.deleteAll();
         bookRepository.deleteAll();
     }
 
-    @Test
+
     public void testGetBooksOfDefiniedAuthor(){
 
         //Given
@@ -76,7 +78,7 @@ public class BookServiceTest {
 
     }
 
-    @Test
+
     public void testFindByTitle(){
 
         //Given
@@ -97,7 +99,7 @@ public class BookServiceTest {
 
     }
 
-    @Test
+
     public void testCreateBook(){
 
         //Given
@@ -115,7 +117,7 @@ public class BookServiceTest {
         bookRepository.deleteAll();
     }
 
-    @Test
+
     public void testGetBook(){
 
         //Given
@@ -134,7 +136,7 @@ public class BookServiceTest {
 
     }
 
-    @Test
+
     public void testDeleteBook(){
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");

@@ -84,6 +84,7 @@ public class BookService {
         return bookRepository.getOne(id);
     }
 
+    @Transactional
     public Book createBook(final Book book){
         LOGGER.info("Creating new book");
         return bookRepository.save(book);
@@ -97,7 +98,7 @@ public class BookService {
         LOGGER.info("Updating book with id:"+id.toString()+" finished");
     }*/
 
-    @Transactional
+   @Transactional
     public void deleteBook(final Long id){
         LOGGER.info("Deleting book with id:"+id.toString());
         bookRepository.deleteById(id);

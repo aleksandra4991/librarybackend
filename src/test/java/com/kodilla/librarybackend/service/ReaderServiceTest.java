@@ -16,9 +16,9 @@ import java.util.List;
 import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class ReaderServiceTest {
 
     @Autowired

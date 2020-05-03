@@ -12,9 +12,9 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
-@SpringBootTest
 @RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
 public class ReaderMyLibraryTestSuite {
 
     @Autowired

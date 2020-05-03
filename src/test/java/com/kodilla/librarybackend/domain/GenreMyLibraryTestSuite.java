@@ -10,9 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 
-@Transactional
-@SpringBootTest
 @RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
 public class GenreMyLibraryTestSuite {
 
     private static final String GENRE_NAME_THRILLER = "Thriller";
