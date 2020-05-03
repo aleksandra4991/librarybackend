@@ -130,6 +130,10 @@ public class ReaderService {
         return Optional.ofNullable(readerRepository.findFirstByEmailAddressAndPassword(emailAddress, password)).orElse(new Reader());
     }
 
+    public Reader findReaderByUuid(String uuid){
+        return Optional.ofNullable(readerRepository.findFirstByUuid(uuid)).orElse(new Reader());
+    }
+
     public List<Reader> getAllReaders() {
         LOGGER.info("Getting all readers");
         return readerRepository.findAll();
@@ -140,10 +144,10 @@ public class ReaderService {
         return readerRepository.getOne(id);
     }
 
-    public Reader createReader(final Reader reader) {
+    /*public Reader createReader(final Reader reader) {
         LOGGER.info("Creating new reader");
         return readerRepository.save(reader);
-    }
+    }*/
 
    /* public void blockReader(final Long id) {
         LOGGER.info("Blocking reader started,readerId:"+id.toString());

@@ -20,5 +20,6 @@ public interface ReaderRepository extends JpaRepository <Reader,Long> {
     Reader findFirstByEmailAddress(String emailAddress);
     Reader findFirstByPassword(String password);
     Reader findFirstByEmailAddressAndPassword(String emailAddress,String password);
+    Reader findFirstByUuid(String uuid);
 
 }
