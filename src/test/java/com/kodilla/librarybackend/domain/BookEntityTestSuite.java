@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -47,7 +45,7 @@ public class BookEntityTestSuite {
 
     }
 
-    @Test
+    /*@Test
     public void getAvaiableToRentBooks (){
 
         //Given
@@ -86,7 +84,7 @@ public class BookEntityTestSuite {
 
         //Clean Up
         bookRepository.deleteAll();
-    }
+    }*/
 
     @Test
     public void testGetAlreadyRentedBooks () {

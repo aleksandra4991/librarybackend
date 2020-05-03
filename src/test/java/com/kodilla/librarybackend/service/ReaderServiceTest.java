@@ -135,7 +135,7 @@ public class ReaderServiceTest {
         readerRepository.deleteAll();
     }
 
-    @Test
+  /*  @Test
     public void testGetAllReaders(){
 
         //Given
@@ -156,7 +156,7 @@ public class ReaderServiceTest {
         //Clean Up
         readerRepository.deleteAll();
     }
-
+*/
     @Test
     public void testGetReader(){
 
@@ -274,4 +274,5 @@ public class ReaderServiceTest {
         //Then
         Assert.assertEquals(readerCounterBeforeDeletion - 1,readerCounterAfterDeletion );
     }
+
 }

@@ -122,7 +122,7 @@ public class CartServiceTest {
 
     }
 
-    @Test
+   /* @Test
     public void testCreateReservationByCartId(){
 
         //Given
@@ -153,6 +153,6 @@ public class CartServiceTest {
         bookRepository.deleteById(specifiedBook.getId());
         reservationRepository.deleteById(createdReservation.getId());
     }
-
+*/
 }
 

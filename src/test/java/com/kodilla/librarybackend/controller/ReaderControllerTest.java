@@ -42,7 +42,7 @@ public class ReaderControllerTest {
     @Test
     public void testCreateReader() throws Exception {
         when(readerMapper.mapToReaderDto(ArgumentMatchers.any())).thenReturn(readerDto1);
-        when(readerService.createReader(ArgumentMatchers.any())).thenReturn(reader1);
+        when(readerService.saveReader(ArgumentMatchers.any())).thenReturn(reader1);
 
         mockMvc.perform(post("/myLibrary/reader")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -90,10 +90,26 @@ public class ReaderControllerTest {
     }*/
 
     @Test
+    public void getReaderByUUIDTest() throws Exception {
+
+        //Given
+        Reader reader = new Reader("Kamil", "82738292", "mammanjud@gmailo.com", true,"Fjsid876%");
+        reader.setId(3L);
+        reader.setUuid("3Lxyz");
+
+        when(readerService.findReaderByUuid(reader.getUuid())).thenReturn(reader);
+
+        //When & Then
+        mockMvc.perform(get("/myLibrary/reader/" + reader.getUuid()).contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"))
+                .andExpect(status().is(200));
+    }
+
+    @Test
     public void testGetReservationsOfSpecifiedReader() throws Exception {
 
         when(readerMapper.mapToReaderDto(ArgumentMatchers.any())).thenReturn(readerDto1);
-        when(readerService.createReader(ArgumentMatchers.any())).thenReturn(reader1);
+        when(readerService.saveReader(ArgumentMatchers.any())).thenReturn(reader1);
 
         mockMvc.perform(get("/myLibrary/reservation/reserved?readerId=1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -104,7 +120,7 @@ public class ReaderControllerTest {
     public void testGetRentedBooksOfSpecifiedReader() throws Exception {
 
         when(readerMapper.mapToReaderDto(ArgumentMatchers.any())).thenReturn(readerDto1);
-        when(readerService.createReader(ArgumentMatchers.any())).thenReturn(reader1);
+        when(readerService.saveReader(ArgumentMatchers.any())).thenReturn(reader1);
 
         mockMvc.perform(get("/myLibrary/books/rented?readerId=1")
                 .contentType(MediaType.APPLICATION_JSON))
