@@ -58,7 +58,7 @@ public class BookServiceTest {
     }
 
 
-    public void testGetBooksOfDefiniedAuthor(){
+    public void testGetBooksOfDefiniedTitleAndAuthor(){
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
@@ -68,7 +68,7 @@ public class BookServiceTest {
         //When
         bookRepository.save(book1);
         bookRepository.save(book2);
-        List<Book> requestedBooks = bookService.getBooksOfDefiniedAuthor("Autor1");
+        List<Book> requestedBooks = bookService.getBooksOfDefiniedTitleAndAuthor("Tytuł1","Autor1");
 
         //Then
         Assert.assertEquals(requestedBooks.size(),1);
@@ -79,7 +79,7 @@ public class BookServiceTest {
     }
 
 
-    public void testFindByTitle(){
+    /*public void testFindByTitle(){
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
@@ -97,7 +97,7 @@ public class BookServiceTest {
         //Clean Up
         bookRepository.deleteAll();
 
-    }
+    }*/
 
 
     public void testCreateBook(){

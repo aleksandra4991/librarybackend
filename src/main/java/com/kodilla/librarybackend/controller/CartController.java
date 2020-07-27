@@ -3,8 +3,6 @@ package com.kodilla.librarybackend.controller;
 import com.kodilla.librarybackend.domain.*;
 import com.kodilla.librarybackend.mapper.BookMapper;
 import com.kodilla.librarybackend.mapper.CartMapper;
-import com.kodilla.librarybackend.repository.CartRepository;
-import com.kodilla.librarybackend.repository.ReservationRepository;
 import com.kodilla.librarybackend.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +31,7 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/books/placed",consumes = APPLICATION_JSON_VALUE)
-    public List<BookDto> addBookWithSpecifiedIdToSpecifiedCart (@RequestParam CartBookAdderDto cartBookAdderDto) {
+    public List<BookDto> addBookWithSpecifiedIdToSpecifiedCart (@RequestBody CartBookAdderDto cartBookAdderDto) {
         return bookMapper.mapToBookDtoList(cartService.addListOfBooksToSpecifiedCart((cartMapper.mapToIdFromCartAdderDto(cartBookAdderDto))
                 , cartMapper.mapToBooksListFromCartAdderDto(cartBookAdderDto)));
     }

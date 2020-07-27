@@ -50,7 +50,7 @@ public class BookControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
+   /* @Test
     public void getBooksOfDefiniedAuthor() throws Exception{
         String jsonContent = gson.toJson(bookDto1);
         when(bookService.getBook(anyLong())).thenReturn(book1);
@@ -59,15 +59,15 @@ public class BookControllerTest {
         mockMvc.perform(get("/myLibrary/books/author?author=Autor1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-    }
+    }*/
 
     @Test
-    public void getBooksOfSpecifiedTitle() throws Exception{
+    public void getBooksOfSpecifiedTitleAndAuthor() throws Exception{
         String jsonContent = gson.toJson(bookDto1);
         when(bookService.getBook(anyLong())).thenReturn(book1);
         when(bookMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(bookDto1);
 
-        mockMvc.perform(get("/myLibrary/books/title?title=Tytuł1")
+        mockMvc.perform(get("/myLibrary/book/specified?title=Tytuł1&author=Autor1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

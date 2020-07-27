@@ -65,19 +65,20 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public List<Book> getBooksOfDefiniedAuthor(String author) {
+    public List<Book> getBooksOfDefiniedTitleAndAuthor(String title, String author) {
         LOGGER.info("Getting books of:"+author);
         List<Book> bookList = bookRepository.findAll();
         return bookList.stream()
+                .filter(book -> book.getTitle() == title)
                 .filter(book -> book.getAuthor() == author)
                 .collect(Collectors.toList());
     }
 
-    public List<Book> findByTitle(String title) {
+    /*public List<Book> findByTitle(String title) {
         LOGGER.info("Getting books by title,here:"+title);
         List<Book> books = bookRepository.findAll();
         return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toList());
-    }
+    }*/
 
     public Book getBook(final Long id){
         LOGGER.info("Getting book with id:"+id.toString());

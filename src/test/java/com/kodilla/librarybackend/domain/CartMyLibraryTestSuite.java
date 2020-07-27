@@ -32,7 +32,7 @@ public class CartMyLibraryTestSuite {
     @Autowired
     private GenreRepository genreRepository;
 
-    @Test
+    /*@Test
     public void testCreateEmptyCart(){
 
         //Given
@@ -49,7 +49,7 @@ public class CartMyLibraryTestSuite {
 
         //CleanUp
         cartRepository.deleteAll();
-    }
+    }*/
 
     @Test
     public void testAddBookWithSpecifiedIdToSpecifiedCart(){

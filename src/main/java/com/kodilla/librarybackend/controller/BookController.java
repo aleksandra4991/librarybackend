@@ -8,8 +8,6 @@ import com.kodilla.librarybackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -40,15 +38,15 @@ public class BookController {
         return bookMapper.mapToBookDtoList(bookService.getAlreadyRentedBooks(rented));
     }*/
 
-    @RequestMapping(method = RequestMethod.GET, value = "/books/author")
-    public List<BookDto> getBooksOfDefiniedAuthor (@RequestParam String author){
-        return bookMapper.mapToBookDtoList(bookService.getBooksOfDefiniedAuthor(author));
+    @RequestMapping(method = RequestMethod.GET, value = "/book/specified")
+    public List<BookDto> getBooksOfDefiniedTitleAndAuthor (@RequestParam String title, @RequestParam String author){
+        return bookMapper.mapToBookDtoList(bookService.getBooksOfDefiniedTitleAndAuthor(title,author));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/books/title")
+    /*@RequestMapping(method = RequestMethod.GET, value = "/books/title")
     public List<BookDto> getBooksOfSpecifiedTitle (@RequestParam String title){
         return bookMapper.mapToBookDtoList(bookService.findByTitle(title));
-    }
+    }*/
 
     @RequestMapping(method = RequestMethod.GET, value = "/book")
     public BookDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
