@@ -1,6 +1,5 @@
 package com.kodilla.librarybackend.mapper;
 
-import com.kodilla.librarybackend.domain.GenreDto;
 import com.kodilla.librarybackend.domain.Reader;
 import com.kodilla.librarybackend.domain.ReaderDto;
 import com.kodilla.librarybackend.repository.ReaderRepository;
@@ -18,18 +17,25 @@ public class ReaderMapper {
 
     public List<ReaderDto> mapToReaderDtoList(final List<Reader> readers) {
         return readers.stream()
-                .map(r->new ReaderDto(r.getName(),r.isStatus()))
+                .map(r->new ReaderDto(r.getId(),r.getUuid(),r.getName(),r.getPhoneNumber(),r.getEmailAddress(),r.isStatus(),r.getPassword()))
                 .collect(Collectors.toList());
     }
 
     public ReaderDto mapToReaderDto(Reader reader) {
-        ReaderDto readerDto = new ReaderDto(reader.getName(),reader.isStatus());
+        ReaderDto readerDto = new ReaderDto(reader.getId(),reader.getUuid(),reader.getName(),reader.getPhoneNumber(),reader.getEmailAddress(),reader.isStatus(),reader.getPassword());
         return readerDto;
     }
 
 
-    public Reader mapToReader (ReaderDto readerDto){
-        return new Reader(readerDto.getReaderName(),readerDto.getStatus());
+    public static Reader mapToReader (final ReaderDto readerDto){
+        Reader reader = new Reader(readerDto.getReaderName(),readerDto.getPhoneNumber(),readerDto.getEmailAddress(),readerDto.getStatus(),readerDto.getPassword());
+        if(readerDto.getReaderId() != null){
+            reader.setId(readerDto.getReaderId());
+        }
+        if(readerDto.getUuid() != null){
+            reader.setUuid(readerDto.getUuid());
+        }
+        return reader;
     }
 
 

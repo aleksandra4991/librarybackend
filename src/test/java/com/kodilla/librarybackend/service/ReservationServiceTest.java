@@ -50,6 +50,7 @@ public class ReservationServiceTest {
         Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
         bookRepository.save(specifiedBook1);
         bookRepository.save(specifiedBook);
+
         List<Book> bookList = new ArrayList<>();
         bookList.add(specifiedBook1);
         bookList.add(specifiedBook);

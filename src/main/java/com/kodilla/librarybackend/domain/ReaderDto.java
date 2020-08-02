@@ -8,6 +8,7 @@ import java.util.List;
 public class ReaderDto {
 
     private Long readerId;
+    private String uuid;
     private String readerName;
     private String phoneNumber;
     private String emailAddress;
@@ -23,22 +24,35 @@ public class ReaderDto {
     public ReaderDto() {
     }
 
+    public ReaderDto(Long readerId, String uuid, String readerName, String phoneNumber, String emailAddress, boolean status, String password) {
+        this.readerId = readerId;
+        this.uuid = uuid;
+        this.readerName = readerName;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.status = status;
+        this.password = password;
+    }
+
+    public ReaderDto(String readerName, String phoneNumber, String emailAddress, boolean status, String password) {
+        this.readerName = readerName;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.status = status;
+        this.password = password;
+    }
+
+    public ReaderDto(String readerName, String phoneNumber, String emailAddress, boolean status) {
+        this.readerName = readerName;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.status = status;
+    }
+
     public ReaderDto(String readerName, boolean status) {
         this.readerName = readerName;
         this.status = status;
     }
-
-    public ReaderDto(String emailAddress, String password) {
-        this.emailAddress = emailAddress;
-        this.password = password;
-    }
-
-    public ReaderDto(String readerName, String phoneNumber, String emailAddress) {
-        this.readerName = readerName;
-        this.phoneNumber = phoneNumber;
-        this.emailAddress = emailAddress;
-    }
-
 
     public void blockUser(){
         this.status = false;
@@ -46,6 +60,10 @@ public class ReaderDto {
 
     public Long getReaderId() {
         return readerId;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 
     public String getReaderName() {

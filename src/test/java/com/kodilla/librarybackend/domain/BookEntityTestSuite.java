@@ -10,8 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.ArrayList;
 import java.util.List;
+iport javax.transaction.Transactional;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,7 +53,7 @@ public class BookEntityTestSuite {
 
     }
 
-    @Test
+    /*@Test
     public void getAvaiableToRentBooks (){
 
         //Given
@@ -87,9 +90,14 @@ public class BookEntityTestSuite {
         Assert.assertNotEquals("B19876",signatureOfBook3);
 
         //Clean Up
+
         bookRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
     }
+
+        bookRepository.deleteAll();
+    }*/
+
 
     @Test
     public void testGetAlreadyRentedBooks () {
