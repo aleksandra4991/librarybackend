@@ -8,8 +8,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+iport javax.transaction.Transactional;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,7 +32,6 @@ public class BookEntityTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
         Book book3 = new Book("Tytuł3", "Autor3", (long) 1960, "B19878", testGenre);
@@ -42,6 +46,10 @@ public class BookEntityTestSuite {
         //Then
         Assert.assertEquals(booksCounterBeforeSave + 3, booksCounterAfterSave);
 
+        //Clean Up
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+
 
     }
 
@@ -50,7 +58,6 @@ public class BookEntityTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876",false, testGenre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877",false, testGenre);
         Book book3 = new Book("Tytuł3", "Autor3", (long) 1960, "B19878",false, testGenre);
@@ -83,15 +90,20 @@ public class BookEntityTestSuite {
         Assert.assertNotEquals("B19876",signatureOfBook3);
 
         //Clean Up
+
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+    }
+
         bookRepository.deleteAll();
     }*/
+
 
     @Test
     public void testGetAlreadyRentedBooks () {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876",true, testGenre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877",true, testGenre);
         Book book3 = new Book("Tytuł3", "Autor3", (long) 1960, "B19878",true, testGenre);
@@ -112,7 +124,8 @@ public class BookEntityTestSuite {
         Assert.assertTrue(genreOfbook1.equals(genreOfbook3));
 
         //CleanUp
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
     }
 
     @Test
@@ -120,7 +133,6 @@ public class BookEntityTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876",true, testGenre);
         Book book2 = new Book("Tytuł2", "Autor1", (long) 1959, "B19877",false, testGenre);
         Book book3 = new Book("Tytuł3", "Autor1", (long) 1960, "B19878",true, testGenre);
@@ -139,7 +151,8 @@ public class BookEntityTestSuite {
         Assert.assertTrue(authorOfFirstBook.equals(authorOfSecondBook));
 
         //CleanUp
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
 
     }
 
@@ -148,7 +161,6 @@ public class BookEntityTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876",true, testGenre);
 
         bookRepository.save(book1);
@@ -160,7 +172,8 @@ public class BookEntityTestSuite {
         Assert.assertNotNull(yearOfFirstBook);
 
         //CleanUp
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
     }
 
     @Test
@@ -168,7 +181,6 @@ public class BookEntityTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876",true, testGenre);
 
         //When
@@ -180,7 +192,8 @@ public class BookEntityTestSuite {
         Assert.assertNotNull(newBook);
 
         //CleanUp
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
     }
 
     @Test
@@ -188,7 +201,6 @@ public class BookEntityTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876",true, testGenre);
         bookRepository.save(book1);
         Long book1Id = book1.getId();
@@ -204,7 +216,8 @@ public class BookEntityTestSuite {
         Assert.assertEquals(false,updatedIsRentedForSpecifiedBook);
 
         //CleanUp
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
     }
 
     @Test
@@ -212,7 +225,6 @@ public class BookEntityTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
         Book book3 = new Book("Tytuł3", "Autor3", (long) 1960, "B19878", testGenre);
@@ -230,7 +242,8 @@ public class BookEntityTestSuite {
         Assert.assertNotEquals(bookCounterBeforeDeletion,bookCounterAfterDeletion);
 
         //CleanUp
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
 
     }
 

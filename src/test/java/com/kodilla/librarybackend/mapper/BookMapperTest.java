@@ -44,6 +44,9 @@ public class BookMapperTest {
         List<BookDto> bookDtos = new ArrayList<>(Arrays.asList(bookDto1, bookDto2));
 
         assertThat(bookDtos, sameBeanAs(bookMapper.mapToBookDtoList(bookList)));
+
+        //Clean Up
+        genreRepository.deleteAllInBatch();
     }
 
     @Test
@@ -56,10 +59,13 @@ public class BookMapperTest {
         BookDto bookDto1 = new BookDto("Tytuł1", "Autor1", (long) 1958, "B19876", genre.getId().toString());
 
         assertThat(bookDto1 ,sameBeanAs(bookMapper.mapToBookDto(book1)));
+
+        //Clean Up
+        genreRepository.deleteAllInBatch();
     }
 
     @Test
-    public void mapToProduct() {
+    public void mapToBook() {
 
         Genre genre = new Genre("Gatunek Testowy");
         genreRepository.save(genre);
@@ -68,5 +74,8 @@ public class BookMapperTest {
         BookDto bookDto1 = new BookDto("Tytuł1", "Autor1", (long) 1958, "B19876", genre.getId().toString());
 
         assertThat(book1 ,sameBeanAs(bookMapper.mapToBook(bookDto1)));
+
+        //Clean Up
+        genreRepository.deleteAllInBatch();
     }
 }
