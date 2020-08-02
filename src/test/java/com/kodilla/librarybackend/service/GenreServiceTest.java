@@ -59,7 +59,7 @@ public class GenreServiceTest {
         assertThat(genre1, sameBeanAs(specifiedGenre));
 
         //Clean Up
-        genreRepository.deleteAll();
+        genreRepository.deleteAllInBatch();
 
     }
 
@@ -77,7 +77,7 @@ public class GenreServiceTest {
         Assert.assertNotEquals(null,createdGenre);
 
         //CleanUp
-        genreRepository.deleteAll();
+        genreRepository.deleteAllInBatch();
 
     }
 

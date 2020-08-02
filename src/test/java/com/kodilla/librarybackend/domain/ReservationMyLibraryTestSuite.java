@@ -37,7 +37,6 @@ public class ReservationMyLibraryTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book specifiedBook1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
         bookRepository.save(specifiedBook);
@@ -50,7 +49,6 @@ public class ReservationMyLibraryTestSuite {
         cartRepository.save(specifiedCart);
         Reservation specifiedReservation = new Reservation(true,specifiedReader,specifiedCart);
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
-        genreRepository.save(secondTestGenre);
         Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
         bookRepository.save(thirdSpecifiedBook);
         List<Book> secondBookList = new ArrayList<>();
@@ -77,10 +75,11 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals(2,numberOfReservations);
 
         //CleanUp
-        bookRepository.deleteById(specifiedBook1.getId());
-        bookRepository.deleteById(specifiedBook.getId());
-        reservationRepository.deleteById(specifiedReservation.getId());
-        reservationRepository.deleteById(secondSpecifiedReservation.getId());
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
     }
 
 
@@ -89,7 +88,6 @@ public class ReservationMyLibraryTestSuite {
 
         //Given
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
-        genreRepository.save(secondTestGenre);
         Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
         bookRepository.save(thirdSpecifiedBook);
         List<Book> secondBookList = new ArrayList<>();
@@ -110,15 +108,18 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals(1,numberOfReservations);
 
         //CleanUp
-        bookRepository.deleteById(thirdSpecifiedBook.getId());
-        reservationRepository.deleteById(secondSpecifiedReservation.getId());
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
+
     }
 
     @Test
     public void testGetSpecifiedReservation(){
 
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
-        genreRepository.save(secondTestGenre);
         Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
         bookRepository.save(thirdSpecifiedBook);
         List<Book> secondBookList = new ArrayList<>();
@@ -143,8 +144,11 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals("B09876",signatureOfReservedBook);
 
         //CleanUp
-        bookRepository.deleteById(thirdSpecifiedBook.getId());
-        reservationRepository.deleteById(secondSpecifiedReservation.getId());
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -152,7 +156,6 @@ public class ReservationMyLibraryTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book specifiedBook1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
         bookRepository.save(specifiedBook);
@@ -166,7 +169,6 @@ public class ReservationMyLibraryTestSuite {
         Reservation specifiedReservation = new Reservation(true,specifiedReader,specifiedCart);
 
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
-        genreRepository.save(secondTestGenre);
         Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
         bookRepository.save(thirdSpecifiedBook);
         List<Book> secondBookList = new ArrayList<>();
@@ -194,10 +196,11 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals(1,numberOfReservationsAfterDeletion);
 
         //CleanUp
-        bookRepository.deleteById(specifiedBook.getId());
-        bookRepository.deleteById(specifiedBook1.getId());
-        bookRepository.deleteById(thirdSpecifiedBook.getId());
-        reservationRepository.deleteById(secondSpecifiedReservation.getId());
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
     }
 
     @Test
@@ -205,7 +208,6 @@ public class ReservationMyLibraryTestSuite {
 
         //Given
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
-        genreRepository.save(secondTestGenre);
         Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
         bookRepository.save(thirdSpecifiedBook);
         List<Book> secondBookList = new ArrayList<>();
@@ -233,8 +235,11 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertFalse(statusAfterExpiration == true);
 
         //CleanUp
-       bookRepository.deleteById(thirdSpecifiedBook.getId());
-       reservationRepository.deleteById(secondSpecifiedReservation.getId());
+       bookRepository.deleteAllInBatch();
+       genreRepository.deleteAllInBatch();
+       cartRepository.deleteAllInBatch();
+       reservationRepository.deleteAllInBatch();
+       readerRepository.deleteAllInBatch();
 
     }
 

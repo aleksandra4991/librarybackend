@@ -57,7 +57,7 @@ public class CartServiceTest {
         Assert.assertNotEquals(null,specifiedCart);
 
         //CleanUp
-        cartRepository.deleteById(testCart.getId());
+        cartRepository.deleteAllInBatch();
     }
 
     @Test
@@ -84,9 +84,9 @@ public class CartServiceTest {
         Assert.assertEquals(2,booksAlreadyAddedToCart.size());
 
         //CleanUp
-        bookRepository.deleteById(book1.getId());
-        bookRepository.deleteById(book2.getId());
-        cartRepository.deleteById(testCart.getId());
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
 
     }
 
@@ -116,9 +116,9 @@ public class CartServiceTest {
         Assert.assertEquals(1,testCart.getBooks().size());
 
         //CleanUp
-        bookRepository.deleteById(book1.getId());
-        bookRepository.deleteById(book2.getId());
-        cartRepository.deleteById(testCart.getId());
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
 
     }
 
@@ -149,9 +149,11 @@ public class CartServiceTest {
         Assert.assertEquals("Aleksandra Radzikowska",createdReservation.getReader().getName());
 
         //CleanUp
-        bookRepository.deleteById(specifiedBook.getId());
-        bookRepository.deleteById(specifiedBook.getId());
-        reservationRepository.deleteById(createdReservation.getId());
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
     }
 
 }
