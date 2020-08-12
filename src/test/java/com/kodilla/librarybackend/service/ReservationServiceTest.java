@@ -1,10 +1,7 @@
 package com.kodilla.librarybackend.service;
 
 import com.kodilla.librarybackend.domain.*;
-import com.kodilla.librarybackend.repository.BookRepository;
-import com.kodilla.librarybackend.repository.CartRepository;
-import com.kodilla.librarybackend.repository.ReaderRepository;
-import com.kodilla.librarybackend.repository.ReservationRepository;
+import com.kodilla.librarybackend.repository.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,8 +33,13 @@ public class ReservationServiceTest {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private GenreRepository genreRepository;
+
     @Autowired(required = true)
     private ReservationService reservationService;
+
+
 
     @Test
     public void testGetReservations(){
@@ -48,6 +50,7 @@ public class ReservationServiceTest {
         Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
         bookRepository.save(specifiedBook1);
         bookRepository.save(specifiedBook);
+
         List<Book> bookList = new ArrayList<>();
         bookList.add(specifiedBook1);
         bookList.add(specifiedBook);
@@ -79,7 +82,11 @@ public class ReservationServiceTest {
 
 
         //Clean Up
-        reservationRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
     }
 
     @Test
@@ -107,7 +114,11 @@ public class ReservationServiceTest {
         assertThat(specifiedReservation, sameBeanAs(requestedReservation));
 
         //Clean Up
-        reservationRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
     }
 
     @Test
@@ -135,6 +146,13 @@ public class ReservationServiceTest {
 
         //Then
         Assert.assertEquals(reservationCounterBeforeDeletion - 1,reservationCounterAfterDeletion );
+
+        //Clean Up
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
     }
 
 }

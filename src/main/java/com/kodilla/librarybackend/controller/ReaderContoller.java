@@ -24,9 +24,9 @@ public class ReaderContoller {
     @Autowired
     private ReaderService readerService;
 
-    @RequestMapping(method = RequestMethod.POST , value = "/reader", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST , value = "/reader", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ReaderDto createReader(@RequestBody ReaderDto readerDto){
-        return readerMapper.mapToReaderDto(readerService.createReader(readerMapper.mapToReader(readerDto)));
+        return readerMapper.mapToReaderDto(readerService.saveReader(readerMapper.mapToReader(readerDto)));
 
     }
 
@@ -38,6 +38,11 @@ public class ReaderContoller {
     @RequestMapping(method = RequestMethod.GET, value = "/reader/emailAddress/password")
     public ReaderDto getReaderByEmailAddressAndPassword(@RequestHeader HttpHeaders headers) {
         return readerMapper.mapToReaderDto(readerService.findReaderByLoginData(headers.get("emailAddress").get(0), headers.get("password").get(0))); }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/reader/{uuid}")
+    public ReaderDto getReaderByUUID(@PathVariable String uuid) {
+        return readerMapper.mapToReaderDto(readerService.findReaderByUuid(uuid)); }
+
 
     /*@RequestMapping(method = RequestMethod.PUT , value = "blockReader")
     public ReaderDto blockReader (@RequestParam Long readerId){

@@ -7,10 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
-
 @Repository
-@Transactional
 public interface ReaderRepository extends JpaRepository <Reader,Long> {
 
     @Modifying
@@ -20,5 +17,6 @@ public interface ReaderRepository extends JpaRepository <Reader,Long> {
     Reader findFirstByEmailAddress(String emailAddress);
     Reader findFirstByPassword(String password);
     Reader findFirstByEmailAddressAndPassword(String emailAddress,String password);
+    Reader findFirstByUuid(String uuid);
 
 }

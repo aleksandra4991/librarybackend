@@ -53,6 +53,7 @@ public class BookController {
         return bookMapper.mapToBookDto((Book) bookService.getBook(bookId));
     }
 
+
     @RequestMapping(method = RequestMethod.POST, value = "/book", consumes = APPLICATION_JSON_VALUE)
     public BookDto createBook(@RequestBody BookDto bookDto){
         return bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto)));

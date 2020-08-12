@@ -47,7 +47,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertNotNull(newReader);
 
         //CleanUp
-        readerRepository.deleteAll();
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -69,7 +69,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(false,updatedIsBlockedForSpecifiedReader);
 
         //CleanUp
-        readerRepository.deleteAll();
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -97,7 +97,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals("aleksandraRadzikowska@onet.pl",updatedEmailAdressForSpecifiedReader);
 
         //CleanUp
-        readerRepository.deleteAll();
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -108,7 +108,6 @@ public class ReaderMyLibraryTestSuite {
         readerRepository.save(testReader);
         List<Book> reservedBooks = new ArrayList<>();
         Genre genre = new Genre("testGenre");
-        genreRepository.save(genre);
         Book book1 = new Book("Rok 1984","George Orwell",(long)1949,"B098734",genre);
         Book book2 = new Book("Tytuł","George Orwell", (long) (long)1952,"C234908",genre);
         bookRepository.save(book1);
@@ -133,7 +132,11 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(1,numberOfReservationsOfSpecifiedReader);
 
         //CleanUp
-        readerRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
     }
 
     @Test
@@ -144,7 +147,6 @@ public class ReaderMyLibraryTestSuite {
         readerRepository.save(testReader);
         List<Book> rentedBooks = new ArrayList<>();
         Genre genre = new Genre("testGenre");
-        genreRepository.save(genre);
         Book book1 = new Book("Rok 1984","George Orwell",(long)1949,"B098734",genre);
         Book book2 = new Book("Tytuł","George Orwell", (long) (long)1952,"C234908",genre);
         bookRepository.save(book1);
@@ -163,7 +165,9 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(2,numberOfRentedBooksBySpecifiedReader);
 
         //CleanUP
-        readerRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
     }
 
 

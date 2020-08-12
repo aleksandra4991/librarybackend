@@ -36,7 +36,6 @@ public class BookServiceTest {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        genreRepository.save(testGenre);
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
         Book book3 = new Book("Tytuł3", "Autor3", (long) 1960, "B19878", testGenre);
@@ -53,8 +52,8 @@ public class BookServiceTest {
         assertThat(book3,sameBeanAs(requestedBooks.get(requestedBooks.size()-1)));
 
         //CleanUp
-        genreRepository.deleteAll();
-        bookRepository.deleteAll();
+        genreRepository.deleteAllInBatch();
+        bookRepository.deleteAllInBatch();
     }
 
 
@@ -74,7 +73,8 @@ public class BookServiceTest {
         Assert.assertEquals(requestedBooks.size(),1);
 
         //Clean Up
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
 
     }
 
@@ -95,7 +95,8 @@ public class BookServiceTest {
         Assert.assertEquals(requestedBooks.size(),1);
 
         //Clean Up
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
 
     }*/
 
@@ -114,7 +115,8 @@ public class BookServiceTest {
         Assert.assertNotEquals(null,requestedBook);
 
         //CleanUp
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
     }
 
 
@@ -132,7 +134,7 @@ public class BookServiceTest {
         assertThat(book1, sameBeanAs(specifiedBook));
 
         //Clean Up
-        bookRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
 
     }
 

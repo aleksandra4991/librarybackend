@@ -13,6 +13,9 @@ public class Reader {
     @NotNull
     @Column(name = "READER_ID" ,unique = true)
     private Long id;
+
+    @GeneratedValue
+    private String uuid;
     private String name;
     private String phoneNumber;
     private String emailAddress;
@@ -34,16 +37,26 @@ public class Reader {
     public Reader() {
     }
 
-    public Reader(String name, boolean status) {
-        this.name = name;
-        this.status = status;
-    }
-
-    public Reader(String name, String phoneNumber, String emailAddress, boolean status) {
+    public Reader(@NotNull Long id, String uuid, String name, String phoneNumber, String emailAddress, boolean status, String password, List<Reservation> reservations, List<Book> bookList) {
+        this.id = id;
+        this.uuid = uuid;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.status = status;
+        this.password = password;
+        this.reservations = reservations;
+        this.bookList = bookList;
+    }
+
+    public Reader(Long id, String uuid, String name, String phoneNumber, String emailAddress, boolean status, String password) {
+        this.id = id;
+        this.uuid = uuid;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.status = status;
+        this.password = password;
     }
 
     public Reader(String name, String phoneNumber, String emailAddress, boolean status, String password) {
@@ -54,8 +67,32 @@ public class Reader {
         this.password = password;
     }
 
+    public Reader(String name, String phoneNumber, String emailAddress, boolean status) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.status = status;
+    }
+
+    public Reader(String name, boolean status) {
+        this.name = name;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {

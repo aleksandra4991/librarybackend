@@ -64,7 +64,7 @@ public class ReaderServiceTest {
         Assert.assertEquals("Aleksandra Radzikowska",savedReader.getName());
 
         //CleanUp
-        readerRepository.deleteAll();
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -80,8 +80,6 @@ public class ReaderServiceTest {
         //Then
         Assert.assertEquals(null,savedReader);
 
-        //CleanUp
-        readerRepository.deleteAll();
     }
 
     @Test
@@ -97,8 +95,6 @@ public class ReaderServiceTest {
         //Then
         Assert.assertEquals(null,savedReader);
 
-        //CleanUp
-        readerRepository.deleteAll();
     }
 
     @Test
@@ -115,7 +111,7 @@ public class ReaderServiceTest {
         Assert.assertEquals(true,result);
 
         //CleanUp
-        readerRepository.deleteAll();
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -131,11 +127,9 @@ public class ReaderServiceTest {
         //Then
         Assert.assertEquals(false,result);
 
-        //CleanUp
-        readerRepository.deleteAll();
     }
 
-    @Test
+  /*  @Test
     public void testGetAllReaders(){
 
         //Given
@@ -154,9 +148,9 @@ public class ReaderServiceTest {
 
 
         //Clean Up
-        readerRepository.deleteAll();
+        readerRepository.deleteAllInBatch();
     }
-
+*/
     @Test
     public void testGetReader(){
 
@@ -171,7 +165,7 @@ public class ReaderServiceTest {
         assertThat(reader1, sameBeanAs(specifiedReader));
 
         //Clean Up
-        readerRepository.deleteAll();
+        readerRepository.deleteAllInBatch();
 
     }
 
@@ -190,7 +184,7 @@ public class ReaderServiceTest {
         Assert.assertNotEquals("XXXX",foundReader.getName());
 
         //Clean Up
-        readerRepository.deleteAll();
+        readerRepository.deleteAllInBatch();
     }
 
     @Test
@@ -223,8 +217,11 @@ public class ReaderServiceTest {
         Assert.assertEquals(1,reservationsOfReader.size());
 
         //Clean Up
-        bookRepository.deleteAll();
-        reservationRepository.deleteAll();
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
 
 
     }
@@ -252,8 +249,8 @@ public class ReaderServiceTest {
        Assert.assertEquals(2,booksRentedByReader1.size());
 
        //CleanUp
-       bookRepository.deleteAll();
-       readerRepository.deleteAll();
+       bookRepository.deleteAllInBatch();
+       readerRepository.deleteAllInBatch();
 
 
     }
@@ -274,4 +271,5 @@ public class ReaderServiceTest {
         //Then
         Assert.assertEquals(readerCounterBeforeDeletion - 1,readerCounterAfterDeletion );
     }
+
 }
