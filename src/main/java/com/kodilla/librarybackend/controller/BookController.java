@@ -8,8 +8,6 @@ import com.kodilla.librarybackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -54,6 +52,7 @@ public class BookController {
     public BookDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
         return bookMapper.mapToBookDto((Book) bookService.getBook(bookId));
     }
+
 
     @RequestMapping(method = RequestMethod.POST, value = "/book", consumes = APPLICATION_JSON_VALUE)
     public BookDto createBook(@RequestBody BookDto bookDto){

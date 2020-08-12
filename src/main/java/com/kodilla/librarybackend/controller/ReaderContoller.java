@@ -24,7 +24,7 @@ public class ReaderContoller {
     @Autowired
     private ReaderService readerService;
 
-    @RequestMapping(method = RequestMethod.POST , value = "/reader", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST , value = "/reader", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ReaderDto createReader(@RequestBody ReaderDto readerDto){
         return readerMapper.mapToReaderDto(readerService.createReader(readerMapper.mapToReader(readerDto)));
 
