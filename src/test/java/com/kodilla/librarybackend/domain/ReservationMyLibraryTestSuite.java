@@ -32,8 +32,7 @@ public class ReservationMyLibraryTestSuite {
     @Autowired
     private GenreRepository genreRepository;
 
-
-
+  
    /* @Test
     public void testGetReservations(){
 
@@ -77,12 +76,14 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals(2,numberOfReservations);
 
         //CleanUp
-<<<<<<< HEAD
-        bookRepository.deleteById(specifiedBook1.getId());
-        bookRepository.deleteById(specifiedBook.getId());
-        reservationRepository.deleteById(specifiedReservation.getId());
-        reservationRepository.deleteById(secondSpecifiedReservation.getId());
-    }*/
+
+        bookRepository.deleteAllInBatch();
+        genreRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        reservationRepository.deleteAllInBatch();
+        readerRepository.deleteAllInBatch();
+    }
+
 
 
 
@@ -112,15 +113,15 @@ public class ReservationMyLibraryTestSuite {
 
         //CleanUp
 
-
         bookRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
         reservationRepository.deleteAllInBatch();
         readerRepository.deleteAllInBatch();
-
     }
 */
+  
+
    /* @Test
 
     public void testGetSpecifiedReservation(){

@@ -21,6 +21,8 @@ public class GenreMyLibraryTestSuite {
     @Autowired
     private GenreRepository genreRepository;
 
+
+   /* @Test
     public void testGetAllGenres(){
 
         //Given
@@ -40,9 +42,9 @@ public class GenreMyLibraryTestSuite {
         Assert.assertEquals(2,genreCounter);
 
         //CleanUp
-
         genreRepository.deleteAllInBatch();
     }
+*/
 
 
     @Test
