@@ -21,6 +21,7 @@ public class GenreMyLibraryTestSuite {
     @Autowired
     private GenreRepository genreRepository;
 
+
    /* @Test
     public void testGetAllGenres(){
 
@@ -44,6 +45,7 @@ public class GenreMyLibraryTestSuite {
         genreRepository.deleteAllInBatch();
     }
 */
+
 
     @Test
     public void testGetSpecifiedGenre(){

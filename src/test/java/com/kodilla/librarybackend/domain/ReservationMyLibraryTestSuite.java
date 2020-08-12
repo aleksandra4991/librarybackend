@@ -32,6 +32,7 @@ public class ReservationMyLibraryTestSuite {
     @Autowired
     private GenreRepository genreRepository;
 
+  
    /* @Test
     public void testGetReservations(){
 
@@ -75,6 +76,7 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals(2,numberOfReservations);
 
         //CleanUp
+
         bookRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
@@ -83,7 +85,9 @@ public class ReservationMyLibraryTestSuite {
     }
 
 
-    @Test
+
+
+    /*@Test
     public void testCreateReservation(){
 
         //Given
@@ -108,15 +112,18 @@ public class ReservationMyLibraryTestSuite {
         Assert.assertEquals(1,numberOfReservations);
 
         //CleanUp
+
         bookRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
         reservationRepository.deleteAllInBatch();
         readerRepository.deleteAllInBatch();
-
     }
 */
+  
+
    /* @Test
+
     public void testGetSpecifiedReservation(){
 
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
@@ -206,6 +213,7 @@ public class ReservationMyLibraryTestSuite {
         reservationRepository.deleteAllInBatch();
     }
 */
+
     @Test
     public void testUpdateWithExpirationOfReservation(){
 
