@@ -4,6 +4,7 @@ import com.kodilla.librarybackend.domain.Book;
 import com.kodilla.librarybackend.domain.Reader;
 import com.kodilla.librarybackend.domain.Reservation;
 import com.kodilla.librarybackend.repository.ReaderRepository;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@RequiredArgsConstructor
 @Service
 public class ReaderService {
 
@@ -30,9 +32,7 @@ public class ReaderService {
     private EntityManager entityManager;
 
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*!()])(?=\\S+$).{7,25}$";
-
-    private Pattern pattern;
-    private Matcher matcher;
+    private static final String EMAIL_PATTERN = "^(.+)@(.+)$";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReaderService.class);
 
@@ -70,19 +70,23 @@ public class ReaderService {
 
     private boolean isEmailAddressValid(String emailAddress) {
         boolean isEmailAddressValid = false;
-        LOGGER.info("Starting: validation of email: " + emailAddress);
+        //LOGGER.info("Validation of email " + emailAddress);
+        //Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        //Matcher matcher = pattern.matcher(emailAddress);
+        //if (matcher.matches()) {
         if (EmailValidator.getInstance().isValid(emailAddress)) {
             isEmailAddressValid = true;
             LOGGER.info("Email is valid");
         } else {
             LOGGER.error("Invalid email address");
         }
+        //return matcher.matches();
         return isEmailAddressValid;
     }
 
     private boolean isPasswordCorrect(String password) {
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        Matcher matcher = pattern.matcher(password);
         LOGGER.info("Starting validation of password: " + password);
         if (matcher.matches()) {
             LOGGER.info("Password correct");
