@@ -16,7 +16,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/myLibrary")
-public class ReaderContoller {
+public class ReaderController {
 
     @Autowired
     private ReaderMapper readerMapper;
@@ -52,7 +52,7 @@ public class ReaderContoller {
 
     //@RequestMapping(method = RequestMethod.PUT , value = "updateReaderPhoneNumber")
     //public ReaderDto updateReaderData (@RequestParam Long readerId){
-      //  return new ReaderDto(1L,"Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com","UNBLOCKED");
+    //  return new ReaderDto(1L,"Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com","UNBLOCKED");
     //}
 
     @RequestMapping(method = RequestMethod.GET , value = "/reservation/reserved")
@@ -66,7 +66,6 @@ public class ReaderContoller {
         readerService.getRentedBooksOfSpecifiedReader(readerId);
         return readerMapper.mapToReaderDto(readerService.getReader(readerId)).getBookDtoList();
     }
-
 
 
 
