@@ -24,7 +24,7 @@ public class ReaderDto {
     public ReaderDto() {
     }
 
-    public ReaderDto(Long readerId, String uuid, String readerName, String phoneNumber, String emailAddress, boolean status, String password) {
+    public ReaderDto(Long readerId, String readerName, String phoneNumber, String emailAddress, boolean status, String password, String uuid) {
         this.readerId = readerId;
         this.uuid = uuid;
         this.readerName = readerName;

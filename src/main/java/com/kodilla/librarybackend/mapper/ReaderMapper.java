@@ -17,12 +17,12 @@ public class ReaderMapper {
 
     public List<ReaderDto> mapToReaderDtoList(final List<Reader> readers) {
         return readers.stream()
-                .map(r->new ReaderDto(r.getId(),r.getUuid(),r.getName(),r.getPhoneNumber(),r.getEmailAddress(),r.isStatus(),r.getPassword()))
+                .map(r->new ReaderDto(r.getId(),r.getName(),r.getPhoneNumber(),r.getEmailAddress(),r.isStatus(),r.getPassword(),r.getUuid()))
                 .collect(Collectors.toList());
     }
 
     public ReaderDto mapToReaderDto(Reader reader) {
-        ReaderDto readerDto = new ReaderDto(reader.getId(),reader.getUuid(),reader.getName(),reader.getPhoneNumber(),reader.getEmailAddress(),reader.isStatus(),reader.getPassword());
+        ReaderDto readerDto = new ReaderDto(reader.getId(),reader.getName(),reader.getPhoneNumber(),reader.getEmailAddress(),reader.isStatus(),reader.getPassword(),reader.getUuid());
         return readerDto;
     }
 

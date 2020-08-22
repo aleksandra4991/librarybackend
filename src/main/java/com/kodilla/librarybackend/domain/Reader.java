@@ -49,7 +49,7 @@ public class Reader {
         this.bookList = bookList;
     }
 
-    public Reader(Long id, String uuid, String name, String phoneNumber, String emailAddress, boolean status, String password) {
+    public Reader(Long id, String name, String phoneNumber, String emailAddress, boolean status, String password, String uuid) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;

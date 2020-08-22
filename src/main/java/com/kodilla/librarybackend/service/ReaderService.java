@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,6 +56,8 @@ public class ReaderService {
         Reader savedReader = null;
         LOGGER.info("Starting creation of reader: "+ reader.toString());
         if (isEmailAddressValid(reader.getEmailAddress()) && (isPasswordCorrect(reader.getPassword()))) {
+            String uuid = UUID.randomUUID().toString();
+            reader.setUuid(uuid);
             savedReader = readerRepository.save(reader);
             LOGGER.info("Finished: reader creation");
         } else {
