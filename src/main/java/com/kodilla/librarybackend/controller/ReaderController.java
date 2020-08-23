@@ -6,7 +6,6 @@ import com.kodilla.librarybackend.domain.ReservationDto;
 import com.kodilla.librarybackend.mapper.ReaderMapper;
 import com.kodilla.librarybackend.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,13 +30,13 @@ public class ReaderController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/reader/login")
-    public Boolean login(@RequestHeader HttpHeaders headers) {
-        return (readerService.loginReader(headers.get("emailAddress").get(0), headers.get("password").get(0)));
+    public Boolean login(@RequestHeader("emailAddress")String emailAddress,@RequestHeader("password")String password ) {
+        return (readerService.loginReader(emailAddress,password));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/reader/emailAddress/password")
-    public ReaderDto getReaderByEmailAddressAndPassword(@RequestHeader HttpHeaders headers) {
-        return readerMapper.mapToReaderDto(readerService.findReaderByLoginData(headers.get("emailAddress").get(0), headers.get("password").get(0))); }
+    public ReaderDto getReaderByEmailAddressAndPassword(@RequestHeader("emailAddress")String emailAddress,@RequestHeader("password")String password ) {
+        return readerMapper.mapToReaderDto(readerService.findReaderByLoginData(emailAddress,password)); }
 
     @RequestMapping(method = RequestMethod.GET, value = "/reader/{uuid}")
     public ReaderDto getReaderByUUID(@PathVariable String uuid) {

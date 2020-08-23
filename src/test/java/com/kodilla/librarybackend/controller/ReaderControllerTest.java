@@ -55,16 +55,15 @@ public class ReaderControllerTest {
     public void loginTest() throws Exception {
 
         //Given
-        String emailAddress = "aleksandra9977@gmail.com";
-        String password = "XyZ1@3";
+        Reader reader = new Reader("aleksandra9977@gmail.com","XyZ1@3");
 
-        when(readerService.loginReader(emailAddress, password)).thenReturn(true);
+        when(readerService.loginReader(reader.getEmailAddress(), reader.getPassword())).thenReturn(true);
 
         //When & Then
-        mockMvc.perform(get("/myLibrary/reader/login").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(get("/myLibrary/reader/login?reader=reader").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .header("emailAddress", emailAddress)
-                .header("password", password))
+                .header("emailAddress", reader.getEmailAddress())
+                .header("password", reader.getPassword()))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$", Matchers.is(true)));
     }
