@@ -54,6 +54,11 @@ public class ReaderDto {
         this.status = status;
     }
 
+    public ReaderDto(String emailAddress, String password) {
+        this.emailAddress = emailAddress;
+        this.password = password;
+    }
+
     public void blockUser(){
         this.status = false;
     }

@@ -79,6 +79,11 @@ public class Reader {
         this.status = status;
     }
 
+    public Reader(String emailAddress, String password) {
+        this.emailAddress = emailAddress;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
