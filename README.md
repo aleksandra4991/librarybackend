@@ -9,4 +9,4 @@ Uruchomienie backendu-end'u REST API:
 Informacje na temat front-end'u:
 
 1. Repozytorium front-end'owe: https://github.com/aleksandra4991/libraryfrontend
-2. Adres REST API: http://localhost:8090
+2. Adres front-end'u: http://localhost:8090
