@@ -1,3 +1,5 @@
+Projekt w trakcie rozwoju.
+
 Uruchomienie backendu-end'u REST API:
 
 1. W projekcie wykorzystano baze danych MySql. Lokalnie należy utowrzyć bazę danych o nazwie 'library', usera o nazwie 'aleksandra4991' z hasłem 'Gucio2018!'. Userowi należy nadać wszytkie uprawnienia do administrowania bazą danych.
