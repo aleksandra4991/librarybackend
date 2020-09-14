@@ -96,12 +96,12 @@ public class ReaderService {
     }
 
     public boolean loginReader(String emailAddress, String password) {
-        LOGGER.info("Login email: " + emailAddress + " login password: " + password);
+        LOGGER.info("Start of checking login data: login email: " + emailAddress + " login password: " + password);
         boolean ifLoginSuccessful = false;
 
         if (findReaderByLoginData(emailAddress, password).getId() != null) {
             Reader foundReader = findReaderByLoginData(emailAddress, password);
-            LOGGER.info("User found uuid:" + foundReader.getId());
+            LOGGER.info("Reader found id:" + foundReader.getId());
             if (foundReader.getPassword().equals(password)) {
                 ifLoginSuccessful = true;
                 LOGGER.info("Password '" + password +"' correct");
@@ -130,7 +130,7 @@ public class ReaderService {
     }*/
 
     public Reader findReaderByLoginData(String emailAddress, String password) {
-        return Optional.ofNullable(readerRepository.findFirstByEmailAddressAndPassword(emailAddress, password)).orElse(new Reader());
+        return Optional.ofNullable(readerRepository.findByEmailAddressAndPassword(emailAddress, password)).orElse(new Reader());
     }
 
     public Reader findReaderByUuid(String uuid){
