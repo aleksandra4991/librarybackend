@@ -181,7 +181,7 @@ public class ReaderServiceTest {
 
         //Then
         Assert.assertNotEquals(null,foundReader);
-        Assert.assertNotEquals("XXXX",foundReader.getName());
+        Assert.assertEquals("Aleksandra Radzikowska",foundReader.getName());
 
         //Clean Up
         readerRepository.deleteAllInBatch();

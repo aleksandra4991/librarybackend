@@ -14,9 +14,10 @@ public interface ReaderRepository extends JpaRepository <Reader,Long> {
     @Query("update Reader r set r.status = :status where r.id=:id")
     int updateReaderSetStatusForId(@Param("status") boolean status, @Param("id") Long id);
 
+    Reader findByEmailAddressAndPassword(String emailAddress,String password);
     Reader findFirstByEmailAddress(String emailAddress);
     Reader findFirstByPassword(String password);
-    Reader findFirstByEmailAddressAndPassword(String emailAddress,String password);
+    //Reader findFirstByEmailAddressAndPassword(String emailAddress,String password);
     Reader findFirstByUuid(String uuid);
 
 }
