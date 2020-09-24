@@ -6,25 +6,25 @@ public class CartBookAdderDto {
 
     private Long cartId;
 
-    private List<BookDto> bookDtoList;
+    private List<VolumeDto> volumeDtoList;
 
     public CartBookAdderDto() {
     }
 
-    public CartBookAdderDto(Long cartId, List<BookDto> bookDtoList) {
+    public CartBookAdderDto(Long cartId, List<VolumeDto> volumeDtoList) {
         this.cartId = cartId;
-        this.bookDtoList = bookDtoList;
+        this.volumeDtoList = volumeDtoList;
     }
 
     public Long getCartId() {
         return cartId;
     }
 
-    public List<BookDto> getBookDtoList() {
-        return bookDtoList;
+    public List<VolumeDto> getBookDtoList() {
+        return volumeDtoList;
     }
 
-    public void setBookDtoList(List<BookDto> bookDtoList) {
-        this.bookDtoList = bookDtoList;
+    public void setBookDtoList(List<VolumeDto> volumeDtoList) {
+        this.volumeDtoList = volumeDtoList;
     }
 }

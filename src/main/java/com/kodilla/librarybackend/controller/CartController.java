@@ -31,7 +31,7 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/books/placed",consumes = APPLICATION_JSON_VALUE)
-    public List<BookDto> addBookWithSpecifiedIdToSpecifiedCart (@RequestBody CartBookAdderDto cartBookAdderDto) {
+    public List<VolumeDto> addBookWithSpecifiedIdToSpecifiedCart (@RequestBody CartBookAdderDto cartBookAdderDto) {
         return bookMapper.mapToBookDtoList(cartService.addListOfBooksToSpecifiedCart((cartMapper.mapToIdFromCartAdderDto(cartBookAdderDto))
                 , cartMapper.mapToBooksListFromCartAdderDto(cartBookAdderDto)));
     }

@@ -1,6 +1,6 @@
 package com.kodilla.librarybackend.service;
 
-import com.kodilla.librarybackend.domain.Book;
+import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.domain.Genre;
 import com.kodilla.librarybackend.repository.BookRepository;
 import com.kodilla.librarybackend.repository.GenreRepository;
@@ -20,7 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class BookServiceTest {
+public class VolumeServiceTest {
 
     @Autowired
     private BookRepository bookRepository;
@@ -36,20 +36,20 @@ public class BookServiceTest {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
-        Book book3 = new Book("Tytuł3", "Autor3", (long) 1960, "B19878", testGenre);
+        Volume volume1 = new Volume("Dawca","Lois Lowry",testGenre);
+        Volume volume2 = new Volume("xxx","yyy",testGenre);
+        Volume volume3 = new Volume("i","ii",testGenre);
 
         //When
-        bookService.createBook(book1);
-        bookService.createBook(book2);
-        bookService.createBook(book3);
-        List<Book> requestedBooks = bookRepository.findAll();
+        bookService.createBook(volume1);
+        bookService.createBook(volume2);
+        bookService.createBook(volume3);
+        List<Volume> requestedVolumes = bookRepository.findAll();
 
         //Then
-        assertThat(book1, sameBeanAs(requestedBooks.get(requestedBooks.size()-3)));
-        assertThat(book2, sameBeanAs(requestedBooks.get(requestedBooks.size()-2)));
-        assertThat(book3,sameBeanAs(requestedBooks.get(requestedBooks.size()-1)));
+        assertThat(volume1, sameBeanAs(requestedVolumes.get(requestedVolumes.size()-3)));
+        assertThat(volume2, sameBeanAs(requestedVolumes.get(requestedVolumes.size()-2)));
+        assertThat(volume3,sameBeanAs(requestedVolumes.get(requestedVolumes.size()-1)));
 
         //CleanUp
         genreRepository.deleteAllInBatch();
@@ -61,16 +61,16 @@ public class BookServiceTest {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
+        Volume volume1 = new Volume(testGenre.getId());
+        Volume volume2 = new Volume(testGenre.getId());
 
         //When
-        bookRepository.save(book1);
-        bookRepository.save(book2);
-        List<Book> requestedBooks = bookService.getBooksOfDefiniedTitleAndAuthor("Tytuł1","Autor1");
+        bookRepository.save(volume1);
+        bookRepository.save(volume2);
+        List<Volume> requestedVolumes = bookService.getBooksOfDefiniedTitleAndAuthor("Tytuł1","Autor1");
 
         //Then
-        Assert.assertEquals(requestedBooks.size(),1);
+        Assert.assertEquals(requestedVolumes.size(),1);
 
         //Clean Up
         bookRepository.deleteAllInBatch();
@@ -105,14 +105,14 @@ public class BookServiceTest {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        bookRepository.save(book1);
+        Volume volume1 = new Volume(testGenre.getId());
+        bookRepository.save(volume1);
 
         //When
-        Book requestedBook = bookService.createBook(book1);
+        Volume requestedVolume = bookService.createBook(volume1);
 
         //Then
-        Assert.assertNotEquals(null,requestedBook);
+        Assert.assertNotEquals(null, requestedVolume);
 
         //CleanUp
         bookRepository.deleteAllInBatch();
@@ -124,14 +124,14 @@ public class BookServiceTest {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        bookRepository.save(book1);
+        Volume volume1 = new Volume(testGenre.getId());
+        bookRepository.save(volume1);
 
         //When
-        Book specifiedBook = bookService.getBook(book1.getId());
+        Volume specifiedVolume = bookService.getBook(volume1.getId());
 
         //Then
-        assertThat(book1, sameBeanAs(specifiedBook));
+        assertThat(volume1, sameBeanAs(specifiedVolume));
 
         //Clean Up
         bookRepository.deleteAllInBatch();
@@ -142,14 +142,14 @@ public class BookServiceTest {
     public void testDeleteBook(){
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        bookRepository.save(book1);
-        Book specifiedBook = bookService.getBook(book1.getId());
+        Volume volume1 = new Volume(testGenre.getId());
+        bookRepository.save(volume1);
+        Volume specifiedVolume = bookService.getBook(volume1.getId());
 
         long bookCounterBeforeDeletion = bookRepository.count();
 
         //When
-        bookService.deleteBook(specifiedBook.getId());
+        bookService.deleteBook(specifiedVolume.getId());
         long bookCounterAfterDeletion = bookRepository.count();
 
         //Then

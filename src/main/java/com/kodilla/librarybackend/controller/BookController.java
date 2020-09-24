@@ -1,7 +1,7 @@
 package com.kodilla.librarybackend.controller;
 
-import com.kodilla.librarybackend.domain.Book;
-import com.kodilla.librarybackend.domain.BookDto;
+import com.kodilla.librarybackend.domain.Volume;
+import com.kodilla.librarybackend.domain.VolumeDto;
 import com.kodilla.librarybackend.exceptions.BookNotFoundException;
 import com.kodilla.librarybackend.mapper.BookMapper;
 import com.kodilla.librarybackend.service.BookService;
@@ -24,22 +24,12 @@ public class BookController {
     private BookMapper bookMapper;
 
     @RequestMapping(method = RequestMethod.GET, value = "/books")
-    public List<BookDto> getAllBooks(){
+    public List<VolumeDto> getAllBooks(){
         return bookMapper.mapToBookDtoList(bookService.getAllBooks());
     }
 
-    /*@RequestMapping(method = RequestMethod.GET, value = "getAvaiableToRentBooks")
-    public List<BookDto> getAvaiableToRentBooks(@RequestParam boolean rented){
-        return bookMapper.mapToBookDtoList(bookService.getAvaiableToRentBooks(rented));
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "getAlreadyRentedBooks")
-    public List<BookDto> getAlreadyRentedBooks(@RequestParam boolean rented){
-        return bookMapper.mapToBookDtoList(bookService.getAlreadyRentedBooks(rented));
-    }*/
-
     @RequestMapping(method = RequestMethod.GET, value = "/book/specified")
-    public List<BookDto> getBooksOfDefiniedTitleAndAuthor (@RequestParam String title, @RequestParam String author){
+    public List<VolumeDto> getBooksOfDefiniedTitleAndAuthor (@RequestParam String title, @RequestParam String author){
         return bookMapper.mapToBookDtoList(bookService.getBooksOfDefiniedTitleAndAuthor(title,author));
     }
 
@@ -49,14 +39,14 @@ public class BookController {
     }*/
 
     @RequestMapping(method = RequestMethod.GET, value = "/book")
-    public BookDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
-        return bookMapper.mapToBookDto((Book) bookService.getBook(bookId));
+    public VolumeDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
+        return bookMapper.mapToBookDto((Volume) bookService.getBook(bookId));
     }
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/book", consumes = APPLICATION_JSON_VALUE)
-    public BookDto createBook(@RequestBody BookDto bookDto){
-        return bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(bookDto)));
+    public VolumeDto createBook(@RequestBody VolumeDto volumeDto){
+        return bookMapper.mapToBookDto(bookService.createBook(bookMapper.mapToBook(volumeDto)));
     }
 
     /*@RequestMapping(method = RequestMethod.PUT,value = "updateBook",consumes = APPLICATION_JSON_VALUE)

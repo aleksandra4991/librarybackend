@@ -1,7 +1,7 @@
 package com.kodilla.librarybackend.mapper;
 
-import com.kodilla.librarybackend.domain.Book;
-import com.kodilla.librarybackend.domain.BookDto;
+import com.kodilla.librarybackend.domain.Volume;
+import com.kodilla.librarybackend.domain.VolumeDto;
 import com.kodilla.librarybackend.domain.Genre;
 import com.kodilla.librarybackend.repository.GenreRepository;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class BookMapperTest {
+public class VolumeMapperTest {
 
     @Autowired
     private BookMapper bookMapper;
@@ -35,15 +35,15 @@ public class BookMapperTest {
         Genre genre = new Genre("Gatunek Testowy");
         genreRepository.save(genre);
 
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", genre);
-        Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", genre);
-        List<Book> bookList = new ArrayList<>(Arrays.asList(book1, book2));
+        Volume volume1 = new Volume(genre.getId());
+        Volume volume2 = new Volume(genre.getId());
+        List<Volume> volumeList = new ArrayList<>(Arrays.asList(volume1, volume2));
 
-        BookDto bookDto1 = new BookDto("Tytuł1", "Autor1", (long) 1958, "B19876", genre.getId().toString());
-        BookDto bookDto2 = new BookDto("Tytuł2", "Autor2", (long) 1959, "B19877", genre.getId().toString());
-        List<BookDto> bookDtos = new ArrayList<>(Arrays.asList(bookDto1, bookDto2));
+        VolumeDto volumeDto1 = new VolumeDto("Dawca","Lois Lowry", genre.getId().toString());
+        VolumeDto volumeDto2 = new VolumeDto("XXX","X Y Z",genre.getId().toString());
+        List<VolumeDto> volumeDtos = new ArrayList<>(Arrays.asList(volumeDto1, volumeDto2));
 
-        assertThat(bookDtos, sameBeanAs(bookMapper.mapToBookDtoList(bookList)));
+        assertThat(volumeDtos, sameBeanAs(bookMapper.mapToBookDtoList(volumeList)));
 
         //Clean Up
         genreRepository.deleteAllInBatch();
@@ -55,10 +55,10 @@ public class BookMapperTest {
         Genre genre = new Genre("Gatunek Testowy");
         genreRepository.save(genre);
 
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", genre);
-        BookDto bookDto1 = new BookDto("Tytuł1", "Autor1", (long) 1958, "B19876", genre.getId().toString());
+        Volume volume1 = new Volume(genre.getId());
+        VolumeDto volumeDto1 = new VolumeDto("XXX","X Y Z", genre.getId().toString());
 
-        assertThat(bookDto1 ,sameBeanAs(bookMapper.mapToBookDto(book1)));
+        assertThat(volumeDto1,sameBeanAs(bookMapper.mapToBookDto(volume1)));
 
         //Clean Up
         genreRepository.deleteAllInBatch();
@@ -70,10 +70,10 @@ public class BookMapperTest {
         Genre genre = new Genre("Gatunek Testowy");
         genreRepository.save(genre);
 
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", genre);
-        BookDto bookDto1 = new BookDto("Tytuł1", "Autor1", (long) 1958, "B19876", genre.getId().toString());
+        Volume volume1 = new Volume(genre.getId());
+        VolumeDto volumeDto1 = new VolumeDto("XXX","X Y Z", genre.getId().toString());
 
-        assertThat(book1 ,sameBeanAs(bookMapper.mapToBook(bookDto1)));
+        assertThat(volume1,sameBeanAs(bookMapper.mapToBook(volumeDto1)));
 
         //Clean Up
         genreRepository.deleteAllInBatch();

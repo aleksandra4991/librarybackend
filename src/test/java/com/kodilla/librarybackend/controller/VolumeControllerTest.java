@@ -1,10 +1,7 @@
 package com.kodilla.librarybackend.controller;
 
 import com.google.gson.Gson;
-import com.kodilla.librarybackend.domain.Book;
-import com.kodilla.librarybackend.domain.BookDto;
-import com.kodilla.librarybackend.domain.Genre;
-import com.kodilla.librarybackend.domain.GenreDto;
+import com.kodilla.librarybackend.domain.*;
 import com.kodilla.librarybackend.mapper.BookMapper;
 import com.kodilla.librarybackend.service.BookService;
 import org.junit.Test;
@@ -25,14 +22,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(BookController.class)
-public class BookControllerTest {
+public class VolumeControllerTest {
 
     private final static Genre genre = new Genre ("Gatunek Testowy");
     private final static GenreDto genreDto = new GenreDto("Gatunek Testowy");
-    private final static Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", genre);
-    private final static BookDto bookDto1 = new BookDto("Tytuł1", "Autor1", (long) 1958, "B19876", genreDto.toString());
+    private final static String title = new String("Dwaca");
+    private final static String authors = new String("Luis Lowre");
+    private final static Volume VOLUME_1 = new Volume(title,authors,genre);
+    private final static VolumeDto VOLUME_DTO_1 = new VolumeDto(title,authors,genreDto.toString());
     private static Gson gson = new Gson();
-    private final static String jsonContent = gson.toJson(bookDto1);
+    private final static String jsonContent = gson.toJson(VOLUME_DTO_1);
 
     @Autowired
     private MockMvc mockMvc;
@@ -63,9 +62,9 @@ public class BookControllerTest {
 
     @Test
     public void getBooksOfSpecifiedTitleAndAuthor() throws Exception{
-        String jsonContent = gson.toJson(bookDto1);
-        when(bookService.getBook(anyLong())).thenReturn(book1);
-        when(bookMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(bookDto1);
+        String jsonContent = gson.toJson(VOLUME_DTO_1);
+        when(bookService.getBook(anyLong())).thenReturn(VOLUME_1);
+        when(bookMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(VOLUME_DTO_1);
 
         mockMvc.perform(get("/myLibrary/book/specified?title=Tytuł1&author=Autor1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -76,9 +75,9 @@ public class BookControllerTest {
 
     @Test
     public void getBooktAndCreateBookTest() throws Exception {
-        String jsonContent = gson.toJson(bookDto1);
-        when(bookService.getBook(anyLong())).thenReturn(book1);
-        when(bookMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(bookDto1);
+        String jsonContent = gson.toJson(VOLUME_DTO_1);
+        when(bookService.getBook(anyLong())).thenReturn(VOLUME_1);
+        when(bookMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(VOLUME_DTO_1);
 
         mockMvc.perform(get("/myLibrary/book?bookId=1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -87,8 +86,8 @@ public class BookControllerTest {
 
     @Test
     public void createBookTest() throws Exception {
-        when(bookMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(bookDto1);
-        when(bookService.createBook(ArgumentMatchers.any())).thenReturn(book1);
+        when(bookMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(VOLUME_DTO_1);
+        when(bookService.createBook(ArgumentMatchers.any())).thenReturn(VOLUME_1);
 
         mockMvc.perform(post("/myLibrary/book")
                 .contentType(MediaType.APPLICATION_JSON)

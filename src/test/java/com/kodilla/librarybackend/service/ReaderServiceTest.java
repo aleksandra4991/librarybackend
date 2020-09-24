@@ -194,13 +194,13 @@ public class ReaderServiceTest {
         Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@@gmail.com",true,"XyZ198@89");
         readerRepository.save(reader1);
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book specifiedBook1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
-        bookRepository.save(specifiedBook);
-        bookRepository.save(specifiedBook1);
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(specifiedBook1);
-        bookList.add(specifiedBook);
+        Volume specifiedVolume1 = new Volume(testGenre.getId());
+        Volume specifiedVolume = new Volume(testGenre.getId());
+        bookRepository.save(specifiedVolume);
+        bookRepository.save(specifiedVolume1);
+        List<Volume> volumeList = new ArrayList<>();
+        volumeList.add(specifiedVolume1);
+        volumeList.add(specifiedVolume);
         Cart specifiedCart = new Cart();
         cartRepository.save(specifiedCart);
         Reservation specifiedReservation = new Reservation(true,reader1,specifiedCart);
@@ -233,17 +233,17 @@ public class ReaderServiceTest {
         Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@@gmail.com",true,"XyZ198@89");
         readerRepository.save(reader1);
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book specifiedBook1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
-        bookRepository.save(specifiedBook);
-        bookRepository.save(specifiedBook1);
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(specifiedBook1);
-        bookList.add(specifiedBook);
-        reader1.setBookList(bookList);
+        Volume specifiedVolume1 = new Volume(testGenre.getId());
+        Volume specifiedVolume = new Volume(testGenre.getId());
+        bookRepository.save(specifiedVolume);
+        bookRepository.save(specifiedVolume1);
+        List<Volume> volumeList = new ArrayList<>();
+        volumeList.add(specifiedVolume1);
+        volumeList.add(specifiedVolume);
+        reader1.setBookList(volumeList);
 
         //When
-       List<Book> booksRentedByReader1 = readerService.getRentedBooksOfSpecifiedReader(reader1.getId());
+       List<Volume> booksRentedByReader1 = readerService.getRentedBooksOfSpecifiedReader(reader1.getId());
 
        //Then
        Assert.assertEquals(2,booksRentedByReader1.size());

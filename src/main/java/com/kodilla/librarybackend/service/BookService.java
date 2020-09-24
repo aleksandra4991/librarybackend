@@ -1,6 +1,9 @@
 package com.kodilla.librarybackend.service;
 
-import com.kodilla.librarybackend.domain.Book;
+import com.kodilla.librarybackend.adapter.VolumeAdapter;
+import com.kodilla.librarybackend.client.GoogleBooksClient;
+import com.kodilla.librarybackend.domain.Volume;
+import com.kodilla.librarybackend.domain.VolumeDto;
 import com.kodilla.librarybackend.repository.BookRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,14 +22,20 @@ import java.util.stream.Collectors;
 public class BookService {
 
     @Autowired
+    private GoogleBooksClient googleBooksClient;
+
+    @Autowired
     private BookRepository bookRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private VolumeAdapter volumeAdapter;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
 
-    private Set<Book> books;
+    private Set<Volume> volumes;
     private static BookService bookService;
 
     public static BookService getInstance() {
@@ -36,41 +45,47 @@ public class BookService {
         return bookService;
     }
 
-    public Set<Book> getBooks() {
-        return new HashSet<>(books);
+    public Set<Volume> getBooks() {
+        return new HashSet<>(volumes);
     }
 
-    public void addBook(Book book) {
-        this.books.add(book);
+    public List<Volume> fetchBooks(){
+        LOGGER.info("Fetching Google Books");
+        List<VolumeDto> googleBooksDto = googleBooksClient.getGoogleBooks();
+        return volumeAdapter.createVolumeList(googleBooksDto) ;
     }
 
-    public List<Book> getAllBooks() {
+    public void addBook(Volume volume) {
+        this.volumes.add(volume);
+    }
+
+    public List<Volume> getAllBooks() {
         LOGGER.info("Getting all books");
         return bookRepository.findAll();
     }
 
-    public List<Book> getAvaiableToRentBooks(boolean rented) {
+    /*public List<Volume> getAvaiableToRentBooks(boolean rented) {
         LOGGER.info("Getting books avaiable to rent");
-        List<Book> bookList = bookRepository.findAll();
-        return bookList.stream()
+        List<Volume> volumeList = bookRepository.findAll();
+        return volumeList.stream()
                 .filter(book -> book.isRented() == false)
                 .collect(Collectors.toList());
-    }
+    }*/
 
-    public List<Book> getAlreadyRentedBooks(boolean rented) {
+    /*public List<Volume> getAlreadyRentedBooks(boolean rented) {
         LOGGER.info("Getting books already rented");
-        List<Book> bookList = bookRepository.findAll();
-        return bookList.stream()
+        List<Volume> volumeList = bookRepository.findAll();
+        return volumeList.stream()
                 .filter(book -> book.isRented() == true)
                 .collect(Collectors.toList());
-    }
+    }*/
 
-    public List<Book> getBooksOfDefiniedTitleAndAuthor(String title, String author) {
-        LOGGER.info("Getting books of:"+author);
-        List<Book> bookList = bookRepository.findAll();
-        return bookList.stream()
+    public List<Volume> getBooksOfDefiniedTitleAndAuthor(String title, String authors) {
+        LOGGER.info("Getting books of:"+authors);
+        List<Volume> volumeList = bookRepository.findAll();
+        return volumeList.stream()
                 .filter(book -> book.getTitle() == title)
-                .filter(book -> book.getAuthor() == author)
+                .filter(book -> book.getAuthors() == authors)
                 .collect(Collectors.toList());
     }
 
@@ -80,15 +95,15 @@ public class BookService {
         return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toList());
     }*/
 
-    public Book getBook(final Long id){
+    public Volume getBook(final Long id){
         LOGGER.info("Getting book with id:"+id.toString());
         return bookRepository.getOne(id);
     }
 
     @Transactional
-    public Book createBook(final Book book){
+    public Volume createBook(final Volume volume){
         LOGGER.info("Creating new book");
-        return bookRepository.save(book);
+        return bookRepository.save(volume);
     }
 
    /*public void updateBook(final Long id){

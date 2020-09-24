@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Reader {
@@ -28,16 +29,16 @@ public class Reader {
             fetch = FetchType.LAZY)
     private List<Reservation> reservations = new ArrayList<>();
 
-    @OneToMany(targetEntity = Book.class,
+    @OneToMany(targetEntity = Volume.class,
             mappedBy = "reader",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<Book> bookList = new ArrayList<>();
+    private List<Volume> volumeList = new ArrayList<>();
 
     public Reader() {
     }
 
-    public Reader(@NotNull Long id, String uuid, String name, String phoneNumber, String emailAddress, boolean status, String password, List<Reservation> reservations, List<Book> bookList) {
+    public Reader(@NotNull Long id, String uuid, String name, String phoneNumber, String emailAddress, boolean status, String password, List<Reservation> reservations, List<Volume> volumeList) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -46,7 +47,7 @@ public class Reader {
         this.status = status;
         this.password = password;
         this.reservations = reservations;
-        this.bookList = bookList;
+        this.volumeList = volumeList;
     }
 
     public Reader(Long id, String name, String phoneNumber, String emailAddress, boolean status, String password, String uuid) {
@@ -148,11 +149,47 @@ public class Reader {
         this.reservations = reservations;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
+    public List<Volume> getBookList() {
+        return volumeList;
     }
 
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
+    public void setBookList(List<Volume> volumeList) {
+        this.volumeList = volumeList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reader reader = (Reader) o;
+        return status == reader.status &&
+                Objects.equals(id, reader.id) &&
+                Objects.equals(uuid, reader.uuid) &&
+                Objects.equals(name, reader.name) &&
+                Objects.equals(phoneNumber, reader.phoneNumber) &&
+                Objects.equals(emailAddress, reader.emailAddress) &&
+                Objects.equals(password, reader.password) &&
+                Objects.equals(reservations, reader.reservations) &&
+                Objects.equals(volumeList, reader.volumeList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, uuid, name, phoneNumber, emailAddress, status, password, reservations, volumeList);
+    }
+
+    @Override
+    public String toString() {
+        return "Reader{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", status=" + status +
+                ", password='" + password + '\'' +
+                ", reservations=" + reservations +
+                ", volumeList=" + volumeList +
+                '}';
     }
 }

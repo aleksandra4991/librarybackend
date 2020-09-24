@@ -219,12 +219,12 @@ public class ReservationMyLibraryTestSuite {
 
         //Given
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
-        Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
-        bookRepository.save(thirdSpecifiedBook);
-        List<Book> secondBookList = new ArrayList<>();
-        secondBookList.add(thirdSpecifiedBook);
+        Volume thirdSpecifiedVolume = new Volume(secondTestGenre.getId());
+        bookRepository.save(thirdSpecifiedVolume);
+        List<Volume> secondVolumeList = new ArrayList<>();
+        secondVolumeList.add(thirdSpecifiedVolume);
         Reader secondSpecifiedReader = new Reader("Julia Wrzosek",true);
-        secondSpecifiedReader.setBookList(secondBookList);
+        secondSpecifiedReader.setBookList(secondVolumeList);
         readerRepository.save(secondSpecifiedReader);
         Cart secondSspecifiedCart = new Cart();
         cartRepository.save(secondSspecifiedCart);

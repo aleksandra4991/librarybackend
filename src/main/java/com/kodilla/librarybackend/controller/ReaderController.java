@@ -1,6 +1,6 @@
 package com.kodilla.librarybackend.controller;
 
-import com.kodilla.librarybackend.domain.BookDto;
+import com.kodilla.librarybackend.domain.VolumeDto;
 import com.kodilla.librarybackend.domain.ReaderDto;
 import com.kodilla.librarybackend.domain.ReservationDto;
 import com.kodilla.librarybackend.mapper.ReaderMapper;
@@ -61,7 +61,7 @@ public class ReaderController {
     }
 
     @RequestMapping(method = RequestMethod.GET , value = "/books/rented")
-    public List<BookDto> getRentedBooksOfSpecifiedReader (@RequestParam Long readerId){
+    public List<VolumeDto> getRentedBooksOfSpecifiedReader (@RequestParam Long readerId){
         readerService.getRentedBooksOfSpecifiedReader(readerId);
         return readerMapper.mapToReaderDto(readerService.getReader(readerId)).getBookDtoList();
     }

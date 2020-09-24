@@ -106,15 +106,15 @@ public class ReaderMyLibraryTestSuite {
         //Given
         Reader testReader = new Reader("Aleksandra Radzikowska","509345876","aradzikowska999@gmail.com",true);
         readerRepository.save(testReader);
-        List<Book> reservedBooks = new ArrayList<>();
+        List<Volume> reservedVolumes = new ArrayList<>();
         Genre genre = new Genre("testGenre");
-        Book book1 = new Book("Rok 1984","George Orwell",(long)1949,"B098734",genre);
-        Book book2 = new Book("Tytuł","George Orwell", (long) (long)1952,"C234908",genre);
-        bookRepository.save(book1);
-        bookRepository.save(book2);
-        reservedBooks.add(book1);
-        reservedBooks.add(book2);
-        Cart cartX = new Cart(reservedBooks);
+        Volume volume1 = new Volume(genre.getId());
+        Volume volume2 = new Volume(genre.getId());
+        bookRepository.save(volume1);
+        bookRepository.save(volume2);
+        reservedVolumes.add(volume1);
+        reservedVolumes.add(volume2);
+        Cart cartX = new Cart(reservedVolumes);
         cartRepository.save(cartX);
         Reservation reservationOfSpecifiedReader = new Reservation(true,testReader,cartX);
         reservationRepository.save(reservationOfSpecifiedReader);
@@ -145,15 +145,15 @@ public class ReaderMyLibraryTestSuite {
         //Given
         Reader testReader = new Reader("Aleksandra Radzikowska","509345876","aradzikowska999@gmail.com",true);
         readerRepository.save(testReader);
-        List<Book> rentedBooks = new ArrayList<>();
+        List<Volume> rentedVolumes = new ArrayList<>();
         Genre genre = new Genre("testGenre");
-        Book book1 = new Book("Rok 1984","George Orwell",(long)1949,"B098734",genre);
-        Book book2 = new Book("Tytuł","George Orwell", (long) (long)1952,"C234908",genre);
-        bookRepository.save(book1);
-        bookRepository.save(book2);
-        rentedBooks.add(book1);
-        rentedBooks.add(book2);
-        testReader.setBookList(rentedBooks);
+        Volume volume1 = new Volume(genre.getId());
+        Volume volume2 = new Volume(genre.getId());
+        bookRepository.save(volume1);
+        bookRepository.save(volume2);
+        rentedVolumes.add(volume1);
+        rentedVolumes.add(volume2);
+        testReader.setBookList(rentedVolumes);
         readerRepository.save(testReader);
         Long readerId = testReader.getId();
         Reader specifiedReader = readerRepository.getOne(readerId);

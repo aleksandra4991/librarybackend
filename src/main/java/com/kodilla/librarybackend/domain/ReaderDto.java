@@ -19,7 +19,7 @@ public class ReaderDto {
     private List<ReservationDto> reservationDtoList = new ArrayList<>();
 
     @JsonIgnore
-    private List<BookDto> bookDtoList = new ArrayList<>();
+    private List<VolumeDto> volumeDtoList = new ArrayList<>();
 
     public ReaderDto() {
     }
@@ -107,15 +107,15 @@ public class ReaderDto {
         return reservationDtoList;
     }
 
-    public List<BookDto> getBookDtoList() {
-        return bookDtoList;
+    public List<VolumeDto> getBookDtoList() {
+        return volumeDtoList;
     }
 
     public void setReservationDtoList(List<ReservationDto> reservationDtoList) {
         this.reservationDtoList = reservationDtoList;
     }
 
-    public void setBookDtoList(List<BookDto> bookDtoList) {
-        this.bookDtoList = bookDtoList;
+    public void setBookDtoList(List<VolumeDto> volumeDtoList) {
+        this.volumeDtoList = volumeDtoList;
     }
 }

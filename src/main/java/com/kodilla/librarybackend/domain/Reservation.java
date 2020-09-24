@@ -4,6 +4,7 @@ package com.kodilla.librarybackend.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class Reservation {
@@ -62,5 +63,20 @@ public class Reservation {
         return reservationDateCreation;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reservation that = (Reservation) o;
+        return active == that.active &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(reader, that.reader) &&
+                Objects.equals(cart, that.cart) &&
+                Objects.equals(reservationDateCreation, that.reservationDateCreation);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, active, reader, cart, reservationDateCreation);
+    }
 }

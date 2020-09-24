@@ -1,6 +1,6 @@
 package com.kodilla.librarybackend.service;
 
-import com.kodilla.librarybackend.domain.Book;
+import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.domain.Cart;
 import com.kodilla.librarybackend.domain.Reader;
 import com.kodilla.librarybackend.domain.Reservation;
@@ -58,13 +58,13 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
-    public List<Book> addListOfBooksToSpecifiedCart(Long id, List<Book> books){
+    public List<Volume> addListOfBooksToSpecifiedCart(Long id, List<Volume> volumes){
         LOGGER.info("Starting adding list of books to cart");
         Cart cart = cartRepository.getOne(id);
-        List<Book> cartBooks = cart.getBooks();
-        books.stream()
+        List<Volume> cartVolumes = cart.getBooks();
+        volumes.stream()
                 .filter(b -> bookRepository.findById(b.getId()).isPresent())
-                .forEach(b -> cartBooks.add(b));
+                .forEach(b -> cartVolumes.add(b));
 
         cartRepository.save(cart);
         LOGGER.info("Books added to cart");

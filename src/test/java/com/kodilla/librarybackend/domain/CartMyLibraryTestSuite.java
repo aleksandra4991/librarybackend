@@ -61,12 +61,12 @@ public class CartMyLibraryTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book specifiedBook = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        List<Book> bookList = new ArrayList<>();
-        bookRepository.save(specifiedBook);
-        bookList.add(specifiedBook);
+        Volume specifiedVolume = new Volume("Tytuł1","Autor1",testGenre);
+        List<Volume> volumeList = new ArrayList<>();
+        bookRepository.save(specifiedVolume);
+        volumeList.add(specifiedVolume);
         Cart specifiedCart = new Cart();
-        specifiedCart.setBooks(bookList);
+        specifiedCart.setBooks(volumeList);
 
         cartRepository.save(specifiedCart);
 
@@ -90,12 +90,12 @@ public class CartMyLibraryTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book specifiedBook = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        List<Book> bookList = new ArrayList<>();
-        bookRepository.save(specifiedBook);
-        bookList.add(specifiedBook);
+        Volume specifiedVolume = new Volume("Tytuł1","Autor1",testGenre);;
+        List<Volume> volumeList = new ArrayList<>();
+        bookRepository.save(specifiedVolume);
+        volumeList.add(specifiedVolume);
         Cart specifiedCart = new Cart();
-        specifiedCart.setBooks(bookList);
+        specifiedCart.setBooks(volumeList);
 
         cartRepository.save(specifiedCart);
         Long idOfSpecifiedCart = specifiedCart.getId();
@@ -119,10 +119,10 @@ public class CartMyLibraryTestSuite {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book specifiedBook = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        bookRepository.save(specifiedBook);
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(specifiedBook);
+        Volume specifiedVolume = new Volume("Tytuł1","Autor1",testGenre);
+        bookRepository.save(specifiedVolume);
+        List<Volume> volumeList = new ArrayList<>();
+        volumeList.add(specifiedVolume);
 
         Reader specifiedReader = new Reader("Aleksandra Radzikowska",true);
         readerRepository.save(specifiedReader);

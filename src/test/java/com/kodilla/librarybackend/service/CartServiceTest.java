@@ -68,17 +68,17 @@ public class CartServiceTest {
         cartRepository.save(testCart);
 
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
-        bookRepository.save(book1);
-        bookRepository.save(book2);
+        Volume volume1 = new Volume(testGenre.getId());
+        Volume volume2 = new Volume(testGenre.getId());
+        bookRepository.save(volume1);
+        bookRepository.save(volume2);
 
-        List<Book> booksToAddToCart = new ArrayList<>();
-        booksToAddToCart.add(book1);
-        booksToAddToCart.add(book2);
+        List<Volume> booksToAddToCart = new ArrayList<>();
+        booksToAddToCart.add(volume1);
+        booksToAddToCart.add(volume2);
 
         //When
-        List<Book> booksAlreadyAddedToCart = cartService.addListOfBooksToSpecifiedCart(testCart.getId(),booksToAddToCart);
+        List<Volume> booksAlreadyAddedToCart = cartService.addListOfBooksToSpecifiedCart(testCart.getId(),booksToAddToCart);
 
         //Then
         Assert.assertEquals(2,booksAlreadyAddedToCart.size());
@@ -98,19 +98,19 @@ public class CartServiceTest {
         cartRepository.save(testCart);
 
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", testGenre);
-        bookRepository.save(book1);
-        bookRepository.save(book2);
+        Volume volume1 = new Volume(testGenre.getId());
+        Volume volume2 = new Volume(testGenre.getId());
+        bookRepository.save(volume1);
+        bookRepository.save(volume2);
 
-        List<Book> booksToAddToCart = new ArrayList<>();
-        booksToAddToCart.add(book1);
-        booksToAddToCart.add(book2);
+        List<Volume> booksToAddToCart = new ArrayList<>();
+        booksToAddToCart.add(volume1);
+        booksToAddToCart.add(volume2);
 
-        List<Book> booksAlreadyAddedToCart = cartService.addListOfBooksToSpecifiedCart(testCart.getId(),booksToAddToCart);
+        List<Volume> booksAlreadyAddedToCart = cartService.addListOfBooksToSpecifiedCart(testCart.getId(),booksToAddToCart);
 
         //When
-        cartService.removeBookWithSpecifiedIdFromSpecifiedCart(testCart.getId(),book2.getId());
+        cartService.removeBookWithSpecifiedIdFromSpecifiedCart(testCart.getId(), volume2.getId());
 
         //Then
         Assert.assertEquals(1,testCart.getBooks().size());

@@ -1,7 +1,7 @@
 package com.kodilla.librarybackend.mapper;
 
-import com.kodilla.librarybackend.domain.Book;
-import com.kodilla.librarybackend.domain.BookDto;
+import com.kodilla.librarybackend.domain.Volume;
+import com.kodilla.librarybackend.domain.VolumeDto;
 import com.kodilla.librarybackend.domain.Genre;
 import com.kodilla.librarybackend.repository.BookRepository;
 import com.kodilla.librarybackend.repository.GenreRepository;
@@ -21,34 +21,33 @@ public class BookMapper {
     @Autowired
     private GenreRepository genreRepository;
 
-    public List<BookDto> mapToBookDtoList(final List<Book> books) {
-        List<BookDto> bookDtos = new ArrayList<>();
-        for (Book book : books) {
-            BookDto bookDto = new BookDto(book.getTitle(), book.getAuthor(),book.getYear(),book.getSignature(),book.isRented(),String.valueOf(book.getGenre().getId()));
-            bookDto.setBookId(book.getId());
-            bookDtos.add(bookDto);
+    public List<VolumeDto> mapToBookDtoList(final List<Volume> volumes) {
+        List<VolumeDto> volumeDtos = new ArrayList<>();
+        for (Volume volume : volumes) {
+            VolumeDto volumeDto = new VolumeDto(volume.getTitle(),volume.getAuthors(),volume.getGenre().toString());
+            volumeDto.setBookId(volume.getId());
+            volumeDtos.add(volumeDto);
         }
-        return bookDtos;
+        return volumeDtos;
     }
 
-    public BookDto mapToBookDto(Book book) {
-        BookDto bookDto = new BookDto(book.getTitle(), book.getAuthor(),book.getYear(),book.getSignature(),book.isRented(),String.valueOf(book.getGenre().getId()));
-        bookDto.setBookId(book.getId());
-        return bookDto;
+    public VolumeDto mapToBookDto(Volume volume) {
+        VolumeDto volumeDto = new VolumeDto(volume.getTitle(),volume.getAuthors(),volume.getGenre().toString());
+        return volumeDto;
     }
 
-    public Book mapToBook(BookDto bookDto) {
-        if(bookDto.getBookId() != null){
-            return bookRepository.getOne(bookDto.getBookId());
+    public Volume mapToBook(VolumeDto volumeDto) {
+        if(volumeDto.getBookId() != null){
+            return bookRepository.getOne(volumeDto.getBookId());
         } else {
-            Genre genre = genreRepository.findById(new Long(bookDto.getGenreId())).get();
-            return new Book(bookDto.getTitle(), bookDto.getAuthor(),bookDto.getYear(),bookDto.getSignature(),bookDto.isRented(), genre);
+            Genre genre = genreRepository.findById(new Long(volumeDto.getGenreId())).get();
+            return new Volume(volumeDto.getTitle(),volumeDto.getAuthors(),genre);
         }
 
     }
 
-    public List<Book> mapToBookList(final List<BookDto> bookDtos) {
-        return bookDtos.stream()
+    public List<Volume> mapToBookList(final List<VolumeDto> volumeDtos) {
+        return volumeDtos.stream()
                 .map(b -> bookRepository.findById(b.getBookId()).get())
                 .collect(Collectors.toList());
     }

@@ -46,14 +46,14 @@ public class ReservationServiceTest {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book specifiedBook1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
-        bookRepository.save(specifiedBook1);
-        bookRepository.save(specifiedBook);
+        Volume specifiedVolume1 = new Volume(testGenre.getId());
+        Volume specifiedVolume = new Volume(testGenre.getId());
+        bookRepository.save(specifiedVolume1);
+        bookRepository.save(specifiedVolume);
 
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(specifiedBook1);
-        bookList.add(specifiedBook);
+        List<Volume> volumeList = new ArrayList<>();
+        volumeList.add(specifiedVolume1);
+        volumeList.add(specifiedVolume);
         Reader specifiedReader = new Reader("Aleksandra Radzikowska",true);
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
@@ -61,10 +61,10 @@ public class ReservationServiceTest {
         Reservation specifiedReservation = new Reservation(true,specifiedReader,specifiedCart);
 
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
-        Book thirdSpecifiedBook = new Book("Tytuł3", "Autor3", (long) 1999, "B09876", secondTestGenre);
-        bookRepository.save(thirdSpecifiedBook);
-        List<Book> secondBookList = new ArrayList<>();
-        secondBookList.add(thirdSpecifiedBook);
+        Volume thirdSpecifiedVolume = new Volume(secondTestGenre.getId());
+        bookRepository.save(thirdSpecifiedVolume);
+        List<Volume> secondVolumeList = new ArrayList<>();
+        secondVolumeList.add(thirdSpecifiedVolume);
         Reader secondSpecifiedReader = new Reader("Julia Wrzosek",true);
         readerRepository.save(secondSpecifiedReader);
         Cart secondSspecifiedCart = new Cart();
@@ -94,12 +94,12 @@ public class ReservationServiceTest {
 
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book specifiedBook1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
-        bookRepository.save(specifiedBook);
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(specifiedBook1);
-        bookList.add(specifiedBook);
+        Volume specifiedVolume1 = new Volume(testGenre.getId());
+        Volume specifiedVolume = new Volume(testGenre.getId());
+        bookRepository.save(specifiedVolume);
+        List<Volume> volumeList = new ArrayList<>();
+        volumeList.add(specifiedVolume1);
+        volumeList.add(specifiedVolume);
         Reader specifiedReader = new Reader("Aleksandra Radzikowska",true);
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();
@@ -125,12 +125,12 @@ public class ReservationServiceTest {
     public void testDeleteSpecifiedReservation(){
         //Given
         Genre testGenre = new Genre("Gatunek Testowy");
-        Book specifiedBook1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
-        Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
-        bookRepository.save(specifiedBook);
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(specifiedBook1);
-        bookList.add(specifiedBook);
+        Volume specifiedVolume1 = new Volume(testGenre.getId());
+        Volume specifiedVolume = new Volume(testGenre.getId());
+        bookRepository.save(specifiedVolume);
+        List<Volume> volumeList = new ArrayList<>();
+        volumeList.add(specifiedVolume1);
+        volumeList.add(specifiedVolume);
         Reader specifiedReader = new Reader("Aleksandra Radzikowska",true);
         readerRepository.save(specifiedReader);
         Cart specifiedCart = new Cart();

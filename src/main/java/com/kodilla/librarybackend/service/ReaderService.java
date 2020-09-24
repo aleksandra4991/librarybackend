@@ -1,6 +1,6 @@
 package com.kodilla.librarybackend.service;
 
-import com.kodilla.librarybackend.domain.Book;
+import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.domain.Reader;
 import com.kodilla.librarybackend.domain.Reservation;
 import com.kodilla.librarybackend.repository.ReaderRepository;
@@ -166,9 +166,9 @@ public class ReaderService {
         return reservationsOfSpecifiedReader;
     }
 
-    public List<Book> getRentedBooksOfSpecifiedReader(final Long id){
+    public List<Volume> getRentedBooksOfSpecifiedReader(final Long id){
         LOGGER.info("Getting rented books of reader,readerId:"+ id.toString());
-        List<Book> booksRentedBySpecifiedReader = readerRepository.findById(id).get().getBookList();
+        List<Volume> booksRentedBySpecifiedReader = readerRepository.findById(id).get().getBookList();
         return booksRentedBySpecifiedReader;
     }
 
