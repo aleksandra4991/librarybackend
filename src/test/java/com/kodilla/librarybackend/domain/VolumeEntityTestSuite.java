@@ -1,7 +1,7 @@
 package com.kodilla.librarybackend.domain;
 
-import com.kodilla.librarybackend.repository.BookRepository;
 import com.kodilla.librarybackend.repository.GenreRepository;
+import com.kodilla.librarybackend.repository.VolumeRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 public class VolumeEntityTestSuite {
 
     @Autowired
-    private BookRepository bookRepository;
+    private VolumeRepository volumeRepository;
 
     @Autowired
     private GenreRepository genreRepository;
@@ -27,23 +28,22 @@ public class VolumeEntityTestSuite {
     public void getAllBooks() {
 
         //Given
-        Genre testGenre = new Genre("Gatunek Testowy");
-        Volume volume1 = new Volume(testGenre.getId());
-        Volume volume2 = new Volume(testGenre.getId());
-        Volume volume3 = new Volume(testGenre.getId());
-        int booksCounterBeforeSave = bookRepository.findAll().size();
-        bookRepository.save(volume1);
-        bookRepository.save(volume2);
-        bookRepository.save(volume3);
+        Volume volume1 = new Volume("Title1","Author1");
+        Volume volume2 = new Volume("Title2","Author2");
+        Volume volume3 = new Volume("Title3","Author3");
+        int booksCounterBeforeSave = volumeRepository.findAll().size();
+        volumeRepository.save(volume1);
+        volumeRepository.save(volume2);
+        volumeRepository.save(volume3);
 
         //When
-        int booksCounterAfterSave = bookRepository.findAll().size();
+        int booksCounterAfterSave = volumeRepository.findAll().size();
 
         //Then
         Assert.assertEquals(booksCounterBeforeSave + 3, booksCounterAfterSave);
 
         //Clean Up
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
 
 
@@ -53,20 +53,19 @@ public class VolumeEntityTestSuite {
     public void getAvaiableToRentBooks (){
 
         //Given
-        Genre testGenre = new Genre("Gatunek Testowy");
-        Volume volume1 = new Volume(testGenre.getId());
-        Volume volume2 = new Volume(testGenre.getId());
-        Volume volume3 = new Volume(testGenre.getId());
+        Volume volume1 = new Volume("title1", "author1");
+        Volume volume2 = new Volume("title2", "author2");
+        Volume volume3 = new Volume("title3", "author3");
 
-        bookRepository.save(volume1);
-        bookRepository.save(volume2);
-        bookRepository.save(volume3);
+        volumeRepository.save(volume1);
+        volumeRepository.save(volume2);
+        volumeRepository.save(volume3);
         Long firstBookId = volume1.getId();
-        Volume firstVolume = bookRepository.getOne(firstBookId);
+        Volume firstVolume = volumeRepository.getOne(firstBookId);
         Long secondtBookId = volume2.getId();
-        Volume secondVolume = bookRepository.getOne(secondtBookId);
+        Volume secondVolume = volumeRepository.getOne(secondtBookId);
         Long thirdBookId = volume3.getId();
-        Volume thirdVolume = bookRepository.getOne(thirdBookId);
+        Volume thirdVolume = volumeRepository.getOne(thirdBookId);
         List<Volume> volumeList = new ArrayList<>();
         volumeList.add(firstVolume);
         volumeList.add(secondVolume);
@@ -74,20 +73,19 @@ public class VolumeEntityTestSuite {
 
 
         //When
-        int numberOfAvaiableBooks = bookRepository.findAll().size();
+        int numberOfAvaiableBooks = volumeRepository.findAll().size();
         String titleOfBook1 = firstVolume.getTitle();
         String authorOfBook2 = secondVolume.getAuthors();
 
 
         //Then
-        Assert.assertEquals(2,numberOfAvaiableBooks);
-        Assert.assertEquals("Tytuł1",titleOfBook1);
-        Assert.assertEquals("Autor2",authorOfBook2);
+        Assert.assertEquals("title1",titleOfBook1);
+        Assert.assertEquals("author2",authorOfBook2);
 
 
         //Clean Up
 
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
     }
 
@@ -99,26 +97,24 @@ public class VolumeEntityTestSuite {
     public void testGetBooksOfDefiniedAuthor(){
 
         //Given
-        Genre testGenre = new Genre("Gatunek Testowy");
-        Volume volume1 = new Volume(testGenre.getId());
-        Volume volume2 = new Volume(testGenre.getId());
-        Volume volume3 = new Volume(testGenre.getId());
+        Volume volume1 = new Volume("title1", "author1");
+        Volume volume2 = new Volume("title2", "author2");
+        Volume volume3 = new Volume("title3", "author3");
 
-        bookRepository.save(volume1);
-        bookRepository.save(volume2);
-        bookRepository.save(volume3);
+        volumeRepository.save(volume1);
+        volumeRepository.save(volume2);
+        volumeRepository.save(volume3);
 
         //When
-        int numberOfBooksOfSpecifiedAuthor = bookRepository.findAll().size();
+        int numberOfBooksOfSpecifiedAuthor = volumeRepository.findAll().size();
         String authorOfFirstBook = volume1.getAuthors();
         String authorOfSecondBook = volume2.getAuthors();
 
         //Then
-        Assert.assertNotEquals(2,numberOfBooksOfSpecifiedAuthor);
-        Assert.assertTrue(authorOfFirstBook.equals(authorOfSecondBook));
+        Assert.assertFalse(authorOfFirstBook.equals(authorOfSecondBook));
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
 
     }
@@ -127,10 +123,10 @@ public class VolumeEntityTestSuite {
     public void testGetBook(){
 
         //Given
-        Genre testGenre = new Genre("Gatunek Testowy");
-        Volume volume1 = new Volume(testGenre.getId());
+        Genre testGenre = new Genre("gatunek Testowy");
+        Volume volume1 = new Volume("Title","authors");
 
-        bookRepository.save(volume1);
+        volumeRepository.save(volume1);
 
         //When
         String titleOfFirstBook = volume1.getTitle();
@@ -139,7 +135,7 @@ public class VolumeEntityTestSuite {
         Assert.assertNotNull(titleOfFirstBook);
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
     }
 
@@ -151,15 +147,15 @@ public class VolumeEntityTestSuite {
         Volume volume1 = new Volume(testGenre.getId());
 
         //When
-        bookRepository.save(volume1);
+        volumeRepository.save(volume1);
         Long bokkId = volume1.getId();
-        Volume newVolume = bookRepository.getOne(bokkId);
+        Volume newVolume = volumeRepository.getOne(bokkId);
 
         //Then
         Assert.assertNotNull(newVolume);
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
     }
 
@@ -171,21 +167,21 @@ public class VolumeEntityTestSuite {
         Volume volume1 = new Volume(testGenre.getId());
         Volume volume2 = new Volume(testGenre.getId());
         Volume volume3 = new Volume(testGenre.getId());
-        bookRepository.save(volume1);
-        bookRepository.save(volume2);
-        bookRepository.save(volume3);
+        volumeRepository.save(volume1);
+        volumeRepository.save(volume2);
+        volumeRepository.save(volume3);
 
         //When
-        long bookCounterBeforeDeletion = bookRepository.count();
-        bookRepository.delete(volume1);
-        long bookCounterAfterDeletion = bookRepository.count();
+        long bookCounterBeforeDeletion = volumeRepository.count();
+        volumeRepository.delete(volume1);
+        long bookCounterAfterDeletion = volumeRepository.count();
 
 
         //Then
         Assert.assertNotEquals(bookCounterBeforeDeletion,bookCounterAfterDeletion);
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
 
     }

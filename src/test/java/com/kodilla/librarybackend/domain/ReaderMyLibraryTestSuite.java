@@ -21,7 +21,7 @@ public class ReaderMyLibraryTestSuite {
     private ReaderRepository readerRepository;
 
     @Autowired
-    private BookRepository bookRepository;
+    private VolumeRepository volumeRepository;
 
     @Autowired
     private CartRepository cartRepository;
@@ -110,8 +110,8 @@ public class ReaderMyLibraryTestSuite {
         Genre genre = new Genre("testGenre");
         Volume volume1 = new Volume(genre.getId());
         Volume volume2 = new Volume(genre.getId());
-        bookRepository.save(volume1);
-        bookRepository.save(volume2);
+        volumeRepository.save(volume1);
+        volumeRepository.save(volume2);
         reservedVolumes.add(volume1);
         reservedVolumes.add(volume2);
         Cart cartX = new Cart(reservedVolumes);
@@ -132,7 +132,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(1,numberOfReservationsOfSpecifiedReader);
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
         readerRepository.deleteAllInBatch();
@@ -149,8 +149,8 @@ public class ReaderMyLibraryTestSuite {
         Genre genre = new Genre("testGenre");
         Volume volume1 = new Volume(genre.getId());
         Volume volume2 = new Volume(genre.getId());
-        bookRepository.save(volume1);
-        bookRepository.save(volume2);
+        volumeRepository.save(volume1);
+        volumeRepository.save(volume2);
         rentedVolumes.add(volume1);
         rentedVolumes.add(volume2);
         testReader.setBookList(rentedVolumes);
@@ -165,7 +165,7 @@ public class ReaderMyLibraryTestSuite {
         Assert.assertEquals(2,numberOfRentedBooksBySpecifiedReader);
 
         //CleanUP
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         readerRepository.deleteAllInBatch();
     }

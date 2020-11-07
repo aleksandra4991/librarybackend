@@ -31,7 +31,7 @@ public class ReservationServiceTest {
     private CartRepository cartRepository;
 
     @Autowired
-    private BookRepository bookRepository;
+    private VolumeRepository volumeRepository;
 
     @Autowired
     private GenreRepository genreRepository;
@@ -48,8 +48,8 @@ public class ReservationServiceTest {
         Genre testGenre = new Genre("Gatunek Testowy");
         Volume specifiedVolume1 = new Volume(testGenre.getId());
         Volume specifiedVolume = new Volume(testGenre.getId());
-        bookRepository.save(specifiedVolume1);
-        bookRepository.save(specifiedVolume);
+        volumeRepository.save(specifiedVolume1);
+        volumeRepository.save(specifiedVolume);
 
         List<Volume> volumeList = new ArrayList<>();
         volumeList.add(specifiedVolume1);
@@ -62,7 +62,7 @@ public class ReservationServiceTest {
 
         Genre secondTestGenre = new Genre("Gatunek Testowy Drugi");
         Volume thirdSpecifiedVolume = new Volume(secondTestGenre.getId());
-        bookRepository.save(thirdSpecifiedVolume);
+        volumeRepository.save(thirdSpecifiedVolume);
         List<Volume> secondVolumeList = new ArrayList<>();
         secondVolumeList.add(thirdSpecifiedVolume);
         Reader secondSpecifiedReader = new Reader("Julia Wrzosek",true);
@@ -82,7 +82,7 @@ public class ReservationServiceTest {
 
 
         //Clean Up
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
         readerRepository.deleteAllInBatch();
@@ -96,7 +96,7 @@ public class ReservationServiceTest {
         Genre testGenre = new Genre("Gatunek Testowy");
         Volume specifiedVolume1 = new Volume(testGenre.getId());
         Volume specifiedVolume = new Volume(testGenre.getId());
-        bookRepository.save(specifiedVolume);
+        volumeRepository.save(specifiedVolume);
         List<Volume> volumeList = new ArrayList<>();
         volumeList.add(specifiedVolume1);
         volumeList.add(specifiedVolume);
@@ -114,7 +114,7 @@ public class ReservationServiceTest {
         assertThat(specifiedReservation, sameBeanAs(requestedReservation));
 
         //Clean Up
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
         readerRepository.deleteAllInBatch();
@@ -127,7 +127,7 @@ public class ReservationServiceTest {
         Genre testGenre = new Genre("Gatunek Testowy");
         Volume specifiedVolume1 = new Volume(testGenre.getId());
         Volume specifiedVolume = new Volume(testGenre.getId());
-        bookRepository.save(specifiedVolume);
+        volumeRepository.save(specifiedVolume);
         List<Volume> volumeList = new ArrayList<>();
         volumeList.add(specifiedVolume1);
         volumeList.add(specifiedVolume);
@@ -148,7 +148,7 @@ public class ReservationServiceTest {
         Assert.assertEquals(reservationCounterBeforeDeletion - 1,reservationCounterAfterDeletion );
 
         //Clean Up
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
         readerRepository.deleteAllInBatch();

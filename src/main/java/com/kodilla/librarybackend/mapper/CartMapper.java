@@ -11,14 +11,14 @@ import java.util.List;
 public class CartMapper {
 
     @Autowired
-    private BookMapper bookMapper;
+    private VolumeMapper volumeMapper;
 
     public Long mapToIdFromCartAdderDto(CartBookAdderDto cartBookAdderDto){
         return cartBookAdderDto.getCartId();
     }
 
     public List<Volume> mapToBooksListFromCartAdderDto(CartBookAdderDto cartBookAdderDto){
-        return bookMapper.mapToBookList(cartBookAdderDto.getBookDtoList());
+        return volumeMapper.mapToBookList(cartBookAdderDto.getBookDtoList());
     }
 
 

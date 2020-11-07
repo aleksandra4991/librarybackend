@@ -1,8 +1,8 @@
 package com.kodilla.librarybackend.controller;
 
 import com.kodilla.librarybackend.domain.*;
-import com.kodilla.librarybackend.mapper.BookMapper;
 import com.kodilla.librarybackend.mapper.CartMapper;
+import com.kodilla.librarybackend.mapper.VolumeMapper;
 import com.kodilla.librarybackend.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class CartController {
     private CartService cartService;
 
     @Autowired
-    private BookMapper bookMapper;
+    private VolumeMapper volumeMapper;
 
     @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart")
     public void createEmptyCart(){
@@ -32,7 +32,7 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/books/placed",consumes = APPLICATION_JSON_VALUE)
     public List<VolumeDto> addBookWithSpecifiedIdToSpecifiedCart (@RequestBody CartBookAdderDto cartBookAdderDto) {
-        return bookMapper.mapToBookDtoList(cartService.addListOfBooksToSpecifiedCart((cartMapper.mapToIdFromCartAdderDto(cartBookAdderDto))
+        return volumeMapper.mapToBookDtoList(cartService.addListOfBooksToSpecifiedCart((cartMapper.mapToIdFromCartAdderDto(cartBookAdderDto))
                 , cartMapper.mapToBooksListFromCartAdderDto(cartBookAdderDto)));
     }
 

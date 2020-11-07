@@ -1,13 +1,13 @@
 package com.kodilla.librarybackend.service;
 
-import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.domain.Cart;
 import com.kodilla.librarybackend.domain.Reader;
 import com.kodilla.librarybackend.domain.Reservation;
-import com.kodilla.librarybackend.repository.BookRepository;
+import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.repository.CartRepository;
 import com.kodilla.librarybackend.repository.ReaderRepository;
 import com.kodilla.librarybackend.repository.ReservationRepository;
+import com.kodilla.librarybackend.repository.VolumeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class CartService {
     private CartRepository cartRepository;
 
     @Autowired
-    private BookRepository bookRepository;
+    private VolumeRepository volumeRepository;
 
     @Autowired
     private ReaderRepository readerRepository;
@@ -63,7 +63,7 @@ public class CartService {
         Cart cart = cartRepository.getOne(id);
         List<Volume> cartVolumes = cart.getBooks();
         volumes.stream()
-                .filter(b -> bookRepository.findById(b.getId()).isPresent())
+                .filter(b -> volumeRepository.findById(b.getId()).isPresent())
                 .forEach(b -> cartVolumes.add(b));
 
         cartRepository.save(cart);
@@ -74,7 +74,7 @@ public class CartService {
     public void removeBookWithSpecifiedIdFromSpecifiedCart(Long cartId,Long bookId){
         LOGGER.info("Removing book with id:"+bookId.toString()+" from cart:"+cartId.toString());
         Cart cart = cartRepository.getOne(cartId);
-        cart.getBooks().remove(bookRepository.getOne(bookId));
+        cart.getBooks().remove(volumeRepository.getOne(bookId));
         cartRepository.save(cart);
         LOGGER.info("finished: removing book with id:"+bookId.toString()+" from cart:"+cartId.toString());
     }

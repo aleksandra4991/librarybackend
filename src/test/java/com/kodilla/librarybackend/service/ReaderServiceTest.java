@@ -28,10 +28,10 @@ public class ReaderServiceTest {
     private ReaderService readerService;
 
     @Autowired
-    private BookRepository bookRepository;
+    private VolumeRepository volumeRepository;
 
     @Autowired
-    private BookService bookService;
+    private VolumeService volumeService;
 
     @Autowired
     private GenreRepository genreRepository;
@@ -196,8 +196,8 @@ public class ReaderServiceTest {
         Genre testGenre = new Genre("Gatunek Testowy");
         Volume specifiedVolume1 = new Volume(testGenre.getId());
         Volume specifiedVolume = new Volume(testGenre.getId());
-        bookRepository.save(specifiedVolume);
-        bookRepository.save(specifiedVolume1);
+        volumeRepository.save(specifiedVolume);
+        volumeRepository.save(specifiedVolume1);
         List<Volume> volumeList = new ArrayList<>();
         volumeList.add(specifiedVolume1);
         volumeList.add(specifiedVolume);
@@ -217,7 +217,7 @@ public class ReaderServiceTest {
         Assert.assertEquals(1,reservationsOfReader.size());
 
         //Clean Up
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
         readerRepository.deleteAllInBatch();
@@ -235,8 +235,8 @@ public class ReaderServiceTest {
         Genre testGenre = new Genre("Gatunek Testowy");
         Volume specifiedVolume1 = new Volume(testGenre.getId());
         Volume specifiedVolume = new Volume(testGenre.getId());
-        bookRepository.save(specifiedVolume);
-        bookRepository.save(specifiedVolume1);
+        volumeRepository.save(specifiedVolume);
+        volumeRepository.save(specifiedVolume1);
         List<Volume> volumeList = new ArrayList<>();
         volumeList.add(specifiedVolume1);
         volumeList.add(specifiedVolume);
@@ -249,7 +249,7 @@ public class ReaderServiceTest {
        Assert.assertEquals(2,booksRentedByReader1.size());
 
        //CleanUp
-       bookRepository.deleteAllInBatch();
+       volumeRepository.deleteAllInBatch();
        readerRepository.deleteAllInBatch();
 
 

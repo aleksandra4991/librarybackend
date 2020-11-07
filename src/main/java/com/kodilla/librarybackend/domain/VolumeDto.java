@@ -19,10 +19,9 @@ public class VolumeDto {
         this.genreId = genreId;
     }
 
-    public VolumeDto(String title,String authors, String genreId) {
+    public VolumeDto(String title,String authors) {
         this.title=title;
         this.authors=authors;
-        this.genreId = genreId;
     }
 
     public VolumeDto(Long bookId) {

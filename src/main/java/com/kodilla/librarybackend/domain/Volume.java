@@ -50,7 +50,7 @@ public class Volume {
         }
 
         public Volume build(){
-            return new Volume(title,authors,genre);
+            return new Volume(title,authors);
         }
     }
 
@@ -64,10 +64,9 @@ public class Volume {
         this.genre = genre;
     }
 
-    public Volume(String title,String authors , Genre genre) {
+    public Volume(String title,String authors) {
         this.title=title;
         this.authors=authors;
-        this.genre = genre;
     }
 
     public Volume(@NotNull Long id, String title,String authors, Cart cart, Genre genre, Reader reader) {

@@ -10,7 +10,7 @@ public class ReservationMapperTest {
     private ReservationMapper reservationMapper;
 
     @Autowired
-    private BookRepository bookRepository;
+    private volumeRepository volumeRepository;
 
     @Test
     public void mapToReservationDtoList() {
@@ -36,13 +36,13 @@ public class ReservationMapperTest {
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", genre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", genre);
 
-        bookRepository.save(book1);
-        bookRepository.save(book2);
+        volumeRepository.save(book1);
+        volumeRepository.save(book2);
 
         Long firstBookId = book1.getId();
-        Book firstBook = bookRepository.getOne(firstBookId);
+        Book firstBook = volumeRepository.getOne(firstBookId);
         Long secondtBookId = book2.getId();
-        Book secondBook = bookRepository.getOne(secondtBookId);
+        Book secondBook = volumeRepository.getOne(secondtBookId);
 
         bookDtos1.add(bookDto1);
         bookDtos2.add(bookDto2);
@@ -84,10 +84,10 @@ public class ReservationMapperTest {
         BookDto bookDto1 = new BookDto("Tytuł1", "Autor1", (long) 1958, "B19876", genreDto.toString());
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", genre);
 
-        bookRepository.save(book1);
+        volumeRepository.save(book1);
 
         Long firstBookId = book1.getId();
-        Book firstBook = bookRepository.getOne(firstBookId);
+        Book firstBook = volumeRepository.getOne(firstBookId);
 
         bookDtos1.add(bookDto1);
         books1.add(firstBook);
@@ -126,13 +126,13 @@ public class ReservationMapperTest {
         Book book1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", genre);
         Book book2 = new Book("Tytuł2", "Autor2", (long) 1959, "B19877", genre);
 
-        bookRepository.save(book1);
-        bookRepository.save(book2);
+        volumeRepository.save(book1);
+        volumeRepository.save(book2);
 
         Long firstBookId = book1.getId();
-        Book firstBook = bookRepository.getOne(firstBookId);
+        Book firstBook = volumeRepository.getOne(firstBookId);
         Long secondtBookId = book2.getId();
-        Book secondBook = bookRepository.getOne(secondtBookId);
+        Book secondBook = volumeRepository.getOne(secondtBookId);
 
         bookDtos1.add(bookDto1);
         bookDtos2.add(bookDto2);

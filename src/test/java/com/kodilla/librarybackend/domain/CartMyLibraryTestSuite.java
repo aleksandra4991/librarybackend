@@ -21,7 +21,7 @@ public class CartMyLibraryTestSuite {
     private CartRepository cartRepository;
 
     @Autowired
-    private BookRepository bookRepository;
+    private VolumeRepository volumeRepository;
 
     @Autowired
     private ReaderRepository readerRepository;
@@ -60,10 +60,9 @@ public class CartMyLibraryTestSuite {
     public void testAddBookWithSpecifiedIdToSpecifiedCart(){
 
         //Given
-        Genre testGenre = new Genre("Gatunek Testowy");
-        Volume specifiedVolume = new Volume("Tytuł1","Autor1",testGenre);
+        Volume specifiedVolume = new Volume("Tytuł1","Autor1");
         List<Volume> volumeList = new ArrayList<>();
-        bookRepository.save(specifiedVolume);
+        volumeRepository.save(specifiedVolume);
         volumeList.add(specifiedVolume);
         Cart specifiedCart = new Cart();
         specifiedCart.setBooks(volumeList);
@@ -80,7 +79,7 @@ public class CartMyLibraryTestSuite {
         Assert.assertTrue(specifiedCart.getBooks().size()==1);
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
     }
@@ -89,10 +88,9 @@ public class CartMyLibraryTestSuite {
     public void testRemoveBookWithSpecifiedIdFromSpecifiedCart(){
 
         //Given
-        Genre testGenre = new Genre("Gatunek Testowy");
-        Volume specifiedVolume = new Volume("Tytuł1","Autor1",testGenre);;
+        Volume specifiedVolume = new Volume("Tytuł1","Autor1");;
         List<Volume> volumeList = new ArrayList<>();
-        bookRepository.save(specifiedVolume);
+        volumeRepository.save(specifiedVolume);
         volumeList.add(specifiedVolume);
         Cart specifiedCart = new Cart();
         specifiedCart.setBooks(volumeList);
@@ -109,7 +107,7 @@ public class CartMyLibraryTestSuite {
         Assert.assertEquals(0,quantityOfBooksinCartAfterRemovingBook);
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
     }
@@ -118,9 +116,8 @@ public class CartMyLibraryTestSuite {
     public void testCreateReservationByCartId(){
 
         //Given
-        Genre testGenre = new Genre("Gatunek Testowy");
-        Volume specifiedVolume = new Volume("Tytuł1","Autor1",testGenre);
-        bookRepository.save(specifiedVolume);
+        Volume specifiedVolume = new Volume("Tytuł1","Autor1");
+        volumeRepository.save(specifiedVolume);
         List<Volume> volumeList = new ArrayList<>();
         volumeList.add(specifiedVolume);
 
@@ -141,7 +138,7 @@ public class CartMyLibraryTestSuite {
         Assert.assertNotEquals(null, foundReservation);
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         readerRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
         reservationRepository.deleteAllInBatch();

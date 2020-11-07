@@ -26,10 +26,10 @@ public class CartServiceTest {
     private CartService cartService;
 
     @Autowired
-    private BookService bookService;
+    private VolumeService volumeService;
 
     @Autowired
-    private BookRepository bookRepository;
+    private VolumeRepository volumeRepository;
 
     @Autowired
     private GenreRepository genreRepository;
@@ -70,8 +70,8 @@ public class CartServiceTest {
         Genre testGenre = new Genre("Gatunek Testowy");
         Volume volume1 = new Volume(testGenre.getId());
         Volume volume2 = new Volume(testGenre.getId());
-        bookRepository.save(volume1);
-        bookRepository.save(volume2);
+        volumeRepository.save(volume1);
+        volumeRepository.save(volume2);
 
         List<Volume> booksToAddToCart = new ArrayList<>();
         booksToAddToCart.add(volume1);
@@ -84,7 +84,7 @@ public class CartServiceTest {
         Assert.assertEquals(2,booksAlreadyAddedToCart.size());
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
 
@@ -100,8 +100,8 @@ public class CartServiceTest {
         Genre testGenre = new Genre("Gatunek Testowy");
         Volume volume1 = new Volume(testGenre.getId());
         Volume volume2 = new Volume(testGenre.getId());
-        bookRepository.save(volume1);
-        bookRepository.save(volume2);
+        volumeRepository.save(volume1);
+        volumeRepository.save(volume2);
 
         List<Volume> booksToAddToCart = new ArrayList<>();
         booksToAddToCart.add(volume1);
@@ -116,7 +116,7 @@ public class CartServiceTest {
         Assert.assertEquals(1,testCart.getBooks().size());
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
 
@@ -129,7 +129,7 @@ public class CartServiceTest {
         Genre testGenre = new Genre("Gatunek Testowy");
         Book specifiedBook1 = new Book("Tytuł1", "Autor1", (long) 1958, "B19876", testGenre);
         Book specifiedBook = new Book("Tytuł2", "Autor2", (long) 1958, "B19878", testGenre);
-        bookRepository.save(specifiedBook);
+        volumeRepository.save(specifiedBook);
         List<Book> bookList = new ArrayList<>();
         bookList.add(specifiedBook1);
         bookList.add(specifiedBook);
@@ -149,7 +149,7 @@ public class CartServiceTest {
         Assert.assertEquals("Aleksandra Radzikowska",createdReservation.getReader().getName());
 
         //CleanUp
-        bookRepository.deleteAllInBatch();
+        volumeRepository.deleteAllInBatch();
         genreRepository.deleteAllInBatch();
         cartRepository.deleteAllInBatch();
         reservationRepository.deleteAllInBatch();

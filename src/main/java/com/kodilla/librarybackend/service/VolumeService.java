@@ -3,8 +3,7 @@ package com.kodilla.librarybackend.service;
 import com.kodilla.librarybackend.adapter.VolumeAdapter;
 import com.kodilla.librarybackend.client.GoogleBooksClient;
 import com.kodilla.librarybackend.domain.Volume;
-import com.kodilla.librarybackend.domain.VolumeDto;
-import com.kodilla.librarybackend.repository.BookRepository;
+import com.kodilla.librarybackend.repository.VolumeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class BookService {
+public class VolumeService {
 
     @Autowired
     private GoogleBooksClient googleBooksClient;
 
     @Autowired
-    private BookRepository bookRepository;
+    private VolumeRepository volumeRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -33,40 +32,45 @@ public class BookService {
     @Autowired
     private VolumeAdapter volumeAdapter;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(VolumeService.class);
 
     private Set<Volume> volumes;
-    private static BookService bookService;
+    private static VolumeService volumeService;
 
-    public static BookService getInstance() {
-        if (bookService == null) {
-            bookService = new BookService();
+    public static VolumeService getInstance() {
+        if (volumeService == null) {
+            volumeService = new VolumeService();
         }
-        return bookService;
+        return volumeService;
     }
 
     public Set<Volume> getBooks() {
         return new HashSet<>(volumes);
     }
 
-    public List<Volume> fetchBooks(){
-        LOGGER.info("Fetching Google Books");
-        List<VolumeDto> googleBooksDto = googleBooksClient.getGoogleBooks();
-        return volumeAdapter.createVolumeList(googleBooksDto) ;
+    public List<Volume> fetchAllGoogleBooks(){
+        LOGGER.info("Fetching all Google Books");
+        return volumeAdapter.createAllGoogleVolumeList(googleBooksClient.getAllGoogleBooks());
+    }
+
+    public Volume fetchSpecifiedGoogleBook(String book){
+        LOGGER.info("Fetching Google Book with requested typo:"+ book);
+        //if(findVolumeByFilledText(titleOrAuthor).getId() != null) {
+            //List <Volume> foundVolumes = volumeService.findVolumeByFilledText(title, author);
+            //LOGGER.info("Found book with id:" + foundVolume.getId());
+        //}
+
+        return volumeAdapter.createSpecificVolume(googleBooksClient.getSpecifiedGoogleBooks(book)) ;
     }
 
     public void addBook(Volume volume) {
         this.volumes.add(volume);
     }
 
-    public List<Volume> getAllBooks() {
-        LOGGER.info("Getting all books");
-        return bookRepository.findAll();
-    }
 
     /*public List<Volume> getAvaiableToRentBooks(boolean rented) {
         LOGGER.info("Getting books avaiable to rent");
-        List<Volume> volumeList = bookRepository.findAll();
+        List<Volume> volumeList = volumeRepository.findAll();
         return volumeList.stream()
                 .filter(book -> book.isRented() == false)
                 .collect(Collectors.toList());
@@ -74,7 +78,7 @@ public class BookService {
 
     /*public List<Volume> getAlreadyRentedBooks(boolean rented) {
         LOGGER.info("Getting books already rented");
-        List<Volume> volumeList = bookRepository.findAll();
+        List<Volume> volumeList = volumeRepository.findAll();
         return volumeList.stream()
                 .filter(book -> book.isRented() == true)
                 .collect(Collectors.toList());
@@ -82,43 +86,35 @@ public class BookService {
 
     public List<Volume> getBooksOfDefiniedTitleAndAuthor(String title, String authors) {
         LOGGER.info("Getting books of:"+authors);
-        List<Volume> volumeList = bookRepository.findAll();
+        List<Volume> volumeList = volumeRepository.findAll();
         return volumeList.stream()
                 .filter(book -> book.getTitle() == title)
                 .filter(book -> book.getAuthors() == authors)
                 .collect(Collectors.toList());
     }
 
-    /*public List<Book> findByTitle(String title) {
-        LOGGER.info("Getting books by title,here:"+title);
-        List<Book> books = bookRepository.findAll();
-        return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toList());
-    }*/
-
     public Volume getBook(final Long id){
         LOGGER.info("Getting book with id:"+id.toString());
-        return bookRepository.getOne(id);
+        return volumeRepository.getOne(id);
     }
 
     @Transactional
     public Volume createBook(final Volume volume){
         LOGGER.info("Creating new book");
-        return bookRepository.save(volume);
+        return volumeRepository.save(volume);
     }
 
    /*public void updateBook(final Long id){
         LOGGER.info("Start of updating book with id:"+id.toString());
-        bookRepository.updateBookSetRentedForId(true,id);
+        volumeRepository.updateBookSetRentedForId(true,id);
         Book book = getBook(id);
         entityManager.refresh(book);
         LOGGER.info("Updating book with id:"+id.toString()+" finished");
     }*/
 
-   @Transactional
+    @Transactional
     public void deleteBook(final Long id){
         LOGGER.info("Deleting book with id:"+id.toString());
-        bookRepository.deleteById(id);
+        volumeRepository.deleteById(id);
     }
-
 }
-

@@ -2,7 +2,6 @@ package com.kodilla.librarybackend.mapper;
 
 import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.domain.VolumeDto;
-import com.kodilla.librarybackend.domain.Genre;
 import com.kodilla.librarybackend.repository.GenreRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,26 +23,24 @@ import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 public class VolumeMapperTest {
 
     @Autowired
-    private BookMapper bookMapper;
+    private VolumeMapper volumeMapper;
 
     @Autowired
     private GenreRepository genreRepository;
 
+    private static final Volume volume1 = new Volume("Dawca","Lois Lowry");
+    private static final Volume volume2 = new Volume("XXX","X Y Z");
+    private static final VolumeDto volumeDto1 = new VolumeDto("Dawca","Lois Lowry");
+    private static final VolumeDto volumeDto2 = new VolumeDto("XXX","X Y Z");
+
+    private static final List<Volume> volumeList = new ArrayList<>(Arrays.asList(volume1,volume2));
+    private static final List<VolumeDto> volumeDtoList = new ArrayList<>(Arrays.asList(volumeDto1,volumeDto2));
+
     @Test
     public void mapToBookDtoList() {
 
-        Genre genre = new Genre("Gatunek Testowy");
-        genreRepository.save(genre);
 
-        Volume volume1 = new Volume(genre.getId());
-        Volume volume2 = new Volume(genre.getId());
-        List<Volume> volumeList = new ArrayList<>(Arrays.asList(volume1, volume2));
-
-        VolumeDto volumeDto1 = new VolumeDto("Dawca","Lois Lowry", genre.getId().toString());
-        VolumeDto volumeDto2 = new VolumeDto("XXX","X Y Z",genre.getId().toString());
-        List<VolumeDto> volumeDtos = new ArrayList<>(Arrays.asList(volumeDto1, volumeDto2));
-
-        assertThat(volumeDtos, sameBeanAs(bookMapper.mapToBookDtoList(volumeList)));
+        assertThat(volumeDtoList, sameBeanAs(volumeMapper.mapToBookDtoList(volumeList)));
 
         //Clean Up
         genreRepository.deleteAllInBatch();
@@ -52,13 +49,7 @@ public class VolumeMapperTest {
     @Test
     public void mapToBookDto() {
 
-        Genre genre = new Genre("Gatunek Testowy");
-        genreRepository.save(genre);
-
-        Volume volume1 = new Volume(genre.getId());
-        VolumeDto volumeDto1 = new VolumeDto("XXX","X Y Z", genre.getId().toString());
-
-        assertThat(volumeDto1,sameBeanAs(bookMapper.mapToBookDto(volume1)));
+        assertThat(volumeDto1,sameBeanAs(volumeMapper.mapToBookDto(volume1)));
 
         //Clean Up
         genreRepository.deleteAllInBatch();
@@ -67,13 +58,7 @@ public class VolumeMapperTest {
     @Test
     public void mapToBook() {
 
-        Genre genre = new Genre("Gatunek Testowy");
-        genreRepository.save(genre);
-
-        Volume volume1 = new Volume(genre.getId());
-        VolumeDto volumeDto1 = new VolumeDto("XXX","X Y Z", genre.getId().toString());
-
-        assertThat(volume1,sameBeanAs(bookMapper.mapToBook(volumeDto1)));
+        assertThat(volume1,sameBeanAs(volumeMapper.mapToBook(volumeDto1)));
 
         //Clean Up
         genreRepository.deleteAllInBatch();
