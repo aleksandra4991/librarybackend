@@ -1,8 +1,9 @@
 package com.kodilla.librarybackend.service;
 
-import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.domain.Reader;
 import com.kodilla.librarybackend.domain.Reservation;
+import com.kodilla.librarybackend.domain.Volume;
+import com.kodilla.librarybackend.repository.CartRepository;
 import com.kodilla.librarybackend.repository.ReaderRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -24,6 +25,9 @@ public class ReaderService {
 
     @Autowired
     private ReaderRepository readerRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     @PersistenceContext
     private EntityManager entityManager;

@@ -60,7 +60,7 @@ public class ReaderControllerTest {
         when(readerService.loginReader(reader.getEmailAddress(), reader.getPassword())).thenReturn(true);
 
         //When & Then
-        mockMvc.perform(get("/myLibrary/reader/login?reader=reader").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(get("/myLibrary/reader/login?reader=reader&cartId=1").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .header("emailAddress", reader.getEmailAddress())
                 .header("password", reader.getPassword()))

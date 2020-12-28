@@ -26,9 +26,18 @@ public class Cart {
     @OneToMany(targetEntity = Volume.class, mappedBy = "cart",
             cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private List<Volume> volumes = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "READER_ID")
+    private Reader reader;
+
     private LocalDate cartUpdate;
 
     public Cart() {
+    }
+
+    public Cart(@NotNull Long id) {
+        this.id = id;
     }
 
     public Cart(List<Volume> volumes) {

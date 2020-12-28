@@ -8,15 +8,15 @@ public class GoogleBooksConfiguration {
     @Value("${googleBooks.endpoint}")
     private String endpoint;
 
-    @Value("${googleBooks.api.key}")
-    private String apiKey;
+    @Value("${key}")
+    private String key;
 
     public String getEndpoint() {
         return endpoint;
     }
 
-    public String getApiKey() {
-        return apiKey;
+    public String getKey() {
+        return key;
     }
 
 }

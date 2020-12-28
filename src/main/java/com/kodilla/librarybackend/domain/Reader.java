@@ -35,6 +35,10 @@ public class Reader {
             fetch = FetchType.LAZY)
     private List<Volume> volumeList = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CART_ID")
+    private Cart cart;
+
     public Reader() {
     }
 
@@ -155,6 +159,15 @@ public class Reader {
 
     public void setBookList(List<Volume> volumeList) {
         this.volumeList = volumeList;
+    }
+
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     @Override

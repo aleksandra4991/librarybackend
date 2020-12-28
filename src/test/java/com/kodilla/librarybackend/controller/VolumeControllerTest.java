@@ -25,12 +25,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(VolumeController.class)
 public class VolumeControllerTest {
 
-    private final static String title = new String("The Giver");
-    private final static String authors = new String("Lois Lowry");
-    private final static Volume VOLUME_1 = new Volume(title,authors);
-    private final static VolumeDto VOLUME_DTO_1 = new VolumeDto(title,authors);
+
     private static Gson gson = new Gson();
-    private final static String jsonContent = gson.toJson(VOLUME_DTO_1);
+    private static final Volume volume = new Volume("Title1","Author1","01012020","xxxx");
+    private static final VolumeDto volumeDto = new VolumeDto("Title2","Author2", "16092010","mmm");
+    private final static String jsonContent = gson.toJson(volumeDto);
 
     @Autowired
     private MockMvc mockMvc;
@@ -43,9 +42,9 @@ public class VolumeControllerTest {
 
     @Test
     public void getBooktAndCreateBookTest() throws Exception {
-        String jsonContent = gson.toJson(VOLUME_DTO_1);
-        when(volumeService.getBook(anyLong())).thenReturn(VOLUME_1);
-        when(volumeMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(VOLUME_DTO_1);
+        String jsonContent = gson.toJson(volumeDto);
+        when(volumeService.getBook(anyLong())).thenReturn(volume);
+        when(volumeMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(volumeDto);
 
         mockMvc.perform(get("/myLibrary/book?bookId=1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -54,8 +53,8 @@ public class VolumeControllerTest {
 
     @Test
     public void createBookTest() throws Exception {
-        when(volumeMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(VOLUME_DTO_1);
-        when(volumeService.createBook(ArgumentMatchers.any())).thenReturn(VOLUME_1);
+        when(volumeMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(volumeDto);
+        when(volumeService.createBook(ArgumentMatchers.any())).thenReturn(volume);
 
         mockMvc.perform(post("/myLibrary/book")
                 .contentType(MediaType.APPLICATION_JSON)

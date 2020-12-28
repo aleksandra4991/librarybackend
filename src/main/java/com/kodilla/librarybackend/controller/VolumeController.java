@@ -23,15 +23,20 @@ public class VolumeController {
     @Autowired
     private VolumeMapper volumeMapper;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/books")
-    public List <VolumeDto> getAllGoogleBooks(){
-        return volumeMapper.mapToBookDtoList(volumeService.fetchAllGoogleBooks());
+    @RequestMapping(method = RequestMethod.GET, value = "/books/title")
+    public List <VolumeDto> getSpecifiedGoogleBook(@RequestHeader("title")String title){
+        return volumeMapper.mapToBookDtoList(volumeService.fetchSpecifiedGoogleBook(title));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/books/title/author")
-    public VolumeDto getSpecifiedGoogleBook(@RequestHeader("book")String book){
-        return volumeMapper.mapToBookDto(volumeService.fetchSpecifiedGoogleBook(book));
+    /*@RequestMapping(method = RequestMethod.PUT, value = " /book/putInCart")
+    public CartBookAdderDto putFoundBookInTheCart(@RequestBody VolumeDto volumeDto, @PathVariable String book, @PathVariable Long cartId){
+        return volumeService.putFoundVolumeInCart(volumeMapper.mapToBook(volumeDto),book,cartId);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/book/alreadyInCart")
+    public VolumeDto getVolumePutIntoCart(@RequestParam CartBookAdderDto cartBookAdderDto){
+        return volumeService.getBookPutInCart(cartBookAdderDto);
+    }*/
 
     @RequestMapping(method = RequestMethod.GET, value = "/book")
     public VolumeDto getBook(@RequestParam Long bookId) throws VolumeNotFoundException {

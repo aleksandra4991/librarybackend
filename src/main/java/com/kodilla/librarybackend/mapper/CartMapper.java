@@ -1,11 +1,9 @@
 package com.kodilla.librarybackend.mapper;
 
-import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.domain.CartBookAdderDto;
+import com.kodilla.librarybackend.domain.Volume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class CartMapper {
@@ -17,8 +15,8 @@ public class CartMapper {
         return cartBookAdderDto.getCartId();
     }
 
-    public List<Volume> mapToBooksListFromCartAdderDto(CartBookAdderDto cartBookAdderDto){
-        return volumeMapper.mapToBookList(cartBookAdderDto.getBookDtoList());
+    public Volume mapToBookFromCartAdderDto(CartBookAdderDto cartBookAdderDto){
+        return volumeMapper.mapToBook(cartBookAdderDto.getBookDto());
     }
 
 
