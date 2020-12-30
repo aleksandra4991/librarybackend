@@ -28,10 +28,10 @@ public class VolumeMapperTest {
     @Autowired
     private GenreRepository genreRepository;
 
-    private static final Volume volume1 = new Volume("Dawca","Lois Lowry");
-    private static final Volume volume2 = new Volume("XXX","X Y Z");
-    private static final VolumeDto volumeDto1 = new VolumeDto("Dawca","Lois Lowry");
-    private static final VolumeDto volumeDto2 = new VolumeDto("XXX","X Y Z");
+    private static final Volume volume1 = new Volume("Title1","Author1","01012020","xxxx");
+    private static final Volume volume2 = new Volume("Title2","Author2", "16092010","mmm");
+    private static final VolumeDto volumeDto1 = new VolumeDto("Title1","Author1","01012020","xxxx");
+    private static final VolumeDto volumeDto2 = new VolumeDto("Title2","Author2", "16092010","mmm");
 
     private static final List<Volume> volumeList = new ArrayList<>(Arrays.asList(volume1,volume2));
     private static final List<VolumeDto> volumeDtoList = new ArrayList<>(Arrays.asList(volumeDto1,volumeDto2));

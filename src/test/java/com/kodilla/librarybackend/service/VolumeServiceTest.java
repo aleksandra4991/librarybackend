@@ -36,9 +36,9 @@ public class VolumeServiceTest {
 
         //Given
 
-        Volume volume1 = new Volume("Dawca","Lois Lowry");
-        Volume volume2 = new Volume("xxx","yyy");
-        Volume volume3 = new Volume("i","ii");
+        Volume volume1 = new Volume("Dawca","Lois Lowry","09081980","description");
+        Volume volume2 = new Volume("xxx","yyy", "zzz" ,"000");
+        Volume volume3 = new Volume("i","ii","iii", "iiii");
 
         //When
         volumeService.createBook(volume1);

@@ -1,8 +1,8 @@
 package com.kodilla.librarybackend.controller;
 
-import com.kodilla.librarybackend.domain.VolumeDto;
 import com.kodilla.librarybackend.domain.ReaderDto;
 import com.kodilla.librarybackend.domain.ReservationDto;
+import com.kodilla.librarybackend.domain.VolumeDto;
 import com.kodilla.librarybackend.mapper.ReaderMapper;
 import com.kodilla.librarybackend.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +30,12 @@ public class ReaderController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/reader/login")
-    public Boolean login(@RequestHeader("emailAddress")String emailAddress,@RequestHeader("password")String password ) {
+    public Boolean login(@RequestHeader("emailAddress")String emailAddress,@RequestHeader("password")String password) {
         return (readerService.loginReader(emailAddress,password));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/reader/emailAddress/password")
-    public ReaderDto getReaderByEmailAddressAndPassword(@RequestHeader("emailAddress")String emailAddress,@RequestHeader("password")String password ) {
+    public ReaderDto getReaderByEmailAddressAndPassword(@RequestHeader("emailAddress")String emailAddress, @RequestHeader("password")String password) {
         return readerMapper.mapToReaderDto(readerService.findReaderByLoginData(emailAddress,password)); }
 
     @RequestMapping(method = RequestMethod.GET, value = "/reader/{uuid}")

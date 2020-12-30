@@ -22,12 +22,14 @@ public class VolumeAdapter {
     public List<Volume> createAllGoogleVolumeList(List<VolumeDto> volumeDtoList){
         LOGGER.info("Google books adapter starts...");
         return volumeDtoList.stream().map(v -> {
-                    return new Volume(v.getTitle(),v.getAuthors());
+                    return new Volume(v.getTitle(),v.getAuthors(),v.getPublishedDate(),v.getDescription());
         }).collect(Collectors.toList());
     }
 
-    public Volume createSpecificVolume(VolumeDto volumeDto){
-        LOGGER.info("Specific google book adapter starts...");
-                    return new Volume(volumeDto.getBookId());
+    public List <Volume> createSpecificVolume(List <VolumeDto> volumeDtoList){
+        LOGGER.info("Specific google book adapter is looking for requested book");
+        return volumeDtoList.stream().map(v -> {
+            return new Volume(v.getTitle(),v.getAuthors(),v.getPublishedDate(),v.getDescription());
+        }).collect(Collectors.toList());
     }
 }

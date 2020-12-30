@@ -2,20 +2,22 @@ package com.kodilla.librarybackend.client;
 
 import com.kodilla.librarybackend.configuration.GoogleBooksConfiguration;
 import com.kodilla.librarybackend.domain.VolumeDto;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
+import java.io.*;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Component
 public class GoogleBooksClient {
@@ -29,48 +31,91 @@ public class GoogleBooksClient {
     private GoogleBooksConfiguration googleBooksConfiguration;
 
 
-    public List<VolumeDto> getAllGoogleBooks() {
-        LOGGER.info("Getting ALL Google books started");
+    public List <VolumeDto> getSpecifiedGoogleBooks(String title) {
+
+        String stringUrl;
+        String auth = "";
+        String titl;
+        String publishedDate;
+        String description;
+
+        List <VolumeDto> volumeDtoList = new ArrayList<>();
 
         try {
+            UriComponents uri = UriComponentsBuilder
+                    .fromHttpUrl(googleBooksConfiguration.getEndpoint() + "?q={title}&fields=items%28volumeInfo%28title,authors,publishedDate,description,categories,imageLinks%29%29&key=" + googleBooksConfiguration.getKey())
+                    .buildAndExpand(title);
 
-            LOGGER.info("Building URI of ALL GoogleBooks API started.");
-            URI url = UriComponentsBuilder.fromHttpUrl(googleBooksConfiguration.getEndpoint()).build().encode().toUri();
-            LOGGER.info("All Google Books URI builded");
+            stringUrl = uri.toUriString();
+            JSONObject jsonObject = readJsonFromUrl(stringUrl);
+            JSONArray items = jsonObject.getJSONArray("items");
 
-            VolumeDto[] boardResponse = restTemplate.getForObject(url, VolumeDto[].class);
-            LOGGER.info("Getting All Google Books finished successfully. List size: " + Arrays.stream(boardResponse).collect(Collectors.toList()).size());
-            return Stream.of(boardResponse).collect(Collectors.toList());
+
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject volumeRecord = items.getJSONObject(i);
+                JSONObject volumeInfo = volumeRecord.getJSONObject("volumeInfo");
+                titl = volumeInfo.getString("title");
+                JSONArray authors = new JSONArray();
+                authors = volumeInfo.getJSONArray("authors");
+                for (int j = 0; j < authors.length(); j++) {
+                    auth += authors.getString(j) + ", ";
+                }
+
+                publishedDate = volumeInfo.getString("publishedDate");
+                String noDescr = "No description";
+                description = volumeInfo.getString("description");
+                if (description == null) {
+                    description = noDescr;
+                }
+                JSONObject image = volumeInfo.getJSONObject("imageLinks");
+
+
+                VolumeDto volumeDto = new VolumeDto();
+                volumeDto.setTitle(titl);
+                volumeDto.setAuthors(auth);
+                auth = "";
+                volumeDto.setPublishedDate(publishedDate);
+                volumeDto.setDescription(description);
+                volumeDtoList.add(volumeDto);
+
+            }
+
+
         } catch (RuntimeException e) {
             LOGGER.error(e.getMessage());
-
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOError e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return new ArrayList<VolumeDto>();
+
+        return volumeDtoList;
     }
 
-    public VolumeDto getSpecifiedGoogleBooks(String book) {
-        LOGGER.info("Getting Specific Google books started");
 
-        try {
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-            httpHeaders.set("book", book);
-            HttpEntity<String> entity = new HttpEntity<String>("parameters", httpHeaders);
-
-            LOGGER.info("Building URI of Specific GoogleBook API started.");
-            URI url = UriComponentsBuilder.fromHttpUrl(googleBooksConfiguration.getEndpoint() + "?q=" + entity.getHeaders()).build().encode().toUri(); /*+ "&kyes&key=" + googleBooksConfiguration.getApiKey())*/
-            LOGGER.info("URI builded");
-
-            ResponseEntity<VolumeDto> respEntity = (restTemplate.exchange(url, HttpMethod.GET, entity, VolumeDto.class));
-            LOGGER.info("Getting Specified Google Book finished successfully.");
-            return respEntity.getBody();
-
-        } catch (RuntimeException e) {
-            LOGGER.error(e.getMessage());
-            return new VolumeDto();
-
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
         }
+        return sb.toString();
+    }
 
+    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+        try (InputStream is = new URL(url).openStream()) {
+            try {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+                String jsonText = readAll(rd);
+                JSONObject jsonObject = new JSONObject(jsonText);
+                final JSONObject jsonObject1 = jsonObject;
+                return jsonObject1;
+            } finally {
+                is.close();
+            }
+        }
     }
 }
 

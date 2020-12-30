@@ -30,6 +30,7 @@ ext {
 
 dependencies {
 
+    compile group: 'org.springframework', name: 'spring-webflux', version: '5.2.7.RELEASE'
     compile ('org.springframework.boot:spring-boot-starter-web')
     implementation ('org.springframework.boot:spring-boot-starter-jdbc')
     compile ('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -46,7 +47,7 @@ dependencies {
     compile 'org.hibernate:hibernate-java8'
     compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
     compile 'commons-validator:commons-validator:1.6'
-    compile 'com.google.apis:google-api-services-books:v1-rev20200717-1.30.10'
+    compile group: 'org.json', name: 'json', version: '20090211'
 
 
 }

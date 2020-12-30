@@ -19,30 +19,30 @@ public class VolumeMapper {
     public List<VolumeDto> mapToBookDtoList(final List<Volume> volumes) {
         List<VolumeDto> volumeDtos = new ArrayList<>();
         for (Volume volume : volumes) {
-            VolumeDto volumeDto = new VolumeDto(volume.getTitle(),volume.getAuthors());
-            volumeDto.setBookId(volume.getId());
+            VolumeDto volumeDto = new VolumeDto(volume.getTitle(),volume.getAuthors(),volume.getPublishedDate(),volume.getDescription());
+            volumeDto.setId(volume.getId());
             volumeDtos.add(volumeDto);
         }
         return volumeDtos;
     }
 
     public VolumeDto mapToBookDto(Volume volume) {
-        VolumeDto volumeDto = new VolumeDto(volume.getTitle(),volume.getAuthors());
+        VolumeDto volumeDto = new VolumeDto(volume.getTitle(),volume.getAuthors(),volume.getPublishedDate(),volume.getDescription());
         return volumeDto;
     }
 
     public Volume mapToBook(VolumeDto volumeDto) {
-        if(volumeDto.getBookId() != null){
-            return volumeRepository.getOne(volumeDto.getBookId());
+        if(volumeDto.getId() != null){
+            return volumeRepository.getOne(volumeDto.getId());
         } else {
-            return new Volume(volumeDto.getTitle(),volumeDto.getAuthors());
+            return new Volume(volumeDto.getTitle(),volumeDto.getAuthors(),volumeDto.getPublishedDate(),volumeDto.getDescription());
         }
 
     }
 
     public List<Volume> mapToBookList(final List<VolumeDto> volumeDtos) {
         return volumeDtos.stream()
-                .map(b -> volumeRepository.findById(b.getBookId()).get())
+                .map(b -> volumeRepository.findById(b.getId()).get())
                 .collect(Collectors.toList());
     }
 }

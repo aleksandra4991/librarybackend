@@ -1,13 +1,13 @@
 package com.kodilla.librarybackend.controller;
 
-import com.kodilla.librarybackend.domain.*;
+import com.kodilla.librarybackend.domain.Cart;
+import com.kodilla.librarybackend.domain.CartBookRemoverDto;
+import com.kodilla.librarybackend.domain.ReservationCreationDto;
 import com.kodilla.librarybackend.mapper.CartMapper;
 import com.kodilla.librarybackend.mapper.VolumeMapper;
 import com.kodilla.librarybackend.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -28,12 +28,6 @@ public class CartController {
     @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart")
     public void createEmptyCart(){
         cartService.createEmptyCart(new Cart());
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/books/placed",consumes = APPLICATION_JSON_VALUE)
-    public List<VolumeDto> addBookWithSpecifiedIdToSpecifiedCart (@RequestBody CartBookAdderDto cartBookAdderDto) {
-        return volumeMapper.mapToBookDtoList(cartService.addListOfBooksToSpecifiedCart((cartMapper.mapToIdFromCartAdderDto(cartBookAdderDto))
-                , cartMapper.mapToBooksListFromCartAdderDto(cartBookAdderDto)));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "books/deleted", consumes = APPLICATION_JSON_VALUE)

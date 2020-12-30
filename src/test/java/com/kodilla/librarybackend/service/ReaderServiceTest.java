@@ -1,6 +1,7 @@
 package com.kodilla.librarybackend.service;
 
 import com.kodilla.librarybackend.domain.*;
+import com.kodilla.librarybackend.mapper.CartMapper;
 import com.kodilla.librarybackend.repository.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,6 +39,9 @@ public class ReaderServiceTest {
 
     @Autowired
     private CartRepository cartRepository;
+
+    @Autowired
+    private CartMapper cartMapper;
 
     @Autowired
     private  CartService cartService;

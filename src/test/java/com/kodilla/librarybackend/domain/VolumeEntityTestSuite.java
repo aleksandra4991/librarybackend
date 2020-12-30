@@ -28,9 +28,9 @@ public class VolumeEntityTestSuite {
     public void getAllBooks() {
 
         //Given
-        Volume volume1 = new Volume("Title1","Author1");
-        Volume volume2 = new Volume("Title2","Author2");
-        Volume volume3 = new Volume("Title3","Author3");
+        Volume volume1 = new Volume("Title1","Author1","01012020","xxxx");
+        Volume volume2 = new Volume("Title2","Author2", "16092010","mmm");
+        Volume volume3 = new Volume("Title3","Author3", "05061980","tytyty");
         int booksCounterBeforeSave = volumeRepository.findAll().size();
         volumeRepository.save(volume1);
         volumeRepository.save(volume2);
@@ -53,9 +53,9 @@ public class VolumeEntityTestSuite {
     public void getAvaiableToRentBooks (){
 
         //Given
-        Volume volume1 = new Volume("title1", "author1");
-        Volume volume2 = new Volume("title2", "author2");
-        Volume volume3 = new Volume("title3", "author3");
+        Volume volume1 = new Volume("Title1","Author1","01012020","xxxx");
+        Volume volume2 = new Volume("Title2","Author2", "16092010","mmm");
+        Volume volume3 = new Volume("Title3","Author3", "05061980","tytyty");
 
         volumeRepository.save(volume1);
         volumeRepository.save(volume2);
@@ -79,8 +79,8 @@ public class VolumeEntityTestSuite {
 
 
         //Then
-        Assert.assertEquals("title1",titleOfBook1);
-        Assert.assertEquals("author2",authorOfBook2);
+        Assert.assertEquals("Title1",titleOfBook1);
+        Assert.assertEquals("Author2",authorOfBook2);
 
 
         //Clean Up
@@ -97,9 +97,9 @@ public class VolumeEntityTestSuite {
     public void testGetBooksOfDefiniedAuthor(){
 
         //Given
-        Volume volume1 = new Volume("title1", "author1");
-        Volume volume2 = new Volume("title2", "author2");
-        Volume volume3 = new Volume("title3", "author3");
+        Volume volume1 = new Volume("Title1","Author1","01012020","xxxx");
+        Volume volume2 = new Volume("Title2","Author2", "16092010","mmm");
+        Volume volume3 = new Volume("Title3","Author3", "05061980","tytyty");
 
         volumeRepository.save(volume1);
         volumeRepository.save(volume2);
@@ -123,9 +123,8 @@ public class VolumeEntityTestSuite {
     public void testGetBook(){
 
         //Given
-        Genre testGenre = new Genre("gatunek Testowy");
-        Volume volume1 = new Volume("Title","authors");
 
+        Volume volume1 = new Volume("Title1","Author1","01012020","xxxx");
         volumeRepository.save(volume1);
 
         //When

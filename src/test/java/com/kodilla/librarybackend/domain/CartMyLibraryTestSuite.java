@@ -60,7 +60,7 @@ public class CartMyLibraryTestSuite {
     public void testAddBookWithSpecifiedIdToSpecifiedCart(){
 
         //Given
-        Volume specifiedVolume = new Volume("Tytuł1","Autor1");
+        Volume specifiedVolume = new Volume("Tytuł1","Autor1","publishedDate1","description1");
         List<Volume> volumeList = new ArrayList<>();
         volumeRepository.save(specifiedVolume);
         volumeList.add(specifiedVolume);
@@ -88,7 +88,7 @@ public class CartMyLibraryTestSuite {
     public void testRemoveBookWithSpecifiedIdFromSpecifiedCart(){
 
         //Given
-        Volume specifiedVolume = new Volume("Tytuł1","Autor1");;
+        Volume specifiedVolume = new Volume("Tytuł1","Autor1","publishedDate1","description1");
         List<Volume> volumeList = new ArrayList<>();
         volumeRepository.save(specifiedVolume);
         volumeList.add(specifiedVolume);
@@ -100,7 +100,7 @@ public class CartMyLibraryTestSuite {
         Cart savedSpecifiedCart = cartRepository.getOne(idOfSpecifiedCart);
 
         //When
-        savedSpecifiedCart.getBooks().remove(0);
+        savedSpecifiedCart.getBooks().remove(specifiedVolume);
         int quantityOfBooksinCartAfterRemovingBook = savedSpecifiedCart.getBooks().size();
 
         //Then
@@ -116,7 +116,7 @@ public class CartMyLibraryTestSuite {
     public void testCreateReservationByCartId(){
 
         //Given
-        Volume specifiedVolume = new Volume("Tytuł1","Autor1");
+        Volume specifiedVolume = new Volume("Tytuł1","Autor1","publishedDate1","description1");
         volumeRepository.save(specifiedVolume);
         List<Volume> volumeList = new ArrayList<>();
         volumeList.add(specifiedVolume);
