@@ -58,7 +58,7 @@ public class ReaderServiceTest {
     public void testSaveReader(){
 
         //Given
-        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com",true,"XyZ198@89");
+        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com",true,"XyZ198@89","READER","READER_PERMISSIONS");
         readerRepository.save(reader1);
 
         //When
@@ -75,7 +75,7 @@ public class ReaderServiceTest {
     public void testNotSaveReaderWrongEmail(){
 
         //Given
-        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXXgmail.com",true,"XyZ198@89");
+        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXXgmail.com",true,"XyZ198@89","READER","READER_PERMISSIONS");
         readerRepository.save(reader1);
 
         //When
@@ -90,7 +90,7 @@ public class ReaderServiceTest {
     public void testNotSaveReaderWrongPaasword(){
 
         //Given
-        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com",true,"XXX");
+        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com",true,"XXX","READER","READER_PERMISSIONS");
         readerRepository.save(reader1);
 
         //When
@@ -105,7 +105,7 @@ public class ReaderServiceTest {
     public void testLoginReader(){
 
         //Given
-        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com",true,"XyZ198@89");
+        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com",true,"XyZ198@89","READER","READER_PERMISSIONS");
         readerService.saveReader(reader1);
 
         //When
@@ -122,7 +122,7 @@ public class ReaderServiceTest {
     public void testNotLoginReaderWrongEmailAnDPassword(){
 
         //Given
-        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@@gmail.com",true,"XyZ198@89");
+        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@@gmail.com",true,"XyZ198@89","READER","READER_PERMISSIONS");
         readerService.saveReader(reader1);
 
         //When
@@ -177,7 +177,7 @@ public class ReaderServiceTest {
     public void testFindReaderByLoginData () {
 
         //Given
-        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com",true,"XyZ198@89");
+        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@gmail.com",true,"XyZ198@89","READER","READER_PERMISSIONS");
         readerService.saveReader(reader1);
 
         //When
@@ -195,7 +195,7 @@ public class ReaderServiceTest {
     public void testGetReservationsOfSpecifiedReader(){
 
         //Given
-        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@@gmail.com",true,"XyZ198@89");
+        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@@gmail.com",true,"XyZ198@89","READER","READER_PERMISSIONS");
         readerRepository.save(reader1);
         Genre testGenre = new Genre("Gatunek Testowy");
         Volume specifiedVolume1 = new Volume(testGenre.getId());
@@ -234,7 +234,7 @@ public class ReaderServiceTest {
     public void testGetRentedBooksOfSpecifiedReader(){
 
         //Given
-        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@@gmail.com",true,"XyZ198@89");
+        Reader reader1 = new Reader("Aleksandra Radzikowska","792333985","aradzikowskaXXX@@gmail.com",true,"XyZ198@89","READER","READER_PERMISSIONS");
         readerRepository.save(reader1);
         Genre testGenre = new Genre("Gatunek Testowy");
         Volume specifiedVolume1 = new Volume(testGenre.getId());

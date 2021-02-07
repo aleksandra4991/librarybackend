@@ -16,7 +16,6 @@ public class Volume {
     private String authors;
     private String publishedDate;
     private String description;
-    private String imageUrl;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CART_ID")

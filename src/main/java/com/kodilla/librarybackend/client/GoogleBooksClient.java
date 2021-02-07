@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
@@ -24,9 +25,11 @@ public class GoogleBooksClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GoogleBooksClient.class);
 
+    @Lazy
     @Autowired
     private RestTemplate restTemplate;
 
+    @Lazy
     @Autowired
     private GoogleBooksConfiguration googleBooksConfiguration;
 
@@ -117,6 +120,7 @@ public class GoogleBooksClient {
             }
         }
     }
+
 }
 
 

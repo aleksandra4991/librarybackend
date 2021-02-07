@@ -6,6 +6,7 @@ import com.kodilla.librarybackend.exceptions.VolumeNotFoundException;
 import com.kodilla.librarybackend.mapper.VolumeMapper;
 import com.kodilla.librarybackend.service.VolumeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +18,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/myLibrary")
 public class VolumeController {
 
+    @Lazy
     @Autowired
     private VolumeService volumeService;
 
+    @Lazy
     @Autowired
     private VolumeMapper volumeMapper;
 
@@ -28,12 +31,7 @@ public class VolumeController {
         return volumeMapper.mapToBookDtoList(volumeService.fetchSpecifiedGoogleBook(title));
     }
 
-    /*@RequestMapping(method = RequestMethod.PUT, value = " /book/putInCart")
-    public CartBookAdderDto putFoundBookInTheCart(@RequestBody VolumeDto volumeDto, @PathVariable String book, @PathVariable Long cartId){
-        return volumeService.putFoundVolumeInCart(volumeMapper.mapToBook(volumeDto),book,cartId);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/book/alreadyInCart")
+        /*@RequestMapping(method = RequestMethod.GET, value = "/book/alreadyInCart")
     public VolumeDto getVolumePutIntoCart(@RequestParam CartBookAdderDto cartBookAdderDto){
         return volumeService.getBookPutInCart(cartBookAdderDto);
     }*/

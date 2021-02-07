@@ -40,8 +40,9 @@ public class VolumeControllerTest {
     @MockBean
     private VolumeMapper volumeMapper;
 
+
     @Test
-    public void getBooktAndCreateBookTest() throws Exception {
+    public void getBookTest() throws Exception {
         String jsonContent = gson.toJson(volumeDto);
         when(volumeService.getBook(anyLong())).thenReturn(volume);
         when(volumeMapper.mapToBookDto(ArgumentMatchers.any())).thenReturn(volumeDto);

@@ -92,7 +92,7 @@ public class ReaderControllerTest {
     public void getReaderByUUIDTest() throws Exception {
 
         //Given
-        Reader reader = new Reader("Kamil", "82738292", "mammanjud@gmailo.com", true,"Fjsid876%");
+        Reader reader = new Reader("Kamil", "82738292", "mammanjud@gmailo.com", true,"Fjsid876%","READER","READER_PERMISSIONS");
         reader.setId(3L);
         reader.setUuid("3Lxyz");
 

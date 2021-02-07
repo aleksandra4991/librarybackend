@@ -4,6 +4,7 @@ import com.kodilla.librarybackend.domain.Genre;
 import com.kodilla.librarybackend.domain.GenreDto;
 import com.kodilla.librarybackend.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 @Component
 public class GenreMapper {
 
+    @Lazy
     @Autowired
     private GenreRepository genreRepository;
 

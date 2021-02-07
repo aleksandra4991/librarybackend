@@ -3,6 +3,7 @@ package com.kodilla.librarybackend.mapper;
 import com.kodilla.librarybackend.domain.*;
 import com.kodilla.librarybackend.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import static java.lang.String.valueOf;
 @Component
 public class ReservationMapper {
 
+    @Lazy
     @Autowired
     private ReservationRepository reservationRepository;
 

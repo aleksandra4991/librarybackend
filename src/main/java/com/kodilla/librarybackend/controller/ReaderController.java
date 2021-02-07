@@ -6,6 +6,7 @@ import com.kodilla.librarybackend.domain.VolumeDto;
 import com.kodilla.librarybackend.mapper.ReaderMapper;
 import com.kodilla.librarybackend.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,11 +18,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/myLibrary")
 public class ReaderController {
 
+    @Lazy
     @Autowired
     private ReaderMapper readerMapper;
 
+    @Lazy
     @Autowired
     private ReaderService readerService;
+
 
     @RequestMapping(method = RequestMethod.POST , value = "/reader", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ReaderDto createReader(@RequestBody ReaderDto readerDto){
@@ -33,6 +37,8 @@ public class ReaderController {
     public Boolean login(@RequestHeader("emailAddress")String emailAddress,@RequestHeader("password")String password) {
         return (readerService.loginReader(emailAddress,password));
     }
+
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/reader/emailAddress/password")
     public ReaderDto getReaderByEmailAddressAndPassword(@RequestHeader("emailAddress")String emailAddress, @RequestHeader("password")String password) {

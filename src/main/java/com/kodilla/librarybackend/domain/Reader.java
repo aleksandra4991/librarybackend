@@ -2,12 +2,10 @@ package com.kodilla.librarybackend.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
-public class Reader {
+public class Reader{
 
     @Id
     @GeneratedValue
@@ -22,6 +20,9 @@ public class Reader {
     private String emailAddress;
     private boolean status;
     private String password;
+    private String roles = "";
+    private String permissions = "";
+
 
     @OneToMany(targetEntity = Reservation.class,
             mappedBy = "reader",
@@ -64,12 +65,14 @@ public class Reader {
         this.password = password;
     }
 
-    public Reader(String name, String phoneNumber, String emailAddress, boolean status, String password) {
+    public Reader(String name, String phoneNumber, String emailAddress, boolean status, String password, String roles, String permissions) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
-        this.status = status;
+        this.status = true;
         this.password = password;
+        this.roles = roles;
+        this.permissions = permissions;
     }
 
     public Reader(String name, String phoneNumber, String emailAddress, boolean status) {
@@ -137,12 +140,29 @@ public class Reader {
         this.status = status;
     }
 
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public String getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
     }
 
     public List<Reservation> getReservations() {
@@ -204,5 +224,19 @@ public class Reader {
                 ", reservations=" + reservations +
                 ", volumeList=" + volumeList +
                 '}';
+    }
+
+    public List<String> getRolesList(){
+        if(this.roles.length() > 0){
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
+    }
+
+    public List<String> getPermissionsList(){
+        if(this.permissions.length() > 0){
+            return Arrays.asList(this.permissions.split(","));
+        }
+        return new ArrayList<>();
     }
 }

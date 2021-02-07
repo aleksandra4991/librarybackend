@@ -8,30 +8,42 @@ import com.kodilla.librarybackend.repository.CartRepository;
 import com.kodilla.librarybackend.repository.ReaderRepository;
 import com.kodilla.librarybackend.repository.ReservationRepository;
 import com.kodilla.librarybackend.repository.VolumeRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@RequiredArgsConstructor
 @Service
 public class CartService {
 
+    @Lazy
     @Autowired
     private CartRepository cartRepository;
 
+    @Lazy
     @Autowired
     private VolumeRepository volumeRepository;
 
+    @Lazy
     @Autowired
     private ReaderRepository readerRepository;
 
+    @Lazy
     @Autowired
     private ReservationRepository reservationRepository;
+
+    @Lazy
+    @Autowired
+    private ReaderService readerService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CartService.class);
 
@@ -53,31 +65,38 @@ public class CartService {
         this.carts.add(cart);
     }
 
-    public Cart createEmptyCart(final Cart cart){
+    public Long createEmptyCart(){
         LOGGER.info("Creation of empty cart");
-        return cartRepository.save(cart);
-    }
-
-    public List<Volume> addListOfBooksToSpecifiedCart(Long id, List<Volume> volumes){
-        LOGGER.info("Starting adding list of books to cart");
-        Cart cart = cartRepository.getOne(id);
-        List<Volume> cartVolumes = cart.getBooks();
-        volumes.stream()
-                .filter(b -> volumeRepository.findById(b.getId()).isPresent())
-                .forEach(b -> cartVolumes.add(b));
-
+        List <Volume> volumes = new ArrayList<>();
+        Cart cart = new Cart(volumes);
         cartRepository.save(cart);
-        LOGGER.info("Books added to cart");
-        return cart.getBooks();
+        return cart.getId();
     }
 
-    public void removeBookWithSpecifiedIdFromSpecifiedCart(Long cartId,Long bookId){
+    public List<Volume> addListOfBooksToSpecifiedCart(Long cartId, List<Volume> volumes){
+        LOGGER.info("Starting creation of new Cart");
+        Cart cart = new Cart();
+        cartRepository.save(cart);
+        cartId = cart.getId();
+        Cart foundCart = cartRepository.findCartById(cartId);
+        List<Volume> cartVolumes = foundCart.getBooks();
+        volumes.stream()
+                .forEach(v -> cartVolumes.add(v));
+
+        cartRepository.save(foundCart);
+        LOGGER.info("Books added to cart");
+        return foundCart.getBooks();
+    }
+
+    /*public void removeBookWithSpecifiedIdFromSpecifiedCart(Long cartId,Long bookId){
         LOGGER.info("Removing book with id:"+bookId.toString()+" from cart:"+cartId.toString());
         Cart cart = cartRepository.getOne(cartId);
-        cart.getBooks().remove(volumeRepository.getOne(bookId));
+        List <Volume> volumesInCart = cart.getBooks();
+        Volume volumeToRemove = volumeRepository.getOne(bookId);
+        volumesInCart.remove(volumeToRemove);
         cartRepository.save(cart);
         LOGGER.info("finished: removing book with id:"+bookId.toString()+" from cart:"+cartId.toString());
-    }
+    }*/
 
     public Reservation createReservationByCartId(Long readerId,Long cartId){
         LOGGER.info("Reservation creation started,readerId:"+readerId.toString()+" ,cartId:"+cartId.toString());

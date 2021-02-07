@@ -1,10 +1,12 @@
 package com.kodilla.librarybackend.domain;
 
+import java.util.List;
+
 public class CartBookAdderDto {
 
     private Long cartId;
 
-    private VolumeDto volumeDto;
+    private List <VolumeDto> volumeDtos;
 
     public CartBookAdderDto() {
     }
@@ -13,9 +15,9 @@ public class CartBookAdderDto {
         this.cartId = cartId;
     }
 
-    public CartBookAdderDto(Long cartId, VolumeDto volumeDto) {
+    public CartBookAdderDto(Long cartId, List <VolumeDto> volumeDtos) {
         this.cartId = cartId;
-        this.volumeDto = volumeDto;
+        this.volumeDtos = volumeDtos;
     }
 
     public Long getCartId() {
@@ -26,11 +28,11 @@ public class CartBookAdderDto {
         this.cartId = cartId;
     }
 
-    public VolumeDto getBookDto() {
-        return volumeDto;
+    public List<VolumeDto> getVolumeDtos() {
+        return volumeDtos;
     }
 
-    public void setBookDto(VolumeDto volumeDto) {
-        this.volumeDto = volumeDto;
+    public void setVolumeDtos(List<VolumeDto> volumeDtos) {
+        this.volumeDtos = volumeDtos;
     }
 }
