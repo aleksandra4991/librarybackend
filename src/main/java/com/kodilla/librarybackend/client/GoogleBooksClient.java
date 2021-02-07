@@ -46,7 +46,7 @@ public class GoogleBooksClient {
 
         try {
             UriComponents uri = UriComponentsBuilder
-                    .fromHttpUrl(googleBooksConfiguration.getEndpoint() + "?q={title}&fields=items%28volumeInfo%28title,authors,publishedDate,description,categories,imageLinks%29%29&key=" + googleBooksConfiguration.getKey())
+                    .fromHttpUrl(googleBooksConfiguration.getEndpoint() + "?q={title}&fields=items%28volumeInfo%28title,authors,publishedDate,description%29%29&key=" + googleBooksConfiguration.getKey())
                     .buildAndExpand(title);
 
             stringUrl = uri.toUriString();
@@ -66,12 +66,7 @@ public class GoogleBooksClient {
 
                 publishedDate = volumeInfo.getString("publishedDate");
                 String noDescr = "No description";
-                description = volumeInfo.getString("description");
-                if (description == null) {
-                    description = noDescr;
-                }
-                JSONObject image = volumeInfo.getJSONObject("imageLinks");
-
+                description = volumeInfo.optString("description").isEmpty()?noDescr:(volumeInfo.optString("description"));
 
                 VolumeDto volumeDto = new VolumeDto();
                 volumeDto.setTitle(titl);
@@ -79,6 +74,7 @@ public class GoogleBooksClient {
                 auth = "";
                 volumeDto.setPublishedDate(publishedDate);
                 volumeDto.setDescription(description);
+                LOGGER.info("{}",volumeDto.getDescription());
                 volumeDtoList.add(volumeDto);
 
             }
