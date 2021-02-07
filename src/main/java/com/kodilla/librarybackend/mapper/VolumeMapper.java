@@ -4,6 +4,7 @@ import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.domain.VolumeDto;
 import com.kodilla.librarybackend.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Component
 public class VolumeMapper {
 
+    @Lazy
     @Autowired
     private VolumeRepository volumeRepository;
 

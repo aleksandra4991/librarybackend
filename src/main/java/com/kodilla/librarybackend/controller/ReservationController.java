@@ -6,10 +6,9 @@ import com.kodilla.librarybackend.exceptions.ReservationNotFoundException;
 import com.kodilla.librarybackend.mapper.ReservationMapper;
 import com.kodilla.librarybackend.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -19,9 +18,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/myLibrary")
 public class ReservationController {
 
+    @Lazy
     @Autowired
     private ReservationService reservationService;
 
+    @Lazy
     @Autowired
     private ReservationMapper reservationMapper;
 

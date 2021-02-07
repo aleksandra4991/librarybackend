@@ -2,41 +2,47 @@ package com.kodilla.librarybackend.service;
 
 import com.kodilla.librarybackend.adapter.VolumeAdapter;
 import com.kodilla.librarybackend.client.GoogleBooksClient;
+import com.kodilla.librarybackend.domain.Cart;
+import com.kodilla.librarybackend.domain.CartBookAdderDto;
 import com.kodilla.librarybackend.domain.Volume;
 import com.kodilla.librarybackend.mapper.VolumeMapper;
 import com.kodilla.librarybackend.repository.CartRepository;
 import com.kodilla.librarybackend.repository.VolumeRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class VolumeService {
 
+    @Lazy
     @Autowired
     private GoogleBooksClient googleBooksClient;
 
+    @Lazy
     @Autowired
     private VolumeRepository volumeRepository;
 
+    @Lazy
     @Autowired
     private CartRepository cartRepository;
 
+    @Lazy
     @Autowired
     private VolumeMapper volumeMapper;
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
+    @Lazy
     @Autowired
     private VolumeAdapter volumeAdapter;
 
@@ -68,17 +74,18 @@ public class VolumeService {
         this.volumes.add(volume);
     }
 
-    /*public CartBookAdderDto putFoundVolumeInCart (Volume foundVolume, String title, String authors, Long cartId){
+    public CartBookAdderDto putFoundVolumeInCart (Volume foundVolume, Long cartId){
         LOGGER.info("Putting found volume in cart started");
         Cart cart = cartRepository.findCartById(cartId);
         LOGGER.info("Cart: " + cart.toString() + " selected.");
-        foundVolume = fetchSpecifiedGoogleBook(volumeMapper.mapToBook(googleBooksClient.getSpecifiedGoogleBooks(title, authors)));
-        LOGGER.info("Volume: " + foundVolume.getTitle() + " found");
-        Volume volumePutInCart = new Volume(foundVolume.getId(),foundVolume.getTitle(),foundVolume.getAuthors());
-        volumePutInCart.setCart(cart);
+        LOGGER.info("Volume: " + foundVolume.getTitle() + " adding to cart started");
+        Volume volumePutInCart = new Volume(foundVolume.getTitle(),foundVolume.getAuthors(),foundVolume.getPublishedDate(),foundVolume.getDescription());
+        List <Volume> volumeList = new ArrayList<>();
+        volumeList.add(volumePutInCart);
+        cart.setBooks(volumeList);
         LOGGER.info("Volume added to cart");
-        return new CartBookAdderDto(cartId, volumeMapper.mapToBookDto((volumePutInCart)));
-    }*/
+        return new CartBookAdderDto(cartId, volumeMapper.mapToBookDtoList((volumeList)));
+    }
 
 
     /*public VolumeDto getBookPutInCart(CartBookAdderDto cartBookAdderDto){

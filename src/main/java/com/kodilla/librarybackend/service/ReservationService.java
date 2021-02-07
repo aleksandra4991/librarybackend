@@ -4,9 +4,11 @@ import com.kodilla.librarybackend.domain.*;
 import com.kodilla.librarybackend.repository.CartRepository;
 import com.kodilla.librarybackend.repository.ReaderRepository;
 import com.kodilla.librarybackend.repository.ReservationRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -14,15 +16,19 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class ReservationService {
 
+    @Lazy
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Lazy
     @Autowired
     private CartRepository cartRepository;
 
+    @Lazy
     @Autowired
     private ReaderRepository readerRepository;
 

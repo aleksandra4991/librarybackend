@@ -4,6 +4,7 @@ import com.kodilla.librarybackend.domain.Reader;
 import com.kodilla.librarybackend.domain.ReaderDto;
 import com.kodilla.librarybackend.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 @Component
 public class ReaderMapper {
 
+    @Lazy
     @Autowired
     private ReaderRepository readerRepository;
 
@@ -28,7 +30,7 @@ public class ReaderMapper {
 
 
     public static Reader mapToReader (final ReaderDto readerDto){
-        Reader reader = new Reader(readerDto.getReaderName(),readerDto.getPhoneNumber(),readerDto.getEmailAddress(),readerDto.getStatus(),readerDto.getPassword());
+        Reader reader = new Reader(readerDto.getReaderName(),readerDto.getPhoneNumber(),readerDto.getEmailAddress(),readerDto.getStatus(),readerDto.getPassword(),readerDto.getRoles(),readerDto.getPermissions());
         if(readerDto.getReaderId() != null){
             reader.setId(readerDto.getReaderId());
         }

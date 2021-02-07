@@ -6,20 +6,23 @@ import com.kodilla.librarybackend.exceptions.GenreNotFoundException;
 import com.kodilla.librarybackend.mapper.GenreMapper;
 import com.kodilla.librarybackend.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/myLibrary")
 public class GenreController {
 
+    @Lazy
     @Autowired
     private GenreService genreService;
 
+    @Lazy
     @Autowired
     private GenreMapper genreMapper;
 

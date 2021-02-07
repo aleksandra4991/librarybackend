@@ -10,10 +10,9 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -23,14 +22,13 @@ import java.util.regex.Pattern;
 @Service
 public class ReaderService {
 
+    @Lazy
     @Autowired
     private ReaderRepository readerRepository;
 
+    @Lazy
     @Autowired
     private CartRepository cartRepository;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*!()])(?=\\S+$).{7,25}$";
     private static final String EMAIL_PATTERN = "^(.+)@(.+)$";

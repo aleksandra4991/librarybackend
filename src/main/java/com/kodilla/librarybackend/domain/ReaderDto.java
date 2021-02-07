@@ -14,6 +14,8 @@ public class ReaderDto {
     private String emailAddress;
     private boolean status;
     private String password;
+    private String roles = "";
+    private String permissions = "";
     private CartBookAdderDto cartBookAdderDto;
 
     @JsonIgnore
@@ -35,12 +37,14 @@ public class ReaderDto {
         this.password = password;
     }
 
-    public ReaderDto(String readerName, String phoneNumber, String emailAddress, boolean status, String password) {
+    public ReaderDto(String readerName, String phoneNumber, String emailAddress, boolean status, String password, String permissions, String roles) {
         this.readerName = readerName;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
-        this.status = status;
+        this.status = true;
         this.password = password;
+        this.roles = roles;
+        this.permissions = permissions;
     }
 
     public ReaderDto(String readerName, String phoneNumber, String emailAddress, boolean status) {
@@ -102,6 +106,22 @@ public class ReaderDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public String getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
     }
 
     public CartBookAdderDto getCartBookAdderDto() {
